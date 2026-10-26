@@ -107,6 +107,41 @@ def red(nombre: str, url: str, obligatorio: bool = True) -> None:
                  "Pida a TI habilitar este dominio en el proxy o firewall.")
 
 
+def copilot_integrado() -> bool:
+    """Busca Copilot entre las extensiones que trae la instalación de VS Code.
+
+    Se parte de la ubicación del comando `code` y se sube por sus carpetas buscando
+    `resources/app/extensions` (Windows y Linux) o `Resources/app/extensions` (macOS),
+    incluida la subcarpeta por versión que usan las instalaciones recientes en Windows.
+    """
+    from pathlib import Path
+
+    exe = shutil.which("code")
+    if not exe:
+        return False
+    try:
+        ruta = Path(exe).resolve()
+    except OSError:
+        return False
+    candidatas: list[Path] = []
+    for carpeta in list(ruta.parents)[:5]:
+        candidatas += [carpeta / "resources" / "app" / "extensions",
+                       carpeta / "Resources" / "app" / "extensions"]
+        if carpeta.name == "app":
+            candidatas.append(carpeta / "extensions")
+        try:
+            candidatas += list(carpeta.glob("*/resources/app/extensions"))
+        except OSError:
+            pass
+    for ext_dir in candidatas:
+        try:
+            if ext_dir.is_dir() and any("copilot" in d.name.lower() for d in ext_dir.iterdir() if d.is_dir()):
+                return True
+        except OSError:
+            continue
+    return False
+
+
 def nucleo() -> None:
     print("\n1. Sistema")
     so = f"{platform.system()} {platform.release()} ({platform.machine()})"
@@ -135,6 +170,8 @@ def nucleo() -> None:
         # aparece en --list-extensions; por eso su ausencia es un aviso, no un faltante.
         if {"github.copilot-chat", "github.copilot"} & set(ext):
             reportar(OK, "Copilot Chat", "extensión instalada")
+        elif copilot_integrado():
+            reportar(OK, "Copilot Chat", "integrado en VS Code")
         else:
             reportar(AVISO, "Copilot Chat", "no aparece como extensión (puede venir integrado)",
                      "Abra VS Code: si ve el panel 'Chat' y el ícono de Copilot en la barra inferior, está listo. "
