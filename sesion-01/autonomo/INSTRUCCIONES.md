@@ -2,12 +2,12 @@
 
 **Entrega:** antes de la sesión 2, en el canal del curso.
 
-## 1. Verificar accesos (obligatorio)
-La sesión 2 usa las dos herramientas autorizadas por la organización. Comprueben que pueden:
-- [ ] Abrir Copilot Chat en VS Code y recibir una respuesta.
-- [ ] Ingresar al sandbox de Claude y enviar un mensaje de prueba.
+## 1. Preparar su máquina (obligatorio)
+La sesión 2 es práctica con las tres herramientas del curso: Copilot Chat en VS Code, Copilot CLI y Claude Code.
+- [ ] Siga la guía `preparacion/README.md`.
+- [ ] Corra `python preparacion/verificar_entorno.py --track <su track>` y envíe una captura del resultado por el canal.
 
-Si alguna falla, avisen en el canal antes de la sesión 2.
+Si algo queda en **FALTA**, envíe la captura igual: lo resolvemos antes de la sesión 2.
 
 ## 2. Ejercicio: cazar errores con Copilot (~40 min)
 Archivo: `validador_transacciones.py`. El código corre sin errores, pero tiene problemas de lógica y de buenas prácticas para un entorno financiero.
