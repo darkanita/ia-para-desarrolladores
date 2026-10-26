@@ -15,7 +15,7 @@ Si en su equipo no tiene permisos para instalar software, pida apoyo a la mesa d
 | Python | 3.10 (recomendado 3.12) | Demos y laboratorios | `python --version` |
 | Node.js | 22 LTS | Instalar Copilot CLI con npm y track frontend | `node --version` |
 | Visual Studio Code | Versión actual | Editor del curso | `code --version` |
-| Extensión GitHub Copilot Chat | Versión actual | Copilot en el editor: chat, edición y modo agente | Ícono de Copilot en VS Code |
+| GitHub Copilot Chat (integrado en VS Code reciente; en versiones anteriores, extensión) | Versión actual | Copilot en el editor: chat, edición y modo agente | Panel Chat e ícono de Copilot en la barra inferior de VS Code |
 | Extensión Python (Microsoft) | Versión actual | Ejecutar y probar Python en VS Code | Panel de Extensiones |
 | GitHub Copilot CLI | Versión actual | Copilot en la terminal | `copilot version` |
 | Claude Code | 2.x | Claude en la terminal | `claude --version` |
@@ -32,7 +32,7 @@ Abra **PowerShell** (no hace falta abrirlo como administrador) y siga el orden. 
 3. **Python 3.12:** `winget install Python.Python.3.12`. Si usa el instalador de python.org, marque *Add python.exe to PATH*.
 4. **Node.js 22 LTS:** `winget install OpenJS.NodeJS.LTS`.
 5. **Visual Studio Code:** `winget install Microsoft.VisualStudioCode`. Si usa el instalador, elija *User Installer* (no requiere administrador) y marque *Agregar a PATH*.
-6. **Extensiones de VS Code:** abra VS Code y en el panel de Extensiones instale **GitHub Copilot Chat** y **Python** (Microsoft). También puede hacerlo desde la terminal:
+6. **Copilot Chat y extensión Python:** abra VS Code. Si ya ve el panel **Chat** y el ícono de Copilot en la barra inferior, Copilot Chat está listo: en versiones recientes viene integrado y no aparece como extensión. Si no lo ve, instale **GitHub Copilot Chat** desde el panel de Extensiones. Instale también **Python** (Microsoft). Desde la terminal:
    - `code --install-extension GitHub.copilot-chat`
    - `code --install-extension ms-python.python`
 7. **GitHub Copilot CLI:** `winget install GitHub.Copilot`. Alternativa con Node.js: `npm install -g @github/copilot`.

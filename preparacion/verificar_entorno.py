@@ -131,11 +131,17 @@ def nucleo() -> None:
                     "Instale VS Code (code.visualstudio.com) y marque 'Agregar a PATH'.")
     if code:
         ext = (ejecutar("code", "--list-extensions") or "").lower().split()
-        for ident, nombre, ayuda in [
-            ("github.copilot-chat", "Extensión Copilot Chat", "En VS Code: Extensiones → 'GitHub Copilot Chat'."),
-            ("ms-python.python", "Extensión Python", "En VS Code: Extensiones → 'Python' (Microsoft)."),
-        ]:
-            reportar(OK if ident in ext else FALTA, nombre, "instalada" if ident in ext else "no instalada", ayuda)
+        # En versiones recientes de VS Code el chat de Copilot viene integrado y ya no
+        # aparece en --list-extensions; por eso su ausencia es un aviso, no un faltante.
+        if {"github.copilot-chat", "github.copilot"} & set(ext):
+            reportar(OK, "Copilot Chat", "extensión instalada")
+        else:
+            reportar(AVISO, "Copilot Chat", "no aparece como extensión (puede venir integrado)",
+                     "Abra VS Code: si ve el panel 'Chat' y el ícono de Copilot en la barra inferior, está listo. "
+                     "Si no, instale 'GitHub Copilot Chat' desde Extensiones.")
+        reportar(OK if "ms-python.python" in ext else FALTA, "Extensión Python",
+                 "instalada" if "ms-python.python" in ext else "no instalada",
+                 "En VS Code: Extensiones → 'Python' (Microsoft).")
 
     print("\n4. Asistentes de IA")
     requerir("GitHub Copilot CLI", ["copilot", "version"], None,
