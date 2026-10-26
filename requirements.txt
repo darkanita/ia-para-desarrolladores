@@ -1,0 +1,5 @@
+numpy>=1.26
+tiktoken>=0.7
+pytest>=8.0
+# Sesión 2, solo si el sandbox de la organización expone acceso por API:
+# anthropic
