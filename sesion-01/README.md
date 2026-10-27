@@ -11,10 +11,11 @@ Comprender los fundamentos técnicos de la IA generativa y los LLMs aplicados al
 | Tiempo | Bloque | Material |
 |---|---|---|
 | 0:00 – 0:10 | Apertura, acuerdos del curso, reto continuo y reglas de datos | Presentación |
-| 0:10 – 0:40 | Conceptos: siguiente token, tokens, transformer, atención, embeddings, código como lenguaje | Presentación + `demo/01` a `03` |
-| 0:40 – 1:00 | Demo en vivo con Copilot: límites de los asistentes | `demo/04_amortizacion.py` |
-| 1:00 – 1:35 | Demo guiada: construimos un guardián de prompts (el grupo propone los prompts) | `laboratorio/ENUNCIADO.md` |
-| 1:35 – 1:50 | Capacidades, límites, riesgos y cinco reglas | Presentación |
+| 0:10 – 0:35 | Qué hay dentro de un LLM: siguiente token, tokens, transformer, atención, embeddings | Presentación + `demo/01` a `03` |
+| 0:35 – 0:55 | Las herramientas del curso: cómo trabaja un agente, Copilot Chat, Copilot CLI y Claude Code en vivo | Presentación |
+| 0:55 – 1:15 | Demos en Copilot Chat y Claude Code: alucinación, datos sensibles y un crédito mal calculado | `demo/04_amortizacion.py` |
+| 1:15 – 1:40 | Demo guiada: construimos un guardián de prompts con las dos herramientas | `laboratorio/ENUNCIADO.md` |
+| 1:40 – 1:50 | Capacidades, límites, riesgos y cinco reglas | Presentación |
 | 1:50 – 2:00 | Cómo llegar listos a la sesión 2 y trabajo autónomo | `preparacion/`, `autonomo/` |
 
 ## Archivos
