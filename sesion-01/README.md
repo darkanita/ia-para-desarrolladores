@@ -29,6 +29,7 @@ sesion-01/
 │   ├── 03_busqueda_semantica.py  embeddings y similitud coseno
 │   └── 04_amortizacion.py        tabla de amortización de un crédito
 ├── laboratorio/                 guardián de prompts: práctica opcional
+├── resultados/                  las apps que construyeron Copilot y Claude Code en clase
 │   ├── ENUNCIADO.md
 │   ├── guardian_prompt.py        plantilla con TODOs
 │   └── tests/                    34 pruebas automáticas
