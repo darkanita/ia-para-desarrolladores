@@ -2,7 +2,7 @@
 
 Material práctico del curso **IA para Desarrolladores**: 20 horas, 10 sesiones de 2 horas, 2 por semana.
 
-Herramientas del curso: **GitHub Copilot** en VS Code (chat y modo agente), **GitHub Copilot CLI** y **Claude Code** en la terminal. Todos los datos de los ejercicios son sintéticos y los casos de uso son del sector financiero.
+Herramientas del curso: **GitHub Copilot** (Copilot Chat en VS Code y Copilot CLI) y **Claude Code** (extensión de VS Code y Claude Code CLI). Todos los datos de los ejercicios son sintéticos y los casos de uso son del sector financiero.
 
 El curso termina con un **cerebro del equipo**: los estándares, plantillas y buenas prácticas del equipo escritos una sola vez (instrucciones, reglas, skills, agentes y hooks) para que Copilot y Claude Code los apliquen igual.
 
@@ -27,7 +27,7 @@ python preparacion/verificar_entorno.py
 
 ## Cronograma
 
-Cada sesión profundiza en las tres herramientas: **Copilot Chat** (VS Code), **Copilot CLI** y **Claude Code**.
+Cada sesión usa los dos asistentes en sus dos formas: **Copilot Chat** y **Claude Code** en VS Code, **Copilot CLI** y **Claude Code CLI** en la terminal.
 
 | Semana | Sesión | Módulo | Tema | Pieza del cerebro del equipo | Hito del reto |
 |---|---|---|---|---|---|
