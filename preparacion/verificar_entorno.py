@@ -208,6 +208,9 @@ def nucleo() -> None:
             reportar(AVISO, "Copilot Chat", "no aparece como extensión (puede venir integrado)",
                      "Abra VS Code: si ve el panel 'Chat' y el ícono de Copilot en la barra inferior, está listo. "
                      "Si no, instale 'GitHub Copilot Chat' desde Extensiones.")
+        reportar(OK if "anthropic.claude-code" in ext else AVISO, "Extensión Claude Code",
+                 "instalada" if "anthropic.claude-code" in ext else "no instalada (recomendada)",
+                 "En VS Code: Extensiones → 'Claude Code' (Anthropic). Da el panel de Claude Code dentro del editor.")
         reportar(OK if "ms-python.python" in ext else FALTA, "Extensión Python",
                  "instalada" if "ms-python.python" in ext else "no instalada",
                  "En VS Code: Extensiones → 'Python' (Microsoft).")

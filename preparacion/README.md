@@ -19,6 +19,7 @@ Si en su equipo no tiene permisos para instalar software, pida apoyo a la mesa d
 | Extensión Python (Microsoft) | Versión actual | Ejecutar y probar Python en VS Code | Panel de Extensiones |
 | GitHub Copilot CLI | Versión actual | Copilot en la terminal | `copilot version` |
 | Claude Code | 2.x | Claude en la terminal | `claude --version` |
+| Extensión Claude Code (recomendada) | Versión actual · VS Code 1.94 o superior | Claude Code en un panel dentro de VS Code | Ícono de chispa en VS Code |
 | Licencias | Copilot asignada a su cuenta de GitHub · acceso a Claude Code | Usar los asistentes | Sección 4 |
 
 Si ya usa Claude Code o Copilot Chat en su trabajo diario, solo debe completar lo que le falte.
@@ -35,10 +36,11 @@ Abra **PowerShell** (no hace falta abrirlo como administrador) y siga el orden. 
 6. **Copilot Chat y extensión Python:** abra VS Code. Si ya ve el panel **Chat** y el ícono de Copilot en la barra inferior, Copilot Chat está listo: en versiones recientes viene integrado y no aparece como extensión. Si no lo ve, instale **GitHub Copilot Chat** desde el panel de Extensiones. Instale también **Python** (Microsoft). Desde la terminal:
    - `code --install-extension GitHub.copilot-chat`
    - `code --install-extension ms-python.python`
+   - `code --install-extension anthropic.claude-code` (recomendada: Claude Code en un panel de VS Code)
 7. **GitHub Copilot CLI:** `winget install GitHub.Copilot`. Alternativa con Node.js: `npm install -g @github/copilot`.
 8. **Claude Code:** `irm https://claude.ai/install.ps1 | iex`. Alternativa: `winget install Anthropic.ClaudeCode` (esta opción no se actualiza sola; actualice con `winget upgrade Anthropic.ClaudeCode`).
 
-Si Claude Code ya está instalado en su equipo, no lo reinstale: verifique con `claude --version` y actualice con `claude update`.
+Si Claude Code ya está instalado en su equipo, no lo reinstale: verifique con `claude --version` y actualice con `claude update`. La extensión de VS Code trae su propia copia de Claude Code para el panel, pero para usar `claude` en la terminal se necesita esta instalación.
 
 ## 3. Instalación en macOS y Linux
 
@@ -48,7 +50,7 @@ En macOS se asume [Homebrew](https://brew.sh). En Linux use el gestor de paquete
 2. **Python 3.12:** macOS `brew install python@3.12` · Ubuntu `sudo apt install python3 python3-venv python3-pip`.
 3. **Node.js 22 LTS (opcional, solo para instalar Copilot CLI con npm):** macOS `brew install node@22` · Linux: instalador de nodejs.org o `nvm`.
 4. **Visual Studio Code:** macOS `brew install --cask visual-studio-code` · Linux: paquete .deb o .rpm de code.visualstudio.com. En macOS, abra VS Code y ejecute *Shell Command: Install 'code' command in PATH* desde la paleta de comandos.
-5. **Extensiones:** `code --install-extension GitHub.copilot-chat` y `code --install-extension ms-python.python`.
+5. **Extensiones:** `code --install-extension GitHub.copilot-chat`, `code --install-extension ms-python.python` y, recomendada, `code --install-extension anthropic.claude-code`.
 6. **GitHub Copilot CLI:** `brew install --cask copilot-cli` · o `curl -fsSL https://gh.io/copilot-install | bash` · o `npm install -g @github/copilot`.
 7. **Claude Code:** `curl -fsSL https://claude.ai/install.sh | bash` · o `brew install --cask claude-code`.
 
@@ -60,7 +62,7 @@ Cada asistente se prueba con una pregunta corta. Si responde, está listo. Use l
 | --- | --- | --- |
 | Copilot Chat (VS Code) | En VS Code, clic en el ícono de Copilot → *Sign in* con su cuenta de GitHub | Abra el chat (`Ctrl+Alt+I`; en macOS `Cmd+Ctrl+I`) y escriba: *¿qué modelos tengo disponibles?* |
 | Copilot CLI | En la terminal, `copilot`, luego `/login` y siga las instrucciones del navegador | Pregunte: *explica qué hay en esta carpeta* |
-| Claude Code | En la terminal, `claude` y siga las instrucciones de su organización para iniciar sesión | Escriba `/status` para ver la cuenta y el modelo; luego pregunte: *explica qué hay en esta carpeta* |
+| Claude Code | En la terminal, `claude`, o en VS Code el ícono de chispa; siga las instrucciones de su organización para iniciar sesión | En la terminal escriba `/status` para ver la cuenta y el modelo; luego pregunte: *explica qué hay en esta carpeta* |
 
 La primera vez que abra Copilot CLI o Claude Code en una carpeta, le preguntarán si confía en ella: responda que sí solo en la carpeta del curso.
 
