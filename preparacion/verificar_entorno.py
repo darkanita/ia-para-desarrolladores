@@ -139,6 +139,41 @@ def copilot_integrado() -> bool:
                 return True
         except OSError:
             continue
+
+    # Copilot Chat aparece como "Built-in" pero VS Code lo descarga y lo guarda en la
+    # carpeta de datos del usuario, no en la instalación. Se busca "github.copilot-chat"
+    # (su identificador) en esas carpetas, con profundidad limitada.
+    inicio = Path.home()
+    datos = [inicio / ".vscode" / "extensions",
+             inicio / "Library" / "Application Support" / "Code",
+             inicio / ".config" / "Code"]
+    if os.getenv("APPDATA"):
+        datos.append(Path(os.environ["APPDATA"]) / "Code")
+    if os.getenv("LOCALAPPDATA"):
+        datos.append(Path(os.environ["LOCALAPPDATA"]) / "Programs" / "Microsoft VS Code")
+    for raiz in datos:
+        if _contiene(raiz, "github.copilot-chat", profundidad=4):
+            return True
+    return False
+
+
+def _contiene(raiz, texto: str, profundidad: int) -> bool:
+    """True si algún archivo o carpeta bajo `raiz` (hasta `profundidad` niveles) tiene `texto` en el nombre."""
+    pendientes = [(raiz, 0)]
+    vistos = 0
+    while pendientes:
+        carpeta, nivel = pendientes.pop()
+        try:
+            for hijo in carpeta.iterdir():
+                vistos += 1
+                if vistos > 20_000:  # evita recorrer carpetas enormes
+                    return False
+                if texto in hijo.name.lower():
+                    return True
+                if nivel < profundidad and hijo.is_dir() and not hijo.is_symlink():
+                    pendientes.append((hijo, nivel + 1))
+        except OSError:
+            continue
     return False
 
 
