@@ -1,7 +1,11 @@
-# simulador-claude-code
+# Simulador de crédito · construido con Claude Code
 
-Se completa al terminar la sesión 1 con:
+Esta carpeta se abre sola en VS Code y se le pide a **Claude Code** (en la terminal) que construya la aplicación.
 
-```bash
-python proyectos/guardar_resultado.py <carpeta de la app> sesion-01/resultados/simulador-claude-code
-```
+Lo que Claude Code necesita ya está aquí:
+
+- `REQUISITOS.md`: la pregunta de negocio y lo que debe hacer la aplicación.
+- `AGENTS.md`: las reglas del equipo.
+- `CLAUDE.md`: el archivo que Claude Code lee al empezar; solo importa `AGENTS.md`.
+
+El resto de archivos (`simulador/`, `app.py`, `tests/`) los escribe Claude Code en clase y se guardan tal como los dejó.
