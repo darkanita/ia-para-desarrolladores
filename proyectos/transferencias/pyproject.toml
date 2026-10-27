@@ -14,3 +14,5 @@ transferencias = "transferencias.app.cli:main"
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = ["tests"]
+# Evita avisos de plugins instalados globalmente (p. ej. pytest-asyncio) que este proyecto no usa.
+addopts = "-p no:asyncio"
