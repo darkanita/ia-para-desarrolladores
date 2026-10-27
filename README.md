@@ -43,3 +43,7 @@ Cada sesión profundiza en las tres herramientas: **Copilot Chat** (VS Code), **
 | 5 | S10 | M5 Apropiar | Demos y recomendaciones de adopción | Cerebro del equipo integrado | **Entregable final** |
 
 Certificación: asistencia mínima del 80 % (máximo 2 inasistencias de 10 sesiones).
+
+## Material de referencia
+
+El curso se apoya en los módulos de GitHub Copilot de **Microsoft Learn** y en **Claude Code 101** de **Anthropic Academy**. El mapa de lecturas por sesión está en [`REFERENCIAS.md`](REFERENCIAS.md).
