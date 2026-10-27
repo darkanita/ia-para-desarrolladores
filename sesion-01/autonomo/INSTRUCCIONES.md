@@ -24,7 +24,7 @@ Pista: hay al menos 5 problemas.
 Si quiere practicar lo que hicimos en la demo guiada, complete `laboratorio/guardian_prompt.py` con Copilot hasta que `pytest sesion-01/laboratorio/tests -q` pase completo.
 
 ## 4. Lectura de apoyo (~45 min)
-- **Microsoft Learn:** [Introduction to GitHub Copilot](https://learn.microsoft.com/en-us/training/modules/introduction-to-github-copilot/1-introduction).
+- **Microsoft Learn:** primer módulo, *Foundations of Agentic AI in GitHub*, del curso [GH-600T00: Developing in Agentic AI Systems](https://learn.microsoft.com/es-es/training/courses/gh-600t00) (disponible en español).
 - **Anthropic Academy:** [Claude Code 101](https://anthropic.skilljar.com/claude-code-101), lecciones *What is Claude Code?*, *How Claude Code works*, *Installing Claude Code* y *Your first prompt*.
 - Lineamientos de la organización sobre uso de herramientas de IA (documento por confirmar).
 

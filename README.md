@@ -46,4 +46,4 @@ Certificación: asistencia mínima del 80 % (máximo 2 inasistencias de 10 sesio
 
 ## Material de referencia
 
-El curso se apoya en los módulos de GitHub Copilot de **Microsoft Learn** y en **Claude Code 101** de **Anthropic Academy**. El mapa de lecturas por sesión está en [`REFERENCIAS.md`](REFERENCIAS.md).
+El curso se apoya en el curso **GH-600T00: Developing in Agentic AI Systems** de **Microsoft Learn** y en **Claude Code 101** de **Anthropic Academy**. El mapa de lecturas por sesión está en [`REFERENCIAS.md`](REFERENCIAS.md).
