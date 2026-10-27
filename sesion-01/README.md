@@ -13,9 +13,9 @@ Comprender los fundamentos técnicos de la IA generativa y los LLMs aplicados al
 | 0:00 – 0:10 | Apertura, acuerdos del curso, reto continuo y reglas de datos | Presentación |
 | 0:10 – 0:40 | Conceptos: siguiente token, tokens, transformer, atención, embeddings, código como lenguaje | Presentación + `demo/01` a `03` |
 | 0:40 – 1:00 | Demo en vivo con Copilot: límites de los asistentes | `demo/04_amortizacion.py` |
-| 1:00 – 1:40 | Laboratorio: guardián de prompts | `laboratorio/ENUNCIADO.md` |
-| 1:40 – 1:55 | Capacidades, límites, riesgos y cinco reglas | Presentación |
-| 1:55 – 2:00 | Cierre y trabajo autónomo | `autonomo/` |
+| 1:00 – 1:35 | Demo guiada: construimos un guardián de prompts (el grupo propone los prompts) | `laboratorio/ENUNCIADO.md` |
+| 1:35 – 1:50 | Capacidades, límites, riesgos y cinco reglas | Presentación |
+| 1:50 – 2:00 | Cómo llegar listos a la sesión 2 y trabajo autónomo | `preparacion/`, `autonomo/` |
 
 ## Archivos
 
@@ -27,7 +27,7 @@ sesion-01/
 │   ├── 02_atencion.py            self-attention causal en NumPy
 │   ├── 03_busqueda_semantica.py  embeddings y similitud coseno
 │   └── 04_amortizacion.py        tabla de amortización de un crédito
-├── laboratorio/
+├── laboratorio/                 se hace como demo guiada; práctica opcional
 │   ├── ENUNCIADO.md
 │   ├── guardian_prompt.py        plantilla con TODOs
 │   └── tests/                    34 pruebas automáticas

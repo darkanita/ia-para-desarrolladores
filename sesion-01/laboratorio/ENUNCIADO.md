@@ -1,6 +1,6 @@
 # Laboratorio S1 — Guardián de prompts
 
-**Tiempo:** 35 minutos · **Modalidad:** individual o en parejas · **Herramientas:** VS Code + GitHub Copilot
+**En clase:** demo guiada (ustedes proponen los prompts, la docente los ejecuta) · **Después:** práctica opcional, individual, antes de la sesión 2 · **Herramientas:** VS Code + GitHub Copilot
 
 ## Contexto
 

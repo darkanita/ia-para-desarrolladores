@@ -20,8 +20,11 @@ Archivo: `validador_transacciones.py`. El código corre sin errores, pero tiene 
 
 Pista: hay al menos 5 problemas.
 
-## 3. Lectura de apoyo
+## 3. Opcional: terminar el guardián de prompts
+Si quiere practicar lo que hicimos en la demo guiada, complete `laboratorio/guardian_prompt.py` con Copilot hasta que `pytest sesion-01/laboratorio/tests -q` pase completo.
+
+## 4. Lectura de apoyo
 - Lineamientos de la organización sobre uso de herramientas de IA (documento por confirmar).
 
-## 4. Traer una idea
+## 5. Traer una idea
 Una tarea real y repetitiva de su trabajo, sin datos sensibles, donde la IA podría ayudar. Será la semilla del reto del curso, que se define en equipos en la sesión 2.
