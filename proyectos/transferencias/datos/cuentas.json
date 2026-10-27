@@ -1,0 +1,6 @@
+[
+  {"numero": "40011000001", "titular_id": "C-0001", "tipo": "AHORROS", "saldo": "2500000", "estado": "ACTIVA", "exenta_gmf": true},
+  {"numero": "40011000002", "titular_id": "C-0001", "tipo": "CORRIENTE", "saldo": "18000000", "estado": "ACTIVA", "exenta_gmf": false},
+  {"numero": "40011000003", "titular_id": "C-0002", "tipo": "AHORROS", "saldo": "350000", "estado": "ACTIVA", "exenta_gmf": false},
+  {"numero": "40011000004", "titular_id": "C-0003", "tipo": "AHORROS", "saldo": "900000", "estado": "BLOQUEADA", "exenta_gmf": false}
+]
