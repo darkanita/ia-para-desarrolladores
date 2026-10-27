@@ -13,8 +13,8 @@ Comprender los fundamentos técnicos de la IA generativa y los LLMs aplicados al
 | 0:00 – 0:10 | Apertura, acuerdos del curso, reto continuo y reglas de datos | Presentación |
 | 0:10 – 0:30 | Qué hay dentro de un LLM: siguiente token, tokens, transformer, atención, embeddings | Presentación + `demo/01` a `03` |
 | 0:30 – 1:15 | Las herramientas del curso: qué son VS Code, Git, GitHub Copilot y Claude Code; los controles de Copilot Chat; cómo trabaja un agente; Copilot y Claude Code, cada uno en VS Code y en la terminal; qué modelos hay y cuándo usar cada uno; recorrido en vivo por las cuatro formas de uso y qué modelos tiene cada una | Presentación + `proyectos/transferencias` |
-| 1:15 – 1:30 | Demos en Copilot Chat y Claude Code: alucinación, datos sensibles y un crédito mal calculado | `demo/04_amortizacion.py` |
-| 1:30 – 1:45 | Demo guiada: construimos un guardián de prompts con las dos herramientas | `laboratorio/ENUNCIADO.md` |
+| 1:15 – 1:20 | Demo: alucinación y datos sensibles, en Copilot Chat y Claude Code | Presentación |
+| 1:20 – 1:45 | Manos a la obra: Copilot y Claude Code construyen un simulador de crédito a partir de un documento de requisitos | `proyectos/simulador-credito` |
 | 1:45 – 1:52 | Capacidades, límites, riesgos y cinco reglas | Presentación |
 | 1:52 – 2:00 | Cómo llegar listos a la sesión 2 y trabajo autónomo | `preparacion/`, `autonomo/` |
 
@@ -28,7 +28,7 @@ sesion-01/
 │   ├── 02_atencion.py            self-attention causal en NumPy
 │   ├── 03_busqueda_semantica.py  embeddings y similitud coseno
 │   └── 04_amortizacion.py        tabla de amortización de un crédito
-├── laboratorio/                 se hace como demo guiada; práctica opcional
+├── laboratorio/                 guardián de prompts: práctica opcional
 │   ├── ENUNCIADO.md
 │   ├── guardian_prompt.py        plantilla con TODOs
 │   └── tests/                    34 pruebas automáticas

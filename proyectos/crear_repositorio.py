@@ -37,6 +37,9 @@ HISTORIAL = {
         ("2026-09-22T17:45:00", "CLI, repositorios JSON, notificador y datos de ejemplo",
          ["."]),
     ],
+    "simulador-credito": [
+        ("2026-10-20T09:00:00", "Requisitos del simulador de crédito y reglas del equipo", ["."]),
+    ],
 }
 
 

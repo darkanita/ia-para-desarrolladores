@@ -1,6 +1,6 @@
 # Laboratorio S1 — Guardián de prompts
 
-**En clase:** demo guiada (ustedes proponen los prompts, la docente los ejecuta) · **Después:** práctica opcional, individual, antes de la sesión 2 · **Herramientas:** VS Code + GitHub Copilot
+**Práctica opcional**, individual, antes de la sesión 2 · **Herramientas:** VS Code + GitHub Copilot (o Claude Code)
 
 ## Contexto
 
