@@ -22,7 +22,7 @@ Las presentaciones se publican en `slides/` después de cada sesión.
 Siga la guía [`preparacion/README.md`](preparacion/README.md) y, al terminar, verifique su máquina:
 
 ```bash
-python preparacion/verificar_entorno.py --track backend   # o frontend, datos
+python preparacion/verificar_entorno.py
 ```
 
 ## Cronograma
@@ -39,7 +39,7 @@ Cada sesión profundiza en las tres herramientas: **Copilot Chat** (VS Code), **
 | 3 | S6 | M4 Transformar | Pruebas automatizadas y refactorización | Hooks: lint y pruebas en cada cambio | **Hito 3:** suite de pruebas |
 | 4 | S7 | M4 Transformar | Seguridad: OWASP, secretos, permisos del agente, revisión cruzada | Agente de seguridad y bloqueos | — |
 | 4 | S8 | M4 Transformar | Buenas prácticas y gobierno del cerebro: versionar, revisar, compartir | Empaquetado para otros repositorios | **Hito 4:** refactorizado y asegurado |
-| 5 | S9 | M5 Apropiar | Cada equipo construye y aplica la parte de su stack | Partes por stack (backend, frontend, datos) | — |
+| 5 | S9 | M5 Apropiar | Cada equipo construye y aplica la parte de su tipo de proyecto | Partes por tipo de proyecto (APIs, ETL, automatizaciones) | — |
 | 5 | S10 | M5 Apropiar | Demos y recomendaciones de adopción | Cerebro del equipo integrado | **Entregable final** |
 
 Certificación: asistencia mínima del 80 % (máximo 2 inasistencias de 10 sesiones).

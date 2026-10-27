@@ -1,10 +1,7 @@
 """Verifica que su máquina esté lista para el curso IA para Desarrolladores.
 
-Uso (desde la carpeta del curso):
-    python preparacion/verificar_entorno.py              # núcleo común
-    python preparacion/verificar_entorno.py --track backend
-    python preparacion/verificar_entorno.py --track frontend
-    python preparacion/verificar_entorno.py --track datos
+Uso (desde la carpeta del curso, con el entorno virtual activo):
+    python preparacion/verificar_entorno.py
 
 Solo usa la librería estándar. No modifica nada en su equipo: ejecuta comandos
 de consulta de versión (como `git --version`) y prueba la conexión a los
@@ -193,7 +190,7 @@ def nucleo() -> None:
     print("\n2. Herramientas base")
     requerir("Git", ["git", "--version"], (2, 30), "Windows: winget install Git.Git · macOS: xcode-select --install")
     requerir("Node.js", ["node", "--version"], (22, 0),
-             "Instale Node.js 22 LTS (nodejs.org). Necesario para instalar Copilot CLI con npm y para el track frontend.",
+             "Opcional: solo si instala Copilot CLI con npm (Node.js 22 LTS, nodejs.org).",
              obligatorio=False)
 
     print("\n3. Editor")
@@ -244,30 +241,11 @@ def nucleo() -> None:
     red("Vocabulario de tiktoken", "https://openaipublic.blob.core.windows.net", obligatorio=False)
 
 
-def track(nombre: str) -> None:
-    print(f"\n7. Track {nombre}")
-    if nombre == "backend":
-        requerir("Java (JDK)", ["java", "-version"], (17, 0), "Instale un JDK 17 o 21 (por ejemplo Eclipse Temurin).")
-        red("Maven Central", "https://repo.maven.apache.org/maven2/")
-        red("Gradle Plugin Portal", "https://plugins.gradle.org/m2/")
-    elif nombre == "frontend":
-        requerir("Node.js", ["node", "--version"], (22, 0), "Instale Node.js 22 LTS (nodejs.org).")
-        requerir("npm", ["npm", "--version"], (10, 0), "Viene con Node.js 22.")
-        red("Registro npm", "https://registry.npmjs.org")
-    elif nombre == "datos":
-        reportar(OK, "Python", "ya verificado en el núcleo")
-        red("PyPI", "https://pypi.org/simple/")
-
-
 def main() -> int:
-    p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    p.add_argument("--track", choices=["backend", "frontend", "datos"], help="verificar además los requisitos de su track")
-    args = p.parse_args()
+    argparse.ArgumentParser(description=__doc__.splitlines()[0]).parse_args()
 
     print("IA para Desarrolladores · verificación del entorno")
     nucleo()
-    if args.track:
-        track(args.track)
 
     faltan = [r for r in resultados if r[0] == FALTA]
     avisos = [r for r in resultados if r[0] == AVISO]

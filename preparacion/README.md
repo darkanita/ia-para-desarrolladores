@@ -2,7 +2,7 @@
 
 Antes de la **sesión 2**, cada participante debe tener instaladas y con sesión iniciada tres herramientas de IA (GitHub Copilot Chat en VS Code, GitHub Copilot CLI y Claude Code) y las herramientas base del curso. La instalación toma entre 45 y 60 minutos. Al terminar, corra el script de verificación (sección 5) y envíe una captura del resultado por el canal del curso.
 
-Si en su equipo no tiene permisos para instalar software, pida apoyo a la mesa de ayuda con esta guía: la sección 7 está escrita para el equipo de TI.
+Si en su equipo no tiene permisos para instalar software, pida apoyo a la mesa de ayuda con esta guía: la sección 6 está escrita para el equipo de TI.
 
 ## 1. Qué debe tener su máquina
 
@@ -13,7 +13,7 @@ Si en su equipo no tiene permisos para instalar software, pida apoyo a la mesa d
 | PowerShell (solo Windows) | 7.x | Copilot CLI requiere PowerShell 6 o superior; el que trae Windows es 5.1 | `pwsh --version` |
 | Git | 2.30 | Control de versiones; en Windows también da Git Bash, que usa Claude Code | `git --version` |
 | Python | 3.10 (recomendado 3.12) | Demos y laboratorios | `python --version` |
-| Node.js | 22 LTS | Instalar Copilot CLI con npm y track frontend | `node --version` |
+| Node.js (opcional) | 22 LTS | Solo si instala Copilot CLI con npm | `node --version` |
 | Visual Studio Code | Versión actual | Editor del curso | `code --version` |
 | GitHub Copilot Chat (integrado en VS Code reciente; en versiones anteriores, extensión) | Versión actual | Copilot en el editor: chat, edición y modo agente | Panel Chat e ícono de Copilot en la barra inferior de VS Code |
 | Extensión Python (Microsoft) | Versión actual | Ejecutar y probar Python en VS Code | Panel de Extensiones |
@@ -30,7 +30,7 @@ Abra **PowerShell** (no hace falta abrirlo como administrador) y siga el orden. 
 1. **PowerShell 7:** `winget install Microsoft.PowerShell`. Desde aquí en adelante use la terminal *PowerShell 7* (`pwsh`), no *Windows PowerShell*.
 2. **Git for Windows:** `winget install Git.Git`. Incluye Git Bash, que Claude Code usa para ejecutar comandos.
 3. **Python 3.12:** `winget install Python.Python.3.12`. Si usa el instalador de python.org, marque *Add python.exe to PATH*.
-4. **Node.js 22 LTS:** `winget install OpenJS.NodeJS.LTS`.
+4. **Node.js 22 LTS (opcional):** `winget install OpenJS.NodeJS.LTS`. Solo hace falta si va a instalar Copilot CLI con npm.
 5. **Visual Studio Code:** `winget install Microsoft.VisualStudioCode`. Si usa el instalador, elija *User Installer* (no requiere administrador) y marque *Agregar a PATH*.
 6. **Copilot Chat y extensión Python:** abra VS Code. Si ya ve el panel **Chat** y el ícono de Copilot en la barra inferior, Copilot Chat está listo: en versiones recientes viene integrado y no aparece como extensión. Si no lo ve, instale **GitHub Copilot Chat** desde el panel de Extensiones. Instale también **Python** (Microsoft). Desde la terminal:
    - `code --install-extension GitHub.copilot-chat`
@@ -46,7 +46,7 @@ En macOS se asume [Homebrew](https://brew.sh). En Linux use el gestor de paquete
 
 1. **Git:** macOS `xcode-select --install` · Ubuntu `sudo apt install git`.
 2. **Python 3.12:** macOS `brew install python@3.12` · Ubuntu `sudo apt install python3 python3-venv python3-pip`.
-3. **Node.js 22 LTS:** macOS `brew install node@22` · Linux: instalador de nodejs.org o `nvm`.
+3. **Node.js 22 LTS (opcional, solo para instalar Copilot CLI con npm):** macOS `brew install node@22` · Linux: instalador de nodejs.org o `nvm`.
 4. **Visual Studio Code:** macOS `brew install --cask visual-studio-code` · Linux: paquete .deb o .rpm de code.visualstudio.com. En macOS, abra VS Code y ejecute *Shell Command: Install 'code' command in PATH* desde la paleta de comandos.
 5. **Extensiones:** `code --install-extension GitHub.copilot-chat` y `code --install-extension ms-python.python`.
 6. **GitHub Copilot CLI:** `brew install --cask copilot-cli` · o `curl -fsSL https://gh.io/copilot-install | bash` · o `npm install -g @github/copilot`.
@@ -64,7 +64,7 @@ Cada asistente se prueba con una pregunta corta. Si responde, está listo. Use l
 
 La primera vez que abra Copilot CLI o Claude Code en una carpeta, le preguntarán si confía en ella: responda que sí solo en la carpeta del curso.
 
-Si Copilot CLI responde que la política no está habilitada, su licencia viene de la organización y un administrador debe activarla (sección 7). Si Claude Code no puede conectarse, ejecute `claude doctor` y envíe el resultado.
+Si Copilot CLI responde que la política no está habilitada, su licencia viene de la organización y un administrador debe activarla (sección 6). Si Claude Code no puede conectarse, ejecute `claude doctor` y envíe el resultado.
 
 ## 5. Preparar el material del curso y verificar
 
@@ -75,26 +75,13 @@ El material se entrega como un archivo `.zip` por el canal del curso. Descomprí
    - Windows: `python -m venv .venv` y luego `.venv\Scripts\Activate.ps1`
    - macOS/Linux: `python3 -m venv .venv` y luego `source .venv/bin/activate`
 3. Instale los paquetes del curso: `pip install -r requirements.txt`
-4. Corra la verificación con su track (`backend`, `frontend` o `datos`):
-   - `python preparacion/verificar_entorno.py --track backend`
+4. Corra la verificación: `python preparacion/verificar_entorno.py`
 
 El script no modifica nada en su equipo: consulta las versiones instaladas y prueba la conexión a los servicios del curso. Marca cada punto como **OK**, **FALTA** u **AVISO** (opcional) y explica cómo resolverlo. Cuando termine con *Listo para el curso*, envíe una captura por el canal. Si algo sigue en **FALTA**, envíe la captura igual para resolverlo antes de la sesión.
 
 En Windows, si PowerShell no deja activar el entorno virtual, ejecute una vez `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` o use la terminal *Command Prompt* con `.venv\Scripts\activate.bat`.
 
-## 6. Requisitos adicionales por track
-
-Desde la sesión 3 los laboratorios se hacen en el stack de cada equipo. Instale lo de su track; si trabaja en varios, elija el que usará en el reto del curso.
-
-| Track | Qué instalar | Cómo verificar |
-| --- | --- | --- |
-| Backend (Java) | JDK 17 o 21 (por ejemplo Eclipse Temurin: `winget install EclipseAdoptium.Temurin.21.JDK`). Gradle no hace falta: los proyectos traen su propio `gradlew` | `java -version` |
-| Frontend | Node.js 22 LTS (ya instalado en la sección 2) | `node --version` y `npm --version` |
-| Datos / ETL | Python 3.12 (ya instalado en la sección 2) | `python --version` |
-
-Pendiente de confirmar con el equipo: versión exacta de Java y Spring, framework de frontend y herramientas de ETL que usan hoy. Esta tabla se actualizará antes de la sesión 3.
-
-## 7. Para el equipo de TI
+## 6. Para el equipo de TI
 
 Estas cinco condiciones dependen de la organización, no de cada participante. Conviene revisarlas antes de que el equipo empiece a instalar.
 
@@ -109,20 +96,19 @@ Estas cinco condiciones dependen de la organización, no de cada participante. C
 | Copilot (autenticación y servicio) | `github.com`, `api.github.com`, `github.githubassets.com`, `avatars.githubusercontent.com`, `copilot-proxy.githubusercontent.com`, `origin-tracker.githubusercontent.com`, `*.business.githubcopilot.com` (plan Business) o el dominio de su plan |
 | Extensiones de VS Code | `marketplace.visualstudio.com`, `*.gallerycdn.vsassets.io`, `update.code.visualstudio.com` |
 | Claude Code | `api.anthropic.com`, `claude.ai`, `claude.com`, `platform.claude.com`, `downloads.claude.ai` (instalador y actualizaciones); `sso.claude.com` si la organización usa SSO |
-| Paquetes del curso | `pypi.org`, `files.pythonhosted.org`, `registry.npmjs.org`, `openaipublic.blob.core.windows.net` (vocabulario de tiktoken, opcional) |
-| Track backend | `repo.maven.apache.org`, `plugins.gradle.org`, `services.gradle.org` |
+| Paquetes del curso | `pypi.org`, `files.pythonhosted.org`, `openaipublic.blob.core.windows.net` (vocabulario de tiktoken, opcional); `registry.npmjs.org` solo si instalan Copilot CLI con npm |
 
 Si la organización usa Claude Code a través de Amazon Bedrock, Google Cloud o Microsoft Foundry, el tráfico del modelo va a ese proveedor en lugar de los dominios de Anthropic. Las listas completas están en las fuentes al final.
 
-## 8. Problemas comunes
+## 7. Problemas comunes
 
 | Síntoma | Causa probable | Solución |
 | --- | --- | --- |
 | `claude`, `copilot` o `code` no se reconoce como comando | La terminal se abrió antes de instalar | Cierre y abra la terminal; si sigue, revise que la carpeta de instalación esté en el PATH |
 | `'irm' is not recognized` | Está en Command Prompt, no en PowerShell | Abra PowerShell 7 o use el comando para CMD de la guía oficial de Claude Code |
 | Copilot CLI no arranca en Windows | Se está usando Windows PowerShell 5.1 | Instale PowerShell 7 y abra la terminal *PowerShell 7* |
-| Copilot CLI: política deshabilitada | La organización no ha activado Copilot CLI | Pedirlo al administrador (sección 7) |
-| Error de certificado al instalar o al conectar | El proxy inspecciona tráfico HTTPS | Pedir a TI el certificado raíz (sección 7) |
+| Copilot CLI: política deshabilitada | La organización no ha activado Copilot CLI | Pedirlo al administrador (sección 6) |
+| Error de certificado al instalar o al conectar | El proxy inspecciona tráfico HTTPS | Pedir a TI el certificado raíz (sección 6) |
 | `pip install` falla por conexión | PyPI bloqueado o proxy sin configurar | Pedir a TI `pypi.org` y `files.pythonhosted.org`, o el espejo interno de paquetes |
 | No se puede activar `.venv` en PowerShell | Política de ejecución de scripts | `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` |
 | El script marca *Vocabulario de tiktoken* en AVISO | Dominio de descarga bloqueado | Es opcional: los ejercicios usan un conteo aproximado y lo indican en pantalla |

@@ -5,7 +5,7 @@
 ## 1. Preparar su máquina (obligatorio)
 La sesión 2 es práctica con las tres herramientas del curso: Copilot Chat en VS Code, Copilot CLI y Claude Code.
 - [ ] Siga la guía `preparacion/README.md`.
-- [ ] Corra `python preparacion/verificar_entorno.py --track <su track>` y envíe una captura del resultado por el canal.
+- [ ] Corra `python preparacion/verificar_entorno.py` y envíe una captura del resultado por el canal.
 
 Si algo queda en **FALTA**, envíe la captura igual: lo resolvemos antes de la sesión 2.
 
