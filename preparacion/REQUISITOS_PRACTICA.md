@@ -28,11 +28,12 @@ En el repositorio del equipo (creado con `python proyectos/crear_repositorio.py 
 - [ ] Pregúntele al asistente: *"¿Qué reglas del equipo tienes que seguir?"*. Debe mencionar el Banco Orquídea, `Decimal` y las tasas E.A. Si no, no está leyendo `AGENTS.md` (Copilot) o `CLAUDE.md` (Claude Code).
 - [ ] Escriba `/` en el chat: debe aparecer **`intencion`**. En Copilot, use el agente **Agent**; si no aparece, verifique que exista `.github/skills/intencion/` y recargue VS Code.
 
-## 4. Git y el repositorio compartido del equipo
+## 4. Git y GitHub
 
 - [ ] `git log --oneline` muestra el commit inicial del repositorio del equipo.
-- [ ] El equipo tiene dónde compartir el repositorio: el sistema de repositorios que use la organización o, si no hay, una carpeta compartida. El curso no requiere acceso a GitHub.
-- [ ] Saben hacer `git add`, `git commit` y traer los cambios de los compañeros.
+- [ ] Pueden crear un repositorio privado en la organización de GitHub que usa su equipo, o alguien del equipo puede crearlo.
+- [ ] `git push` y `git clone` funcionan contra ese repositorio desde su máquina.
+- [ ] Saben crear una rama, hacer commit y abrir un pull request (desde la sesión 5 los cambios entran así).
 
 ## 5. Lo que se suma en las próximas sesiones
 
@@ -44,6 +45,8 @@ Instálelo con tiempo para no perder la sesión:
 | S3 | Que su asistente pueda usar servidores MCP locales | Claude Code: `/mcp` abre sin error · Copilot: la política de MCP de la organización debe estar habilitada (ver sección 6) |
 | S4 | `pip install copier` (plantilla del proyecto) | `copier --version` |
 | S6 | Que el asistente pueda ejecutar hooks (comandos de Python) | Se valida en la sesión 6 |
+| S6–S8 | GitHub Actions en el repositorio del equipo | Pestaña Actions habilitada; el workflow de pruebas corre en cada pull request |
+| S7 | Análisis de dependencias y de código en GitHub (Dependabot, code scanning), si la organización los tiene | Pestaña Security del repositorio |
 
 ## 6. Para el equipo de TI
 
@@ -54,6 +57,8 @@ Instálelo con tiempo para no perder la sesión:
 | Agentes personalizados, skills e instrucciones habilitados en Copilot | Personas con Copilot Business | El agente del equipo usa esas piezas |
 | Claude Code sin restricciones administradas sobre skills, subagentes, hooks y servidores MCP locales del proyecto | Personas con Claude Code | Son las piezas del agente del equipo |
 | Acceso a PyPI (`pypi.org`, `files.pythonhosted.org`) | Todos | Instalar `pyyaml`, `mcp` y `copier` |
+| Repositorios privados de los equipos en la organización de GitHub, con GitHub Actions | Todos | Pull requests, revisión y pruebas automáticas desde la sesión 5 |
+| Revisión de código de Copilot en pull requests habilitada | Personas con Copilot Business | Revisión automática del PR en la sesión 5 |
 
 Todo el trabajo usa **datos sintéticos** y un banco ficticio. Ninguna pieza del agente se conecta a sistemas del banco.
 
