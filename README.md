@@ -13,7 +13,7 @@ El curso termina con un **cerebro del equipo**: los estándares, plantillas y bu
 | `demo/` | Lo que la docente muestra en vivo |
 | `laboratorio/` | El ejercicio parecido que cada participante resuelve en clase; tiene pruebas o una plantilla de entrega |
 | `autonomo/` | Trabajo para antes de la siguiente sesión |
-| `reto-del-curso/` | El reto en equipos que avanza de la sesión 2 a la 10 |
+| `proyectos/plantilla-equipo/` | El repositorio de cada equipo: el agente del equipo (Banco Orquídea, ficticio) que crece de la sesión 2 a la 10 |
 
 Las presentaciones se publican en `slides/` después de cada sesión.
 

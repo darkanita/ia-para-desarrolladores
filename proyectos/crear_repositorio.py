@@ -40,6 +40,9 @@ HISTORIAL = {
     "simulador-credito": [
         ("2026-10-20T09:00:00", "Requisitos del simulador de crédito y reglas del equipo", ["."]),
     ],
+    "plantilla-equipo": [
+        ("2026-10-28T09:00:00", "Repositorio del equipo desde la plantilla del curso (agente v0)", ["."]),
+    ],
 }
 
 

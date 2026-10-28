@@ -1,0 +1,4 @@
+{
+  "chat.useAgentsMdFile": true,
+  "python.terminal.activateEnvironment": true
+}

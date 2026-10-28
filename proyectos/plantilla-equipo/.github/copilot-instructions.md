@@ -1,0 +1,1 @@
+Siga las reglas de `AGENTS.md` en la raíz del repositorio. Las definiciones del banco ficticio (productos, límites, clasificación de datos y convenciones) están en `banco.yaml`: consúltelo antes de proponer reglas de negocio.

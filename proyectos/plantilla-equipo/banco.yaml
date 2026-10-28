@@ -1,0 +1,54 @@
+# Definiciones del Banco Orquídea (BANCO FICTICIO, solo para el curso).
+# Este es el único archivo que un banco real reemplaza con sus propias definiciones:
+# las reglas, las skills y las herramientas del agente lo leen de aquí.
+
+banco:
+  nombre: Banco Orquídea
+  ficticio: true
+  moneda: COP
+
+productos:
+  credito_consumo:
+    tasa_maxima_ea: 0.26            # tasa efectiva anual máxima permitida (valor de ejemplo)
+    monto_minimo: 1000000
+    monto_maximo: 100000000
+    plazo_meses: {minimo: 6, maximo: 72}
+    endeudamiento_maximo: 0.40      # (cuota + otras cuotas) / ingresos
+  transferencias:
+    monto_minimo: 1000
+    limite_diario: 10000000
+    gmf: 0.004                      # gravamen a los movimientos financieros, 4 por mil (simplificado)
+
+datos:
+  clasificacion:
+    publica: "Información que puede publicarse sin restricción"
+    interna: "Uso interno; no sale del banco"
+    confidencial: "Información de negocio sensible; acceso por rol"
+    restringida: "Datos personales y financieros de clientes: cédulas, cuentas, tarjetas, saldos"
+  reglas:
+    - "En desarrollo y pruebas solo se usan datos sintéticos"
+    - "Los datos restringidos nunca se escriben en logs, prompts ni archivos del repositorio"
+    - "Los números de cuenta se muestran enmascarados: solo los últimos 4 dígitos"
+
+convenciones:
+  lenguaje: Python 3.12
+  arquitectura: [dominio, casos_uso, puertos, adaptadores, app]
+  nombres: "español, snake_case; clases en PascalCase; servicios con prefijo svc-"
+  dinero: "decimal.Decimal, redondeo al peso con ROUND_HALF_UP; nunca float"
+  tasas: "efectivas anuales (E.A.) como fracción; mensual = (1 + ea) ** (1/12) - 1"
+  pruebas: {framework: pytest, cobertura_minima_dominio: 0.80}
+  dependencias_aprobadas: [pytest, streamlit, fastapi, pydantic, pyyaml]
+
+ciclo:
+  carpeta_artefactos: docs/sdlc
+  artefactos: [intent.md, spec.md, plan.md, revision.md]
+  aprobaciones:
+    intent.md: "Dueño del producto"
+    spec.md: "Dueño del producto"
+    plan.md: "Líder técnico"
+    revision.md: "Dueño del código"
+    solicitud_cambio: "Gestor de cambios (riesgo alto: dos aprobaciones)"
+
+gestion_cambios:
+  formato_id: "CAMB-####"
+  niveles_riesgo: [bajo, medio, alto]
