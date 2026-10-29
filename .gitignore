@@ -5,3 +5,6 @@ __pycache__/
 node_modules/
 reporte_*.csv
 _publicacion/
+
+# Demo A de la sesión 2: archivo con una clave falsa, nunca se sube
+secretos_demo.py
