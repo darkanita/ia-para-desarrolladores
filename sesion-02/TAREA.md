@@ -7,13 +7,20 @@
 
 ## 1. Crear su repositorio local desde la plantilla · 10 min
 
-Desde la carpeta del curso, con el entorno activo (los comandos funcionan igual en PowerShell y en Git Bash):
+Abra una terminal en **la carpeta del curso**: donde descomprimió el `.zip` (por ejemplo `C:\cursos\ia-para-desarrolladores`) y donde creó el entorno virtual, según la [guía de preparación](../preparacion/README.md). Active el entorno: debe ver `(.venv)` al inicio de la línea.
+
+- PowerShell: `.venv\Scripts\Activate.ps1`
+- Git Bash: `source .venv/Scripts/activate`
+
+Luego (los comandos funcionan igual en las dos terminales):
 
 ```bash
 python proyectos/crear_repositorio.py ../mi-reto --proyecto plantilla-equipo
 cd ../mi-reto
 python herramientas/verificar_equipo.py
 ```
+
+`../mi-reto` queda **al lado** de la carpeta del curso (por ejemplo `C:\cursos\mi-reto`), no dentro: es su repositorio, con su propio historial de git y su primer commit ya hecho.
 
 El verificador debe terminar en "Listo para trabajar con el agente". El aviso "Casos con intent.md: ninguno todavía" es normal. Si dice que falta algo, avise.
 
