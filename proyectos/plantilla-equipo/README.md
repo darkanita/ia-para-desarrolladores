@@ -1,6 +1,6 @@
 # Repositorio del equipo · Banco Orquídea (ficticio)
 
-Punto de partida de cada equipo del curso **IA para Desarrolladores**. Trae el agente del equipo en su versión inicial, para Claude Code y para GitHub Copilot.
+Punto de partida de cada persona (y, desde la sesión 5, de cada equipo) en el curso **IA para Desarrolladores**. Trae el agente del equipo en su versión inicial, para Claude Code y para GitHub Copilot.
 
 | Archivo | Qué es | Lo lee |
 |---|---|---|

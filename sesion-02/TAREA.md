@@ -18,7 +18,7 @@ python herramientas/verificar_equipo.py
 El verificador debe terminar en "Listo para trabajar con el agente". El aviso "Casos con intent.md: ninguno todavía" es normal. Si dice que falta algo, avise.
 
 ## 2. Elegir el reto
-Lea [`RETOS_SUGERIDOS.md`](RETOS_SUGERIDOS.md) o proponga uno de su trabajo diario, con datos sintéticos.
+Lea [`RETOS_SUGERIDOS.md`](RETOS_SUGERIDOS.md): cada reto trae la idea para pegar después de `/intencion` y la tabla de cómo crece su reto durante el curso. También puede proponer uno de su trabajo diario, con datos sintéticos.
 
 ## 3. Escribir la intención con el agente · 20 min
 Abra **la carpeta `mi-reto`** en VS Code (si abre otra, la skill no aparece) y prepare su herramienta:
