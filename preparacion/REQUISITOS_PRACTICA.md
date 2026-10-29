@@ -1,6 +1,6 @@
 # Requisitos para la parte práctica · IA para Desarrolladores
 
-Desde la sesión 2, los ejercicios se hacen **en casa, en el repositorio del equipo**. Antes de empezar, cada persona valida estos puntos en su máquina. Si algo falla, envíe una captura por el canal del curso.
+Desde la sesión 2, los ejercicios se hacen **en casa, en su propio repositorio local** (desde la sesión 5, en uno compartido en GitHub). Antes de empezar, cada persona valida estos puntos en su máquina. Si algo falla, envíe una captura por el canal del curso.
 
 ## 1. La base (guía de preparación)
 
@@ -22,18 +22,17 @@ Modelos recomendados para el curso: en Claude Code, `sonnet` u `opus` para el tr
 
 ## 3. El asistente lee las reglas y las skills del equipo
 
-En el repositorio del equipo (creado con `python proyectos/crear_repositorio.py ../equipo-<nombre> --proyecto plantilla-equipo`):
+En su repositorio local (creado con `python proyectos/crear_repositorio.py ../mi-reto --proyecto plantilla-equipo`):
 
 - [ ] `python herramientas/verificar_equipo.py` termina en "Listo para trabajar con el agente".
 - [ ] Pregúntele al asistente: *"¿Qué reglas del equipo tienes que seguir?"*. Debe mencionar el Banco Orquídea, `Decimal` y las tasas E.A. Si no, no está leyendo `AGENTS.md` (Copilot) o `CLAUDE.md` (Claude Code).
 - [ ] Escriba `/` en el chat: debe aparecer **`intencion`**. En Copilot, use el agente **Agent**; si no aparece, verifique que exista `.github/skills/intencion/` y recargue VS Code.
 
-## 4. Git y GitHub
+## 4. Git
 
-- [ ] `git log --oneline` muestra el commit inicial del repositorio del equipo.
-- [ ] Pueden crear un repositorio privado en la organización de GitHub que usa su equipo, o alguien del equipo puede crearlo.
-- [ ] `git push` y `git clone` funcionan contra ese repositorio desde su máquina.
-- [ ] Saben crear una rama, hacer commit y abrir un pull request (desde la sesión 5 los cambios entran así).
+- [ ] `git log --oneline` muestra el commit inicial de su repositorio local.
+- [ ] Sabe hacer `git add` y `git commit`.
+- [ ] Desde la sesión 5 el trabajo pasa a un repositorio compartido en GitHub, con ramas y pull requests: confirme que puede crear o recibir acceso a un repositorio privado en la organización.
 
 ## 5. Lo que se suma en las próximas sesiones
 
