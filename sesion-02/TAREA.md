@@ -44,8 +44,8 @@ Luego escriba:
 
 Responda sus preguntas (máximo 5). Si no sabe algo, dígale: "No lo sabemos aún; déjalo como pregunta abierta". Cuando pida permiso para crear el archivo, lea la ruta y apruebe (en Copilot, además, **Keep**). El resultado queda en `docs/sdlc/<caso>/intent.md`.
 
-## 4. Revisar en parejas · 5 min
-Lea el `intent.md` de un compañero con esta lista:
+## 4. Revisar · 5 min
+Revise su `intent.md` con esta lista. En clase, una o dos personas comparten pantalla y lo revisamos juntos:
 
 - [ ] Están las 11 secciones; ninguna vacía (o dice "No aplica" y por qué).
 - [ ] El problema está en lenguaje de negocio, sin soluciones técnicas.
