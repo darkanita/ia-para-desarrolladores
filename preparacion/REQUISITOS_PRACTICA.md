@@ -1,6 +1,6 @@
 # Requisitos para la parte práctica · IA para Desarrolladores
 
-Desde la sesión 2, los ejercicios se hacen **en casa, en su propio repositorio local** (desde la sesión 5, en uno compartido en GitHub). Antes de empezar, cada persona valida estos puntos en su máquina. Si algo falla, envíe una captura por el canal del curso.
+En la sesión 2 cada persona practica **en clase, en su propio repositorio local** (desde la sesión 5, en uno compartido en GitHub). **Valide estos puntos en su máquina antes de esa clase.** Si algo falla, envíe una captura por el canal del curso.
 
 ## 1. La base (guía de preparación)
 

@@ -1,10 +1,11 @@
-# Tarea de la sesión 2 · Mi primer intent.md
+# Sesión 2 · La intención de mi reto
 
-**Entrega:** antes de la sesión 3. **Quién:** cada persona, en su máquina. Por ahora no hace falta GitHub: el repositorio es local.
+**Se hace en clase** (40 minutos) y en casa solo se termina. **Quién:** cada persona, en su máquina. Por ahora no hace falta GitHub: el repositorio es local.
+**Entrega:** el `intent.md` aprobado, antes de la sesión 3.
 
-Antes de empezar, revise los [requisitos para la parte práctica](../preparacion/REQUISITOS_PRACTICA.md).
+**Llegue a clase con:** el repositorio del curso descargado, el entorno de Python activo y Claude Code o Copilot con sesión iniciada. Detalle en los [requisitos para la parte práctica](../preparacion/REQUISITOS_PRACTICA.md).
 
-## 1. Crear su repositorio local desde la plantilla
+## 1. Crear su repositorio local desde la plantilla · 10 min
 
 Desde la carpeta del curso, con el entorno activo (los comandos funcionan igual en PowerShell y en Git Bash):
 
@@ -14,35 +15,59 @@ cd ../mi-reto
 python herramientas/verificar_equipo.py
 ```
 
-El verificador debe terminar en "Listo para trabajar con el agente". El aviso "Casos con intent.md: ninguno todavía" es normal.
+El verificador debe terminar en "Listo para trabajar con el agente". El aviso "Casos con intent.md: ninguno todavía" es normal. Si dice que falta algo, avise.
 
 ## 2. Elegir el reto
 Lea [`RETOS_SUGERIDOS.md`](RETOS_SUGERIDOS.md) o proponga uno de su trabajo diario, con datos sintéticos.
 
-## 3. Escribir la intención con el agente
-Abra `mi-reto` en VS Code y, en Claude Code o en Copilot Chat (agente **Agent**), escriba:
+## 3. Escribir la intención con el agente · 20 min
+Abra **la carpeta `mi-reto`** en VS Code (si abre otra, la skill no aparece) y prepare su herramienta:
+
+| | Claude Code (CLI o panel) | Copilot Chat |
+|---|---|---|
+| Abrir | En la terminal de `mi-reto`: `claude` | Conversación nueva con `+` |
+| Modo | Manual: con `Shift+Tab`, sin *plan mode* ni *auto mode* | Agente **Agent**, modo **Interactive**, **Manual permissions** |
+| Comprobar | Escriba `/inten`: debe aparecer `/intencion` | Escriba `/`: debe aparecer `intencion` |
+
+Luego escriba:
 
 ```text
 /intencion <la idea de su reto en una o dos frases>
 ```
 
-Responda las preguntas del asistente. El resultado queda en `docs/sdlc/<caso>/intent.md`.
+Responda sus preguntas (máximo 5). Si no sabe algo, dígale: "No lo sabemos aún; déjalo como pregunta abierta". Cuando pida permiso para crear el archivo, lea la ruta y apruebe (en Copilot, además, **Keep**). El resultado queda en `docs/sdlc/<caso>/intent.md`.
 
-## 4. Revisar antes de entregar
+## 4. Revisar en parejas · 5 min
+Lea el `intent.md` de un compañero con esta lista:
+
 - [ ] Están las 11 secciones; ninguna vacía (o dice "No aplica" y por qué).
+- [ ] El problema está en lenguaje de negocio, sin soluciones técnicas.
 - [ ] La métrica de éxito se puede medir.
 - [ ] Los datos están clasificados con `banco.yaml` y son sintéticos.
 - [ ] Las reglas del banco citan su clave de `banco.yaml` y no hay valores inventados.
-- [ ] El `Estado` sigue en `borrador`: lo aprueba la docente en la sesión 3, como dueña del producto.
+- [ ] Los supuestos y las preguntas abiertas están escritos.
 
-## 5. Guardar y entregar
-Guarde su trabajo en git:
+## 5. Aprobar y registrar · 5 min
+Usted es el dueño de su reto. Si la revisión pasó, **edite a mano** la tabla del inicio (el agente no se aprueba a sí mismo):
 
-```bash
-git add .
-git commit -m "Intención del reto"
+```text
+| Estado | aprobado |
+| Aprobado por | <su nombre> |
 ```
 
-Envíe por el canal del curso su nombre, la herramienta que usó (Claude Code o Copilot) y el archivo `intent.md`.
+Y deje el registro en git:
+
+```bash
+git add docs/sdlc
+git commit -m "Intención del reto aprobada"
+git log --oneline
+```
+
+Si quedaron preguntas abiertas importantes, déjelo en `borrador`, ciérrelas en casa con el agente y apruebe después.
+
+## En casa
+1. Termine lo que quedó pendiente: preguntas abiertas, aprobación y commit.
+2. Envíe por el canal del curso su nombre, la herramienta que usó (Claude Code o Copilot) y el archivo `intent.md`.
+3. Instale lo de la sesión 3: `pip install pyyaml mcp`.
 
 > Más adelante (sesión 5) el trabajo pasa a un repositorio compartido en GitHub, con ramas y pull requests.
