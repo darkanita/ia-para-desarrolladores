@@ -11,9 +11,9 @@ Ver a los agentes construir una aplicación a partir de requisitos, entender el 
 |---|---|---|
 | 0:00 – 0:10 | Repaso y lo que pidió el grupo | Presentación |
 | 0:10 – 0:20 | Demo A: alucinación y datos sensibles | Presentación |
-| 0:20 – 0:55 | Demo B: Copilot y Claude Code construyen el simulador de crédito desde requisitos, mientras vemos qué es el SDLC y el ciclo AI SDLC | `sesion-01/resultados/` |
-| 0:55 – 1:10 | Demo: el repositorio del equipo y la skill `/intencion` | `proyectos/plantilla-equipo` |
-| 1:10 – 1:50 | **Práctica:** cada persona crea su repositorio local y escribe la intención de su reto | [`TAREA.md`](TAREA.md), `RETOS_SUGERIDOS.md` |
+| 0:20 – 1:05 | Demo B: Copilot y Claude Code construyen el simulador de crédito desde requisitos, mientras vemos qué es el SDLC y el ciclo AI SDLC | `sesion-01/resultados/` |
+| 1:05 – 1:20 | Demo: el repositorio del equipo y la skill `/intencion` | `proyectos/plantilla-equipo` |
+| 1:20 – 1:50 | **Práctica:** cada persona crea su repositorio local y escribe la intención de su reto | [`TAREA.md`](TAREA.md), `RETOS_SUGERIDOS.md` |
 | 1:50 – 2:00 | Tarea y cierre | Presentación |
 
 ## Antes de la clase

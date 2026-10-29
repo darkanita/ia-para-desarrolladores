@@ -1,11 +1,11 @@
 # Sesión 2 · La intención de mi reto
 
-**Se hace en clase** (40 minutos) y en casa solo se termina. **Quién:** cada persona, en su máquina. Por ahora no hace falta GitHub: el repositorio es local.
+**Se hace en clase** (30 minutos) y en casa solo se termina. **Quién:** cada persona, en su máquina. Por ahora no hace falta GitHub: el repositorio es local.
 **Entrega:** el `intent.md` aprobado, antes de la sesión 3.
 
 **Llegue a clase con:** el repositorio del curso descargado, el entorno de Python activo y Claude Code o Copilot con sesión iniciada. Detalle en los [requisitos para la parte práctica](../preparacion/REQUISITOS_PRACTICA.md).
 
-## 1. Crear su repositorio local desde la plantilla · 10 min
+## 1. Crear su repositorio local desde la plantilla · 5 min
 
 Abra una terminal en **la carpeta del curso**: donde descomprimió el `.zip` (por ejemplo `C:\cursos\ia-para-desarrolladores`) y donde creó el entorno virtual, según la [guía de preparación](../preparacion/README.md). Active el entorno: debe ver `(.venv)` al inicio de la línea.
 
@@ -27,7 +27,7 @@ El verificador debe terminar en "Listo para trabajar con el agente". El aviso "C
 ## 2. Elegir el reto
 Lea [`RETOS_SUGERIDOS.md`](RETOS_SUGERIDOS.md): cada reto trae la idea para pegar después de `/intencion` y la tabla de cómo crece su reto durante el curso. También puede proponer uno de su trabajo diario, con datos sintéticos.
 
-## 3. Escribir la intención con el agente · 20 min
+## 3. Escribir la intención con el agente · 15 min
 Abra **la carpeta `mi-reto`** en VS Code (si abre otra, la skill no aparece) y prepare su herramienta:
 
 | | Claude Code (CLI o panel) | Copilot Chat |
