@@ -22,7 +22,7 @@ Modelos recomendados para el curso: en Claude Code, `sonnet` u `opus` para el tr
 
 ## 3. El asistente lee las reglas y las skills del equipo
 
-En su repositorio local (creado con `python proyectos/crear_repositorio.py ../mi-reto --proyecto plantilla-equipo`):
+Haga una prueba con un repositorio de práctica (en clase creará el definitivo, `mi-reto`). Desde la carpeta del curso: `python proyectos/crear_repositorio.py ../prueba --proyecto plantilla-equipo`, abra `../prueba` en VS Code y compruebe:
 
 - [ ] `python herramientas/verificar_equipo.py` termina en "Listo para trabajar con el agente".
 - [ ] Pregúntele al asistente: *"¿Qué reglas del equipo tienes que seguir?"*. Debe mencionar el Banco Orquídea, `Decimal` y las tasas E.A. Si no, no está leyendo `AGENTS.md` (Copilot) o `CLAUDE.md` (Claude Code).
@@ -30,7 +30,8 @@ En su repositorio local (creado con `python proyectos/crear_repositorio.py ../mi
 
 ## 4. Git
 
-- [ ] `git log --oneline` muestra el commit inicial de su repositorio local.
+- [ ] `git config user.name` y `git config user.email` devuelven su nombre y correo. Sin esto, el commit de la práctica falla. Si están vacíos: `git config --global user.name "Su nombre"` y `git config --global user.email "su@correo"`.
+- [ ] En la carpeta `../prueba`, `git log --oneline` muestra el commit inicial. Cuando todo funcione, puede borrar esa carpeta.
 - [ ] Sabe hacer `git add` y `git commit`.
 - [ ] Desde la sesión 5 el trabajo pasa a un repositorio compartido en GitHub, con ramas y pull requests: confirme que puede crear o recibir acceso a un repositorio privado en la organización.
 
