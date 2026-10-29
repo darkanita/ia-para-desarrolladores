@@ -1,0 +1,7 @@
+ref,monto,fecha,descripcion
+TRX001,150000.00,01/10/2026,Pago proveedor ACME
+TRX002,2350000.00,01/10/2026,Nomina lote 14
+TRX003,98000.00,06/10/2026,Comision ACH
+TRX004,401000.00,09/10/2026,Transferencia suc 22
+TRX005,87000.00,03/10/2026,Ajuste cambiario
+TRX006,33000.00,04/10/2026,Reverso tarjeta
