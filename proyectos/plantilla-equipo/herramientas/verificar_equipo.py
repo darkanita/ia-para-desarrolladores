@@ -62,7 +62,11 @@ def main() -> int:
                           ("CLAUDE.md", "entrada de Claude Code"), (".github/copilot-instructions.md", "entrada de Copilot"),
                           (".claude/skills/intencion/SKILL.md", "skill /intencion"),
                           (".claude/skills/spec/SKILL.md", "skill /spec (sesión 3)"),
-                          (".claude/rules", "reglas por tipo de archivo (sesión 3)")]:
+                          (".claude/rules", "reglas por tipo de archivo (sesión 3)"),
+                          (".claude/skills/plan-tecnico/SKILL.md", "skill /plan-tecnico (sesión 4)"),
+                          (".claude/agents/arquitecto.md", "agente arquitecto (sesión 4)"),
+                          (".github/agents/arquitecto.agent.md", "agente Arquitecto para Copilot"),
+                          ("herramientas/verificar_capas.py", "regla de capas (sesión 4)")]:
         existe = (RAIZ / archivo).exists()
         reportar(OK if existe else FALTA, archivo, para if existe else "no existe",
                  "Actualice el repositorio: desde la carpeta del curso, python proyectos/actualizar_repositorio.py <su repo>")
@@ -73,6 +77,12 @@ def main() -> int:
     casos = sorted(p.parent.name for p in (RAIZ / "docs" / "sdlc").glob("*/intent.md"))
     reportar(OK if casos else AVISO, "Casos con intent.md", ", ".join(casos) if casos else "ninguno todavía",
              "Use /intencion en su asistente para crear el primero.")
+
+    if (RAIZ / "src").is_dir():
+        capas = subprocess.run([sys.executable, str(RAIZ / "herramientas" / "verificar_capas.py")], capture_output=True,
+                               text=True, encoding="utf-8", errors="replace")
+        reportar(OK if capas.returncode == 0 else FALTA, "Regla de capas en src/", "OK" if capas.returncode == 0 else "con violaciones",
+                 "Ejecute: python herramientas/verificar_capas.py y corrija lo que reporte")
 
     print("\n3. Herramientas del banco (servidor MCP)")
     try:

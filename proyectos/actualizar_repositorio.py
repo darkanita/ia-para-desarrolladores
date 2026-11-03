@@ -87,12 +87,16 @@ def main() -> int:
     if args.probar:
         return 0
 
+    sincronizar = destino / "herramientas" / "sincronizar_skills.py"
+    if sincronizar.exists():  # lleva a Copilot las skills y reglas, incluidas las propias
+        subprocess.run([sys.executable, str(sincronizar)], capture_output=True, text=True, cwd=destino)
     configurar = destino / "herramientas" / "configurar_mcp.py"
     if configurar.exists():
         r = subprocess.run([sys.executable, str(configurar)], capture_output=True, text=True, cwd=destino)
         print("Servidor MCP configurado con este Python." if r.returncode == 0 else r.stdout + r.stderr)
     if not args.sin_commit and (agregados or actualizados):
         tocados = agregados + actualizados + [r for r in POR_MAQUINA if (destino / r).exists()]
+        tocados += [r for r in (".github/skills", ".github/instructions") if (destino / r).exists()]
         subprocess.run(["git", "add", "--", *tocados], cwd=destino, capture_output=True)
         r = subprocess.run(["git", "commit", "-q", "-m", "Agente del equipo actualizado a la última versión de la plantilla"],
                            cwd=destino, capture_output=True, text=True)

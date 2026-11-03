@@ -44,7 +44,7 @@ HISTORIAL = {
         ("2026-11-03T10:00:00", "Módulo de GMF del equipo de pagos, todavía sin pruebas", ["."]),
     ],
     "plantilla-equipo": [
-        ("2026-11-04T09:00:00", "Repositorio del equipo desde la plantilla del curso (agente v1)", ["."]),
+        ("2026-11-11T09:00:00", "Repositorio del equipo desde la plantilla del curso (agente v2)", ["."]),
     ],
 }
 

@@ -38,6 +38,9 @@ convenciones:
   tasas: "efectivas anuales (E.A.) como fracción; mensual = (1 + ea) ** (1/12) - 1"
   pruebas: {framework: pytest, cobertura_minima_dominio: 0.80}
   dependencias_aprobadas: [pytest, streamlit, fastapi, pydantic, pyyaml]
+  paquetes_de_framework: [streamlit, fastapi, pydantic, flask, django, sqlalchemy, requests, httpx]   # prohibidos en dominio
+  palabras_en_ingles: [get, set, calculate, compute, create, update, delete, list, user, account, payment, amount, rate,
+                       loan, customer, client, data, info, manager, helper, handler, service, utils, process, check, validate]
 
 ciclo:
   carpeta_artefactos: docs/sdlc

@@ -1,9 +1,10 @@
 """Servidor MCP del Banco Orquídea (ficticio): las herramientas del banco para el agente.
 
-Expone tres herramientas que leen banco.yaml (no salen a internet ni tocan datos reales):
-  - glosario            términos de negocio (GMF, tasa E.A., usura, capacidad de pago...)
-  - consultar_politica  la política del banco sobre un tema (datos, seguridad, nombres, logs...)
-  - catalogo_servicios  las APIs internas ficticias que ya existen y su contrato
+Expone herramientas que leen banco.yaml (no salen a internet ni tocan datos reales):
+  - glosario            términos de negocio (GMF, tasa E.A., usura, capacidad de pago...)    · sesión 3
+  - consultar_politica  la política del banco sobre un tema (datos, seguridad, nombres, logs...) · sesión 3
+  - catalogo_servicios  las APIs internas ficticias que ya existen y su contrato             · sesión 3
+  - validar_nombre      revisa que un nombre cumpla las convenciones del banco               · sesión 4
 
 Claude Code lo arranca desde .mcp.json y Copilot desde .vscode/mcp.json. Habla MCP por
 entrada y salida estándar (JSON-RPC 2.0, un mensaje por línea). Solo necesita PyYAML: el
@@ -24,7 +25,7 @@ from typing import Any, Callable
 
 RAIZ = Path(__file__).resolve().parents[2]
 BANCO = RAIZ / "banco.yaml"
-NOMBRE, VERSION = "banco-orquidea", "1.0.0"
+NOMBRE, VERSION = "banco-orquidea", "1.1.0"
 PROTOCOLOS = ["2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05"]
 
 
@@ -108,6 +109,59 @@ def catalogo_servicios(busqueda: str = "") -> str:
             + "\n\n".join(bloques))
 
 
+TIPOS_NOMBRE = ("modulo", "funcion", "variable", "clase", "caso_uso", "servicio", "ruta", "prueba", "paquete")
+
+
+def _palabras(nombre: str) -> list[str]:
+    """Separa snake_case, kebab-case, rutas y PascalCase en palabras en minúscula."""
+    texto = "".join(f" {c}" if c.isupper() else c for c in nombre)
+    return [p for p in normalizar(texto).split("_") if p]
+
+
+def validar_nombre(tipo: str = "", nombre: str = "") -> str:
+    """Revisa un nombre contra las convenciones del banco (convenciones y politicas.nombres)."""
+    import re
+
+    tipo = normalizar(tipo)
+    if tipo not in TIPOS_NOMBRE or not nombre.strip():
+        return f"Indique tipo ({', '.join(TIPOS_NOMBRE)}) y nombre. Ejemplo: validar_nombre('caso_uso', 'simular_credito')."
+    nombre = nombre.strip()
+    convenciones = cargar_banco().get("convenciones", {})
+    ingles = set(convenciones.get("palabras_en_ingles", []))
+    problemas: list[str] = []
+    snake = re.fullmatch(r"[a-z][a-z0-9]*(_[a-z0-9]+)*", nombre)
+
+    if tipo in ("modulo", "funcion", "variable", "paquete", "caso_uso"):
+        if not snake:
+            problemas.append("debe ir en snake_case: minúsculas y guion bajo (simular_credito)")
+    if tipo == "paquete" and "_" in nombre and len(nombre) > 20:
+        problemas.append("un paquete debe tener un nombre corto")
+    if tipo == "caso_uso" and snake and not re.search(r"(ar|er|ir)$", nombre.split("_")[0]):
+        problemas.append("un caso de uso empieza con un verbo en infinitivo (realizar_transferencia, simular_credito)")
+    if tipo == "clase" and not re.fullmatch(r"[A-Z][a-z0-9]+([A-Z][a-z0-9]+)*", nombre):
+        problemas.append("una clase va en PascalCase (SimulacionCredito)")
+    if tipo == "servicio" and not re.fullmatch(r"svc-[a-z]+(-[a-z]+)*", nombre):
+        problemas.append("un servicio se llama svc-<dominio> en minúsculas con guiones (svc-creditos)")
+    if tipo == "prueba" and not re.fullmatch(r"test_[a-z0-9]+(_[a-z0-9]+)*", nombre):
+        problemas.append("una prueba se llama test_<regla>_<caso> en snake_case")
+    if tipo == "ruta":
+        partes = [p for p in nombre.split("/") if p]
+        if not partes or not re.fullmatch(r"v\d+", partes[0]):
+            problemas.append("la ruta empieza con la versión: /v1/...")
+        recursos = [p for p in partes[1:] if not p.startswith("{")]
+        if recursos and not recursos[0].endswith("s"):
+            problemas.append("el primer recurso va en plural (/v1/creditos)")
+        if any(not re.fullmatch(r"[a-z]+(-[a-z]+)*|\{[a-z_]+\}", p) for p in partes[1:]):
+            problemas.append("los segmentos van en minúsculas; los parámetros como {id_cliente}")
+    en_ingles = sorted({p for p in _palabras(nombre) if p in ingles})
+    if en_ingles:
+        problemas.append(f"usa palabras en inglés ({', '.join(en_ingles)}): los nombres van en español")
+
+    if not problemas:
+        return f"OK: '{nombre}' cumple las convenciones para {tipo} (politicas.nombres)."
+    return f"No cumple: '{nombre}' ({tipo}).\n" + "\n".join(f"  - {p}" for p in problemas) + "\nCorríjalo antes de usarlo."
+
+
 HERRAMIENTAS: dict[str, tuple[Callable[..., str], str, dict[str, Any]]] = {
     "glosario": (glosario,
                  "Define un término de negocio del Banco Orquídea (por ejemplo GMF, tasa E.A., usura, capacidad de pago). "
@@ -122,6 +176,12 @@ HERRAMIENTAS: dict[str, tuple[Callable[..., str], str, dict[str, Any]]] = {
                            "notificaciones), con sus rutas y la clasificación de cada campo. Úsela antes de proponer un "
                            "servicio nuevo o un origen de datos.",
                            {"busqueda": {"type": "string", "description": "Palabra a buscar, por ejemplo 'tasas' o 'ingresos'"}}),
+    "validar_nombre": (validar_nombre,
+                       "Revisa que un nombre cumpla las convenciones del banco: español, snake_case, clases en PascalCase, "
+                       "casos de uso con verbo en infinitivo, servicios svc-<dominio>, rutas /v1/<plural>. Úsela antes de "
+                       "crear un módulo, función, clase, caso de uso, servicio, ruta o prueba.",
+                       {"tipo": {"type": "string", "enum": list(TIPOS_NOMBRE), "description": "Qué se está nombrando"},
+                        "nombre": {"type": "string", "description": "El nombre propuesto, por ejemplo 'simular_credito'"}}),
 }
 
 
@@ -194,7 +254,8 @@ def probar() -> int:
         return 1
     print(f"Servidor {NOMBRE} {VERSION} · herramientas: {', '.join(HERRAMIENTAS)}\n")
     for nombre, args in [("glosario", {"termino": "usura"}), ("consultar_politica", {"tema": "logs"}),
-                         ("catalogo_servicios", {"busqueda": "tasas"})]:
+                         ("catalogo_servicios", {"busqueda": "tasas"}),
+                         ("validar_nombre", {"tipo": "caso_uso", "nombre": "calculate_loan"})]:
         respuesta = atender({"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": nombre, "arguments": args}})
         print(f"> {nombre}({args})\n{respuesta['result']['content'][0]['text']}\n")
     print("El servidor responde. Si su asistente no lo ve, ejecute: python herramientas/configurar_mcp.py")

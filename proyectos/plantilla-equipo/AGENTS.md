@@ -8,15 +8,21 @@ Cada caso de uso pasa por etapas y cada etapa deja un artefacto en `docs/sdlc/<c
 - Usted (el asistente) redacta y propone; **una persona aprueba** cada artefacto cambiando su `Estado` a `aprobado`.
 - No pase a la etapa siguiente si el artefacto anterior no está aprobado. Si falta, dígalo y ofrezca crearlo.
 - No escriba código de producción sin un `plan.md` aprobado.
-- Cada etapa tiene su skill: `/intencion` escribe `intent.md` y `/spec` escribe `spec.md`.
+- Cada etapa tiene su skill: `/intencion` escribe `intent.md`, `/spec` escribe `spec.md` y `/plan-tecnico` escribe `plan.md`.
+
+## Agentes por rol
+- **arquitecto**: lee el repositorio y la especificación aprobada y escribe solo `plan.md`. No escribe código.
+- **desarrollador**: implementa un `plan.md` aprobado, paso a paso y con la prueba primero.
+- Claude Code: `claude --agent arquitecto` o `claude --agent desarrollador`. Copilot: elíjalos en el selector de agentes del chat.
 
 ## Herramientas del banco (servidor MCP `banco`)
-- `glosario`: qué significa un término de negocio. `consultar_politica`: la política sobre datos, seguridad, nombres, logs, apis o pruebas. `catalogo_servicios`: qué APIs internas ya existen y de dónde sale cada dato.
+- `glosario`: qué significa un término de negocio. `consultar_politica`: la política sobre datos, seguridad, nombres, logs, apis o pruebas. `catalogo_servicios`: qué APIs internas ya existen y de dónde sale cada dato. `validar_nombre`: si un nombre cumple las convenciones.
 - Consúltelas antes de definir un término, proponer una regla o crear un servicio nuevo, y cite lo que encontró.
 - Si no están disponibles, lea `glosario`, `politicas` y `catalogo_servicios` en `banco.yaml`.
 
 ## Stack y estructura
-- Python 3.12. Estructura por capas: `dominio`, `casos_uso`, `puertos`, `adaptadores`, `app`. El dominio no importa frameworks.
+- Python 3.12. Estructura por capas en `src/<paquete>/`: `dominio`, `puertos`, `casos_uso`, `adaptadores`, `app` (se crea con `python herramientas/crear_estructura.py <paquete>`). El dominio no importa frameworks; el detalle está en la regla de capas.
+- Antes de dar algo por terminado: `python herramientas/verificar_capas.py` debe decir OK.
 - Dependencias: solo las de `convenciones.dependencias_aprobadas` en `banco.yaml`. Para otra, pregunte.
 
 ## Código
@@ -34,7 +40,7 @@ Cada caso de uso pasa por etapas y cada etapa deja un artefacto en `docs/sdlc/<c
 - No lea ni escriba secretos (`.env`, llaves). No los incluya en prompts, logs ni código.
 
 ## Reglas por tipo de archivo
-Hay reglas que solo aplican a ciertos archivos (pruebas, APIs, ETL, artefactos del ciclo). Viven en `.claude/rules/` y se copian a `.github/instructions/` para Copilot.
+Hay reglas que solo aplican a ciertos archivos (capas, pruebas, APIs, ETL, artefactos del ciclo). Viven en `.claude/rules/` y se copian a `.github/instructions/` para Copilot.
 
 ## Contexto y tokens
 - Lea solo los archivos que la tarea necesita; no recorra carpetas enteras ni abra archivos de datos grandes.
@@ -42,4 +48,4 @@ Hay reglas que solo aplican a ciertos archivos (pruebas, APIs, ETL, artefactos d
 - Para una tarea nueva, la persona abre una conversación nueva: no arrastre contexto de la anterior.
 
 ## Comandos útiles
-- `python -m pytest -q` · `python herramientas/verificar_equipo.py` · `python herramientas/sincronizar_skills.py` · `python herramientas/mcp_banco/servidor.py --probar`
+- `python -m pytest -q` · `python herramientas/verificar_equipo.py` · `python herramientas/sincronizar_skills.py` · `python herramientas/mcp_banco/servidor.py --probar` · `python herramientas/verificar_capas.py`
