@@ -30,5 +30,8 @@ Escribir buenos prompts y gastar menos tokens, enseñarle al agente reglas por t
 1. Traiga el material nuevo del curso: descargue el `.zip` nuevo y descomprímalo **sobre** la carpeta del curso, reemplazando los archivos (su `.venv` no se toca), o haga `git pull` si clonó el repositorio.
 2. Tenga a mano su `mi-reto` con el `intent.md` **aprobado** de la sesión 2.
 
+## Replicar las demos
+[`REPLICAR_DEMOS.md`](REPLICAR_DEMOS.md) trae las cuatro demos de la clase paso a paso, para repetirlas en su máquina.
+
 ## Práctica en clase y tarea
 [`TAREA.md`](TAREA.md) tiene el paso a paso: se empieza en clase y en casa se termina el `spec.md` y se escribe una regla propia.
