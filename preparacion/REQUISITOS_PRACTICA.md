@@ -28,27 +28,43 @@ Haga una prueba con un repositorio de práctica (en clase creará el definitivo,
 - [ ] Pregúntele al asistente: *"¿Qué reglas del equipo tienes que seguir?"*. Debe mencionar el Banco Orquídea, `Decimal` y las tasas E.A. Si no, no está leyendo `AGENTS.md` (Copilot) o `CLAUDE.md` (Claude Code).
 - [ ] Escriba `/` en el chat: debe aparecer **`intencion`**. En Copilot, use el agente **Agent**; si no aparece, verifique que exista `.github/skills/intencion/` y recargue VS Code.
 
-## 4. Git
+## 4. Las herramientas del banco (MCP)
+
+En la misma carpeta `../prueba`, con el entorno activo. Esta prueba confirma que su asistente tiene permiso para usar servidores MCP locales; si no lo tiene, lo habilita el administrador de su organización, no usted.
+
+```bash
+python herramientas/mcp_banco/servidor.py --probar
+```
+
+- [ ] El comando muestra las respuestas de `glosario`, `consultar_politica`, `catalogo_servicios` y `validar_nombre`. Si dice que falta PyYAML: `pip install pyyaml` y luego `python herramientas/configurar_mcp.py`.
+- [ ] En `python herramientas/verificar_equipo.py`, la sección "3. Herramientas del banco" sale en OK.
+- [ ] **Claude Code:** abra `claude` en `../prueba`, acepte el servidor `banco` cuando lo pregunte y escriba `/mcp`: debe mostrar `banco` conectado.
+- [ ] **Copilot:** abra `.vscode/mcp.json`, pulse **Start** sobre `banco`; en el chat, con el agente **Agent**, el ícono de herramientas debe mostrar `banco`.
+- [ ] Pregunte en su asistente *"¿Qué es la usura según el banco?"*. Apruebe el uso de la herramienta `glosario`. La respuesta debe mencionar `tasa_maxima_ea`: así sabe que salió de las herramientas del banco y no del modelo.
+
+Si Copilot no arranca el servidor o no muestra sus herramientas, lo más probable es que la política **MCP servers in Copilot** no esté habilitada para su cuenta (ver sección 7). Envíe una captura por el canal.
+
+## 5. Git
 
 - [ ] `git config user.name` y `git config user.email` devuelven su nombre y correo. Sin esto, el commit de la práctica falla. Si están vacíos: `git config --global user.name "Su nombre"` y `git config --global user.email "su@correo"`.
 - [ ] En la carpeta `../prueba`, `git log --oneline` muestra el commit inicial. Cuando todo funcione, puede borrar esa carpeta.
 - [ ] Sabe hacer `git add` y `git commit`.
 - [ ] Desde la sesión 5 el trabajo pasa a un repositorio compartido en GitHub, con ramas y pull requests: confirme que puede crear o recibir acceso a un repositorio privado en la organización.
 
-## 5. Lo que se suma en las próximas sesiones
+## 6. Lo que se suma en las próximas sesiones
 
 Instálelo con tiempo para no perder la sesión:
 
 | Sesión | Qué se necesita | Cómo validarlo |
 |---|---|---|
 | S3 | Paquete `pyyaml` (el servidor MCP del banco lo usa; corre local, sin internet) | `pip install pyyaml`; en `mi-reto`, `python herramientas/verificar_equipo.py` muestra la sección 3 en OK |
-| S3 | Que su asistente pueda usar servidores MCP locales | Claude Code: `/mcp` abre sin error · Copilot: la política de MCP de la organización debe estar habilitada (ver sección 6) |
-| S4 | `pip install copier` (plantilla del proyecto) | `copier --version` |
+| S3 | Que su asistente pueda usar servidores MCP locales | Claude Code: `/mcp` abre sin error · Copilot: la política de MCP de la organización debe estar habilitada (ver sección 7) |
+| S4 | Nada adicional: la estructura del proyecto se crea con `herramientas/crear_estructura.py` | En `mi-reto`, `python herramientas/verificar_equipo.py` en OK |
 | S6 | Que el asistente pueda ejecutar hooks (comandos de Python) | Se valida en la sesión 6 |
 | S6–S8 | GitHub Actions en el repositorio del equipo | Pestaña Actions habilitada; el workflow de pruebas corre en cada pull request |
 | S7 | Análisis de dependencias y de código en GitHub (Dependabot, code scanning), si la organización los tiene | Pestaña Security del repositorio |
 
-## 6. Para el equipo de TI
+## 7. Para el equipo de TI
 
 | Qué | Para quién | Por qué |
 |---|---|---|
@@ -62,6 +78,6 @@ Instálelo con tiempo para no perder la sesión:
 
 Todo el trabajo usa **datos sintéticos** y un banco ficticio. Ninguna pieza del agente se conecta a sistemas del banco.
 
-## 7. Si algo falla
+## 8. Si algo falla
 
 Envíe por el canal del curso: su sistema operativo, la herramienta (Claude Code o Copilot), una captura del error y la salida de `verificar_equipo.py`.
