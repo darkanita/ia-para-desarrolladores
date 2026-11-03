@@ -40,8 +40,11 @@ HISTORIAL = {
     "simulador-credito": [
         ("2026-10-20T09:00:00", "Requisitos del simulador de crédito y reglas del equipo", ["."]),
     ],
+    "demo-reglas": [
+        ("2026-11-03T10:00:00", "Módulo de GMF del equipo de pagos, todavía sin pruebas", ["."]),
+    ],
     "plantilla-equipo": [
-        ("2026-10-28T09:00:00", "Repositorio del equipo desde la plantilla del curso (agente v0)", ["."]),
+        ("2026-11-04T09:00:00", "Repositorio del equipo desde la plantilla del curso (agente v1)", ["."]),
     ],
 }
 
@@ -69,6 +72,9 @@ def main() -> int:
 
     shutil.copytree(AQUI / args.proyecto, destino,
                     ignore=shutil.ignore_patterns("__pycache__", ".pytest_cache", "*.egg-info"))
+    configurar = destino / "herramientas" / "configurar_mcp.py"
+    if configurar.exists():  # el servidor MCP usará el Python con el que se creó el repositorio
+        subprocess.run([sys.executable, str(configurar)], capture_output=True, text=True)
     git(destino, "init", "-q", "-b", "main")
     for fecha, mensaje, rutas in HISTORIAL[args.proyecto]:
         git(destino, "add", *rutas)

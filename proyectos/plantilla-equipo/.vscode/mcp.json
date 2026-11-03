@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "banco": {
+      "type": "stdio",
+      "command": "/usr/local/bin/python3",
+      "args": [
+        "${workspaceFolder}/herramientas/mcp_banco/servidor.py"
+      ]
+    }
+  }
+}

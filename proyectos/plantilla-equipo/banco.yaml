@@ -52,3 +52,103 @@ ciclo:
 gestion_cambios:
   formato_id: "CAMB-####"
   niveles_riesgo: [bajo, medio, alto]
+
+# ---------------------------------------------------------------------------
+# Desde aquí: lo que consultan las herramientas del banco (servidor MCP, sesión 3).
+# ---------------------------------------------------------------------------
+
+glosario:
+  gmf: "Gravamen a los movimientos financieros: impuesto de 4 por mil sobre retiros y transferencias, salvo cuentas exentas. Clave: productos.transferencias.gmf."
+  tasa_ea: "Tasa efectiva anual: la tasa que se cobra en un año con capitalización. Se guarda como fracción (0.24 = 24 %). La mensual equivalente es (1 + ea) ** (1/12) - 1."
+  usura: "Tasa máxima que la ley permite cobrar. En el banco ficticio es productos.credito_consumo.tasa_maxima_ea; ningún crédito puede superarla."
+  capacidad_pago: "Si el cliente puede asumir una cuota: (cuota + otras cuotas) / ingresos mensuales no debe superar productos.credito_consumo.endeudamiento_maximo."
+  endeudamiento: "Porcentaje de los ingresos mensuales que el cliente destina a pagar cuotas."
+  cuota_fija: "Sistema de amortización francés: la misma cuota todos los meses; al inicio se paga más interés y al final más capital."
+  saldo_capital: "Lo que el cliente todavía debe del monto prestado, sin intereses futuros."
+  dato_sintetico: "Dato inventado con la forma de uno real, para pruebas y desarrollo. Es el único permitido fuera de producción."
+  dato_restringido: "Dato personal o financiero de un cliente (cédula, cuenta, tarjeta, saldo, ingresos). Ver datos.clasificacion."
+  solicitud_cambio: "Registro CAMB-#### que acompaña toda entrega a producción, con su nivel de riesgo y sus aprobaciones."
+
+politicas:
+  datos:
+    resumen: "Solo datos sintéticos fuera de producción; los datos restringidos nunca salen de su sistema de origen."
+    reglas:
+      - "Clasifique cada campo con datos.clasificacion antes de usarlo."
+      - "Desarrollo y pruebas usan solo datos sintéticos, generados o escritos a mano."
+      - "Cuentas y tarjetas se muestran enmascaradas: solo los últimos 4 dígitos."
+      - "Ningún dato restringido va en logs, prompts, mensajes de error ni archivos del repositorio."
+      - "Un servicio pide solo los campos que necesita (minimización)."
+  seguridad:
+    resumen: "Ningún secreto en el código; toda entrada se valida; solo dependencias aprobadas."
+    reglas:
+      - "Los secretos (llaves, tokens, contraseñas) viven en variables de entorno o en el gestor de secretos, nunca en el repositorio."
+      - "Toda entrada externa se valida en el borde (tipo, rango, formato) antes de llegar al dominio."
+      - "Solo se usan dependencias de convenciones.dependencias_aprobadas; una nueva requiere aprobación del líder técnico."
+      - "Los errores hacia el usuario no revelan detalles internos (rutas, consultas, trazas)."
+  nombres:
+    resumen: "Español y snake_case en el código; los servicios se llaman svc-<dominio>."
+    reglas:
+      - "Módulos, funciones y variables en español y snake_case; clases en PascalCase."
+      - "Servicios: svc-<dominio> en minúsculas con guiones (svc-clientes, svc-pagos)."
+      - "Rutas de API en plural y con versión: /v1/clientes/{id_cliente}."
+      - "Casos de uso con verbo en infinitivo: realizar_transferencia, simular_credito."
+  logs:
+    resumen: "Logs estructurados, sin datos restringidos, con un identificador de correlación."
+    reglas:
+      - "Formato JSON con: fecha, nivel, servicio, id_correlacion, evento."
+      - "Nunca se registran datos restringidos; si hace falta identificar, use el id interno."
+      - "Niveles: INFO para eventos de negocio, WARNING para reglas rechazadas, ERROR para fallas."
+  apis:
+    resumen: "Contratos versionados y errores con un formato único."
+    reglas:
+      - "Toda API se versiona en la ruta (/v1/...) y publica su contrato."
+      - "Errores con el formato {codigo, mensaje, id_correlacion}; el mensaje es apto para el usuario."
+      - "Montos como texto decimal (\"1500000.00\") en los contratos, nunca como número de coma flotante."
+  pruebas:
+    resumen: "Cada regla de negocio tiene su prueba, con datos sintéticos y valores esperados calculados aparte."
+    reglas:
+      - "Una prueba por regla de negocio, y pruebas de los bordes (mínimo, máximo, justo por encima)."
+      - "Cobertura mínima del dominio: convenciones.pruebas.cobertura_minima_dominio."
+      - "Las pruebas no llaman servicios reales: usan dobles (adaptadores en memoria)."
+
+catalogo_servicios:
+  - nombre: svc-clientes
+    descripcion: "Datos básicos de un cliente y su perfil financiero declarado."
+    dueno: equipo-clientes
+    operaciones:
+      - ruta: "GET /v1/clientes/{id_cliente}"
+        devuelve: {id_cliente: interna, nombre: restringida, segmento: interna, ingresos_mensuales: restringida, otras_cuotas_mensuales: restringida}
+  - nombre: svc-cuentas
+    descripcion: "Cuentas de ahorro y corriente: estado y saldo."
+    dueno: equipo-cuentas
+    operaciones:
+      - ruta: "GET /v1/clientes/{id_cliente}/cuentas"
+        devuelve: {numero_enmascarado: interna, tipo: interna, estado: interna}
+      - ruta: "GET /v1/cuentas/{id_cuenta}/saldo"
+        devuelve: {saldo_disponible: restringida, exenta_gmf: interna}
+  - nombre: svc-creditos
+    descripcion: "Créditos vigentes de un cliente: saldo, cuota y fechas."
+    dueno: equipo-creditos
+    operaciones:
+      - ruta: "GET /v1/clientes/{id_cliente}/creditos"
+        devuelve: {id_credito: interna, producto: interna, saldo_capital: restringida, cuota_mensual: restringida, fecha_proximo_pago: interna, dias_mora: interna}
+  - nombre: svc-tasas
+    descripcion: "Tasas vigentes por producto. Fuente oficial de la tasa a usar en simulaciones."
+    dueno: equipo-tesoreria
+    operaciones:
+      - ruta: "GET /v1/tasas/{producto}"
+        devuelve: {producto: publica, tasa_ea_vigente: publica, tasa_maxima_ea: publica, vigente_desde: publica}
+  - nombre: svc-pagos
+    descripcion: "Ejecuta transferencias entre cuentas y calcula el GMF."
+    dueno: equipo-pagos
+    operaciones:
+      - ruta: "POST /v1/transferencias"
+        recibe: {id_cuenta_origen: interna, id_cuenta_destino: interna, monto: restringida}
+        devuelve: {id_transferencia: interna, estado: interna, gmf: restringida}
+  - nombre: svc-notificaciones
+    descripcion: "Envía mensajes al cliente por correo, SMS o la app, con plantillas aprobadas."
+    dueno: equipo-canales
+    operaciones:
+      - ruta: "POST /v1/notificaciones"
+        recibe: {id_cliente: interna, canal: interna, plantilla: interna, variables: confidencial}
+        devuelve: {id_notificacion: interna, estado: interna}

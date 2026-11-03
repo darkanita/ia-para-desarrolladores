@@ -1,0 +1,9 @@
+# Definiciones del Banco Orquídea (BANCO FICTICIO). Extracto para la demo de reglas.
+productos:
+  transferencias:
+    monto_minimo: 1000
+    limite_diario: 10000000
+    gmf: 0.004                      # 4 por mil
+convenciones:
+  dinero: "decimal.Decimal, redondeo al peso con ROUND_HALF_UP; nunca float"
+  pruebas: {framework: pytest}

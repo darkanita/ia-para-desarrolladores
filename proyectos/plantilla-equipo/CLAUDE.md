@@ -1,5 +1,6 @@
 @AGENTS.md
 
 ## Notas para Claude Code
-- Las definiciones del banco están en @banco.yaml.
-- Las skills del equipo viven en `.claude/skills/` (se copian a `.github/skills/` para Copilot con `python herramientas/sincronizar_skills.py`).
+- Las definiciones del banco están en `banco.yaml`. No se importa aquí para no cargarlo en cada conversación: léalo cuando la tarea lo necesite, y para el glosario, las políticas y el catálogo use el servidor MCP `banco`.
+- Las skills (`.claude/skills/`) y las reglas por tipo de archivo (`.claude/rules/`) se escriben aquí y se copian a `.github/` para Copilot con `python herramientas/sincronizar_skills.py`.
+- El servidor MCP del banco se configura en `.mcp.json`; revise que esté conectado con `/mcp`.

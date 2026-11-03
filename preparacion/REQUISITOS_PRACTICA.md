@@ -41,7 +41,7 @@ Instálelo con tiempo para no perder la sesión:
 
 | Sesión | Qué se necesita | Cómo validarlo |
 |---|---|---|
-| S3 | Paquetes `pyyaml` y `mcp` (servidor de herramientas del banco, local) | `pip install pyyaml mcp`; el verificador del equipo los muestra en OK |
+| S3 | Paquete `pyyaml` (el servidor MCP del banco lo usa; corre local, sin internet) | `pip install pyyaml`; en `mi-reto`, `python herramientas/verificar_equipo.py` muestra la sección 3 en OK |
 | S3 | Que su asistente pueda usar servidores MCP locales | Claude Code: `/mcp` abre sin error · Copilot: la política de MCP de la organización debe estar habilitada (ver sección 6) |
 | S4 | `pip install copier` (plantilla del proyecto) | `copier --version` |
 | S6 | Que el asistente pueda ejecutar hooks (comandos de Python) | Se valida en la sesión 6 |
