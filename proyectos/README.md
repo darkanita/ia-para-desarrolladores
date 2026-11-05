@@ -20,7 +20,7 @@ Trabaje siempre en la copia: así puede dejar que los asistentes cambien archivo
 Cuando la plantilla crece (cada sesión agrega piezas al agente), actualice su repositorio sin perder su trabajo:
 
 ```bash
-python proyectos/actualizar_repositorio.py ../mi-reto
+bash proyectos/poner_al_dia.sh ../mi-reto
 ```
 
-Los archivos que usted modificó no se tocan: la versión nueva queda al lado como `.nuevo`. Su carpeta `docs/sdlc/` nunca se toca.
+Trae todo lo que falta (no copie carpetas a mano), primero guarda en commits lo que tenga suelto en `docs/sdlc/` y al final corre el verificador. Los archivos que usted modificó no se tocan: la versión nueva queda al lado como `.nuevo`. Su carpeta `docs/sdlc/` nunca se toca. Por debajo usa `python proyectos/actualizar_repositorio.py ../mi-reto`, que también puede correr solo.

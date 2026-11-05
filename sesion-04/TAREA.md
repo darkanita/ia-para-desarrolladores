@@ -8,12 +8,12 @@
 Desde **la carpeta del curso** (con el material nuevo), con el entorno activo:
 
 ```bash
-python proyectos/actualizar_repositorio.py ../mi-reto
-cd ../mi-reto
-python herramientas/verificar_equipo.py
+bash proyectos/poner_al_dia.sh ../mi-reto
 ```
 
-Igual que en la sesión 3: agrega lo nuevo, actualiza lo que usted no tocó, deja `.nuevo` al lado de lo que usted cambió y no toca `docs/sdlc/`.
+El script guarda primero en commits lo que tenga suelto en `docs/sdlc/`, luego trae **todo** lo que le falta al agente (reglas, skills, servidor MCP, agentes): no copie carpetas a mano. Actualiza lo que usted no tocó, deja `.nuevo` al lado de lo que usted cambió (el script le muestra cómo compararlos) y no toca `docs/sdlc/`. Al final corre el verificador: todo debe quedar en `OK`. Si no alcanzó a actualizar en la sesión 3, este mismo comando lo pone al día.
+
+Después cierre y vuelva a abrir `claude` en `mi-reto` y escriba `/mcp` (debe aparecer `banco`); en VS Code recargue la ventana y dele **Start** a `banco` en `.vscode/mcp.json`.
 
 Revise que su `docs/sdlc/<caso>/spec.md` diga `Estado: aprobado`. Si no, apruébelo primero (usted es el dueño de su reto).
 
