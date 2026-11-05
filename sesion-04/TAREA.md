@@ -3,7 +3,7 @@
 **Se hace en clase** (30 minutos) y en casa se termina. **Quién:** cada persona, en su `mi-reto`.
 **Entrega (hito):** el `plan.md` aprobado y el **primer componente con sus pruebas en verde**, antes de la sesión 5.
 
-## 1. Poner al día y comprobar su repositorio · 5 min (se empieza en el bloque de las 0:10)
+## 1. Poner al día y comprobar su repositorio · 5 min (se empieza en el bloque de las 0:05)
 
 Desde **la carpeta del curso** (con el material nuevo), con el entorno activo:
 
@@ -27,9 +27,22 @@ Compruebe en `claude`, abierto en `mi-reto` (en Copilot Chat, las mismas pregunt
 
 **Qué trajo el script** (lo vimos en clase): las reglas del equipo en `.claude/rules/` (y su copia para Copilot en `.github/instructions/`), que el agente carga solo al tocar ciertos archivos; el servidor del banco (`herramientas/mcp_banco/`, configurado en `.mcp.json` y `.vscode/mcp.json`), que responde con lo que dice `banco.yaml`; y, de hoy, los agentes, `/plan-tecnico` y la regla de capas.
 
-Revise que su `docs/sdlc/<caso>/spec.md` diga `Estado: aprobado`. Si no, apruébelo primero (usted es el dueño de su reto).
+### Revisar y aprobar su `spec.md` · 3 min
 
-## 2. El plan con el agente Arquitecto · 15 min
+Su especificación se escribió sin las reglas ni el servidor del banco. Antes de aprobarla, pídale al agente (en `claude` o en Copilot Chat):
+
+```
+Revisa docs/sdlc/<caso>/spec.md con las herramientas del banco (glosario, consultar_politica, catalogo_servicios). Lista las reglas que no citan su clave o política y los términos que no usan el glosario. No cambies el archivo.
+```
+
+Si la lista tiene cosas: `Aplica las correcciones de la lista. No cambies el Estado.` (o regenere con `/spec <caso>`). Revise el resultado con `git diff`. Luego apruébela usted, a mano: `Estado: aprobado` y `Aprobado por: <su nombre> (dueño del producto)`, y commit:
+
+```bash
+git add docs/sdlc
+git commit -m "Especificación aprobada"
+```
+
+## 2. El plan con el agente Arquitecto · 12 min
 
 | | Claude Code | Copilot Chat |
 |---|---|---|
