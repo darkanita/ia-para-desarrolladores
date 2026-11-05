@@ -3,7 +3,7 @@
 **Se hace en clase** (30 minutos) y en casa se termina. **Quién:** cada persona, en su `mi-reto`.
 **Entrega (hito):** el `plan.md` aprobado y el **primer componente con sus pruebas en verde**, antes de la sesión 5.
 
-## 1. Poner al día y comprobar su repositorio · 5 min (se empieza en el bloque 0:10)
+## 1. Poner al día y comprobar su repositorio · 5 min (se empieza en el bloque de las 0:10)
 
 Desde **la carpeta del curso** (con el material nuevo), con el entorno activo:
 
@@ -22,6 +22,8 @@ Compruebe en `claude`, abierto en `mi-reto` (en Copilot Chat, las mismas pregunt
 | `/mcp` | Aparece `banco`, conectado |
 | `Según el glosario del banco, ¿qué es usura y dónde está su valor?` | Llama a la herramienta `glosario` y responde con `productos.credito_consumo.tasa_maxima_ea` |
 | `¿Qué reglas de .claude/rules se aplican a tests/test_cuota.py y a src/<paquete>/dominio/cuota.py?` | `pruebas` para el primero y `capas` para el segundo, según sus `paths` |
+
+**Qué es una regla:** una instrucción para el agente que solo aplica a ciertos archivos. No se llama: se carga sola cuando el agente va a leer o escribir un archivo que coincide con sus `paths` (en la terminal verá `Loaded .claude/rules/<regla>.md`). Las del equipo son `artefactos`, `pruebas`, `capas`, `api` y `etl`; la sexta es la suya (ver "En casa").
 
 **Qué trajo el script** (lo vimos en clase): las reglas del equipo en `.claude/rules/` (y su copia para Copilot en `.github/instructions/`), que el agente carga solo al tocar ciertos archivos; el servidor del banco (`herramientas/mcp_banco/`, configurado en `.mcp.json` y `.vscode/mcp.json`), que responde con lo que dice `banco.yaml`; y, de hoy, los agentes, `/plan-tecnico` y la regla de capas.
 

@@ -10,12 +10,12 @@ Pasar de la especificación aprobada al código con dos agentes por rol: el **Ar
 | Tiempo | Bloque | Material |
 |---|---|---|
 | 0:00 – 0:10 | Repaso y aprobación del `spec.md` | Presentación |
-| 0:10 – 0:25 | Su repositorio: poner al día con `poner_al_dia.sh`, las reglas del equipo (`.claude/rules`) y el servidor del banco (`.mcp.json`, `banco.yaml`) | `mi-reto` |
-| 0:25 – 0:35 | La estructura por capas: dominio, puertos, casos de uso, adaptadores, app | Presentación |
-| 0:35 – 0:55 | Demo: el agente Arquitecto escribe el plan con `/plan-tecnico` y `validar_nombre`; se revisa y se aprueba | `proyectos/plantilla-equipo` |
-| 0:55 – 1:15 | Demo: el agente Desarrollador implementa el primer componente, prueba primero | `proyectos/plantilla-equipo` |
-| 1:15 – 1:45 | **Práctica:** cada persona actualiza su repositorio, escribe y aprueba su `plan.md` y arranca el primer paso | [`TAREA.md`](TAREA.md) |
-| 1:45 – 2:00 | Preguntas, tarea y cierre | Presentación |
+| 0:10 – 0:30 | Su repositorio: poner al día con `poner_al_dia.sh`; qué es una regla y las reglas del equipo (`.claude/rules`); el servidor del banco (`.mcp.json`, `banco.yaml`) | `mi-reto` |
+| 0:30 – 0:40 | La estructura por capas: dominio, puertos, casos de uso, adaptadores, app | Presentación |
+| 0:40 – 1:00 | Demo: el agente Arquitecto escribe el plan con `/plan-tecnico` y `validar_nombre`; se revisa y se aprueba | `proyectos/plantilla-equipo` |
+| 1:00 – 1:20 | Demo: el agente Desarrollador implementa el primer componente, prueba primero | `proyectos/plantilla-equipo` |
+| 1:20 – 1:50 | **Práctica:** cada persona escribe y aprueba su `plan.md` y arranca el primer paso | [`TAREA.md`](TAREA.md) |
+| 1:50 – 2:00 | Preguntas, tarea y cierre | Presentación |
 
 ## Lo nuevo en el agente del equipo (versión 2)
 
