@@ -3,7 +3,7 @@
 **Se hace en clase** (30 minutos) y en casa se termina. **Quién:** cada persona, en su `mi-reto`.
 **Entrega (hito):** el `plan.md` aprobado y el **primer componente con sus pruebas en verde**, antes de la sesión 5.
 
-## 1. Actualizar su repositorio al agente v2 · 5 min
+## 1. Poner al día y comprobar su repositorio · 5 min (se empieza en el bloque 0:10)
 
 Desde **la carpeta del curso** (con el material nuevo), con el entorno activo:
 
@@ -14,6 +14,16 @@ bash proyectos/poner_al_dia.sh ../mi-reto
 El script guarda primero en commits lo que tenga suelto en `docs/sdlc/`, luego trae **todo** lo que le falta al agente (reglas, skills, servidor MCP, agentes): no copie carpetas a mano. Actualiza lo que usted no tocó, deja `.nuevo` al lado de lo que usted cambió (el script le muestra cómo compararlos) y no toca `docs/sdlc/`. Al final corre el verificador: todo debe quedar en `OK`. Si no alcanzó a actualizar en la sesión 3, este mismo comando lo pone al día.
 
 Después cierre y vuelva a abrir `claude` en `mi-reto` y escriba `/mcp` (debe aparecer `banco`); en VS Code recargue la ventana y dele **Start** a `banco` en `.vscode/mcp.json`.
+
+Compruebe en `claude`, abierto en `mi-reto` (en Copilot Chat, las mismas preguntas):
+
+| Pregunta | Lo que debe pasar |
+|---|---|
+| `/mcp` | Aparece `banco`, conectado |
+| `Según el glosario del banco, ¿qué es usura y dónde está su valor?` | Llama a la herramienta `glosario` y responde con `productos.credito_consumo.tasa_maxima_ea` |
+| `¿Qué reglas de .claude/rules se aplican a tests/test_cuota.py y a src/<paquete>/dominio/cuota.py?` | `pruebas` para el primero y `capas` para el segundo, según sus `paths` |
+
+**Qué trajo el script** (lo vimos en clase): las reglas del equipo en `.claude/rules/` (y su copia para Copilot en `.github/instructions/`), que el agente carga solo al tocar ciertos archivos; el servidor del banco (`herramientas/mcp_banco/`, configurado en `.mcp.json` y `.vscode/mcp.json`), que responde con lo que dice `banco.yaml`; y, de hoy, los agentes, `/plan-tecnico` y la regla de capas.
 
 Revise que su `docs/sdlc/<caso>/spec.md` diga `Estado: aprobado`. Si no, apruébelo primero (usted es el dueño de su reto).
 
@@ -65,5 +75,7 @@ Observe el orden: primero la prueba, la ve fallar, implementa y la ve pasar. Al 
    ```
 4. Commit: `git add -A && git commit -m "Primer componente con pruebas en verde"`.
 5. Envíe por el canal el `plan.md` y la salida de `pytest` y de `verificar_capas.py`.
+
+**Pendiente de la sesión 3: su regla propia.** Piense en algo que su asistente hizo distinto a como lo hace su equipo, al menos dos veces. Copie una regla de `.claude/rules/` (por ejemplo `pruebas.md`), cámbiele `description`, `paths` y el contenido, y corra `python herramientas/sincronizar_skills.py` para generar la de Copilot. Commit: `git add .claude .github && git commit -m "Regla propia: <nombre>"`. Envíela por el canal con lo demás. La guía completa está en `sesion-03/TAREA.md`.
 
 **Lectura:** Claude Code 101 (skills y subagentes) y, de GH-600, *Designing Agent Architecture and SDLC Integration*.
