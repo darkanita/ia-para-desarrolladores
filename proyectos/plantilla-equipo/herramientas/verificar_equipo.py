@@ -66,10 +66,19 @@ def main() -> int:
                           (".claude/skills/plan-tecnico/SKILL.md", "skill /plan-tecnico (sesión 4)"),
                           (".claude/agents/arquitecto.md", "agente arquitecto (sesión 4)"),
                           (".github/agents/arquitecto.agent.md", "agente Arquitecto para Copilot"),
-                          ("herramientas/verificar_capas.py", "regla de capas (sesión 4)")]:
+                          ("herramientas/verificar_capas.py", "regla de capas (sesión 4)"),
+                          (".claude/agents/depurador.md", "agente depurador (sesión 5)"),
+                          (".claude/agents/revisor.md", "agente revisor (sesión 5)"),
+                          (".claude/skills/revisar/SKILL.md", "skill /revisar (sesión 5)")]:
         existe = (RAIZ / archivo).exists()
         reportar(OK if existe else FALTA, archivo, para if existe else "no existe",
-                 "Actualice el repositorio: desde la carpeta del curso, python proyectos/actualizar_repositorio.py <su repo>")
+                 "Actualice el repositorio: desde la carpeta del curso, bash proyectos/poner_al_dia.sh <su repo>")
+    remoto = comando("git", "remote", "get-url", "origin")
+    reportar(OK if remoto else AVISO, "Remoto en GitHub (sesión 5)", remoto or "sin remoto 'origin'",
+             "Cree un repositorio privado en GitHub y ejecute: git remote add origin <url> && git push -u origin main")
+    rama = comando("git", "branch", "--show-current")
+    reportar(OK if rama and rama != "main" else AVISO, "Rama de trabajo", rama or "?",
+             "Trabaje en una rama: git switch -c funcionalidad/<caso>-<descripcion>")
     sincronizadas = subprocess.run([sys.executable, str(RAIZ / "herramientas" / "sincronizar_skills.py"), "--verificar"],
                                    capture_output=True, text=True).returncode == 0
     reportar(OK if sincronizadas else FALTA, "Skills y reglas para Copilot", ".github/skills e instructions",

@@ -39,6 +39,9 @@ convenciones:
   pruebas: {framework: pytest, cobertura_minima_dominio: 0.80}
   dependencias_aprobadas: [pytest, streamlit, fastapi, pydantic, pyyaml]
   paquetes_de_framework: [streamlit, fastapi, pydantic, flask, django, sqlalchemy, requests, httpx]   # prohibidos en dominio
+  ramas: "<tipo>/<caso>-<descripcion-corta>, en minúsculas con guiones; tipos: funcionalidad, correccion, pruebas, documentacion"
+  commits: "Una línea en español que dice qué cambió y por qué, citando RF/RN cuando aplique: 'Corrige el borde de endeudamiento (RN-05)'"
+  rama_principal: main
   palabras_en_ingles: [get, set, calculate, compute, create, update, delete, list, user, account, payment, amount, rate,
                        loan, customer, client, data, info, manager, helper, handler, service, utils, process, check, validate]
 
@@ -70,6 +73,8 @@ glosario:
   saldo_capital: "Lo que el cliente todavía debe del monto prestado, sin intereses futuros."
   dato_sintetico: "Dato inventado con la forma de uno real, para pruebas y desarrollo. Es el único permitido fuera de producción."
   dato_restringido: "Dato personal o financiero de un cliente (cédula, cuenta, tarjeta, saldo, ingresos). Ver datos.clasificacion."
+  regresion: "Falla en algo que antes funcionaba, causada por un cambio nuevo. Se previene con una prueba que reproduce la falla."
+  causa_raiz: "La razón de fondo de una falla, no el síntoma: qué regla, supuesto o línea la produce."
   solicitud_cambio: "Registro CAMB-#### que acompaña toda entrega a producción, con su nivel de riesgo y sus aprobaciones."
 
 politicas:
@@ -113,6 +118,23 @@ politicas:
       - "Una prueba por regla de negocio, y pruebas de los bordes (mínimo, máximo, justo por encima)."
       - "Cobertura mínima del dominio: convenciones.pruebas.cobertura_minima_dominio."
       - "Las pruebas no llaman servicios reales: usan dobles (adaptadores en memoria)."
+  revision:
+    resumen: "Todo cambio entra a main por un pull request revisado; el revisor señala, una persona decide."
+    reglas:
+      - "Nadie hace commit directo a convenciones.rama_principal: se trabaja en una rama con el formato convenciones.ramas."
+      - "Cada pull request usa la plantilla del repositorio y enlaza su caso en docs/sdlc."
+      - "Cada hallazgo de revisión cita archivo y línea, la regla o política que incumple y una sugerencia."
+      - "Severidades: bloqueante (incumple una regla de negocio, una política de datos o seguridad, o rompe pruebas), importante (incumple una convención o deja un criterio sin prueba), sugerencia (mejora opcional)."
+      - "Con un hallazgo bloqueante abierto, el pull request no se fusiona."
+      - "El agente revisor nunca aprueba ni fusiona: deja revision.md en borrador y el dueño del código decide."
+  depuracion:
+    resumen: "Primero reproducir con una prueba, después corregir lo mínimo y explicar la causa raíz."
+    reglas:
+      - "Antes de cambiar código, escriba una prueba que reproduzca la falla y véala fallar."
+      - "Corrija la causa raíz con el cambio mínimo; nada de refactorizaciones de paso."
+      - "No cambie el valor esperado de una prueba existente para que pase. Si la prueba está mal, deténgase y pregunte."
+      - "Al terminar, toda la suite en verde y la regla de capas en OK."
+      - "El commit de la corrección dice la causa raíz y la regla afectada (RN-xx)."
 
 catalogo_servicios:
   - nombre: svc-clientes

@@ -44,9 +44,35 @@ HISTORIAL = {
         ("2026-11-03T10:00:00", "Módulo de GMF del equipo de pagos, todavía sin pruebas", ["."]),
     ],
     "plantilla-equipo": [
-        ("2026-11-11T09:00:00", "Repositorio del equipo desde la plantilla del curso (agente v2)", ["."]),
+        ("2026-11-11T09:00:00", "Repositorio del equipo desde la plantilla del curso (agente v3)", ["."]),
+    ],
+    # Demo de la sesión 5: el repositorio del equipo con el simulador construido hasta el paso 6
+    # y una rama de un compañero con el caso de uso, lista para revisar.
+    "simulador-equipo": [
+        ("2026-10-27T09:00:00", "Repositorio del equipo desde la plantilla del curso",
+         [".", ":!src", ":!tests", ":!pyproject.toml", ":!docs/sdlc/simulador-credito"]),
+        ("2026-10-29T10:00:00", "Intención del simulador aprobada", ["docs/sdlc/simulador-credito/intent.md"]),
+        ("2026-11-04T10:00:00", "Especificación del simulador aprobada", ["docs/sdlc/simulador-credito/spec.md"]),
+        ("2026-11-05T10:00:00", "Plan técnico aprobado; pasos 1 a 6 hechos", ["docs/sdlc/simulador-credito/plan.md"]),
+        ("2026-11-05T11:00:00", "Primer componente: validación, cuota, total y costo (pasos 1 a 5)",
+         ["pyproject.toml", "src", "tests", ":!src/simulador_credito/dominio/capacidad_pago.py",
+          ":!src/simulador_credito/dominio/resultado_simulacion.py", ":!src/simulador_credito/puertos/proveedor_parametros.py",
+          ":!src/simulador_credito/adaptadores/proveedor_parametros_en_memoria.py",
+          ":!src/simulador_credito/casos_uso/simular_credito.py", ":!tests/test_capacidad_pago.py",
+          ":!tests/test_simular_credito.py"]),
+        ("2026-11-06T16:00:00", "Capacidad de pago (paso 6, RF-04)",
+         ["src/simulador_credito/dominio/capacidad_pago.py", "tests/test_capacidad_pago.py"]),
+        ("rama", "funcionalidad/simulador-credito-caso-de-uso"),
+        ("2026-11-07T15:00:00", "Caso de uso simular_credito con puerto de parámetros (pasos 7 y 8)",
+         ["src/simulador_credito/dominio/resultado_simulacion.py", "src/simulador_credito/puertos/proveedor_parametros.py",
+          "src/simulador_credito/adaptadores/proveedor_parametros_en_memoria.py",
+          "src/simulador_credito/casos_uso/simular_credito.py", "tests/test_simular_credito.py"]),
+        ("rama", "main"),
     ],
 }
+
+# Proyectos que se arman sobre otro: se copia primero la base y encima el proyecto.
+BASES = {"simulador-equipo": "plantilla-equipo"}
 
 
 def git(destino: Path, *args: str, fecha: str | None = None) -> None:
@@ -59,7 +85,7 @@ def git(destino: Path, *args: str, fecha: str | None = None) -> None:
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("destino", type=Path)
-    p.add_argument("--proyecto", default="transferencias", choices=sorted(HISTORIAL))
+    p.add_argument("--proyecto", default="transferencias", choices=sorted(k for k in HISTORIAL if (AQUI / k).exists()))
     args = p.parse_args()
 
     if shutil.which("git") is None:
@@ -70,14 +96,22 @@ def main() -> int:
         print(f"{destino} ya existe: elija otra carpeta o bórrela.", file=sys.stderr)
         return 1
 
-    shutil.copytree(AQUI / args.proyecto, destino,
-                    ignore=shutil.ignore_patterns("__pycache__", ".pytest_cache", "*.egg-info"))
+    ignorar = shutil.ignore_patterns("__pycache__", ".pytest_cache", "*.egg-info")
+    if args.proyecto in BASES:
+        shutil.copytree(AQUI / BASES[args.proyecto], destino, ignore=ignorar)
+    shutil.copytree(AQUI / args.proyecto, destino, ignore=ignorar, dirs_exist_ok=True)
     configurar = destino / "herramientas" / "configurar_mcp.py"
     if configurar.exists():  # el servidor MCP usará el Python con el que se creó el repositorio
         subprocess.run([sys.executable, str(configurar)], capture_output=True, text=True)
     git(destino, "init", "-q", "-b", "main")
-    for fecha, mensaje, rutas in HISTORIAL[args.proyecto]:
-        git(destino, "add", *rutas)
+    for paso in HISTORIAL[args.proyecto]:
+        if paso[0] == "rama":  # cambia de rama (la crea si no existe)
+            existe = subprocess.run(["git", "rev-parse", "--verify", "-q", paso[1]], cwd=destino,
+                                    capture_output=True).returncode == 0
+            git(destino, "switch", "-q", *([] if existe else ["-c"]), paso[1])
+            continue
+        fecha, mensaje, rutas = paso
+        git(destino, "add", "--", *rutas)
         git(destino, "commit", "-q", "-m", mensaje, fecha=fecha)
     print(f"Repositorio listo en {destino}")
     print(f"Ábralo con:  code \"{destino}\"")

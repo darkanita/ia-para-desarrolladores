@@ -60,8 +60,9 @@ Instálelo con tiempo para no perder la sesión:
 | S3 | Paquete `pyyaml` (el servidor MCP del banco lo usa; corre local, sin internet) | `pip install pyyaml`; en `mi-reto`, `python herramientas/verificar_equipo.py` muestra la sección 3 en OK |
 | S3 | Que su asistente pueda usar servidores MCP locales | Claude Code: `/mcp` abre sin error · Copilot: la política de MCP de la organización debe estar habilitada (ver sección 7) |
 | S4 | Nada adicional: la estructura del proyecto se crea con `herramientas/crear_estructura.py` | En `mi-reto`, `python herramientas/verificar_equipo.py` en OK |
+| S5 | Cuenta personal de GitHub y acceso a github.com desde el computador de la clase | Sección 9 de esta guía |
 | S6 | Que el asistente pueda ejecutar hooks (comandos de Python) | Se valida en la sesión 6 |
-| S6–S8 | GitHub Actions en el repositorio del equipo | Pestaña Actions habilitada; el workflow de pruebas corre en cada pull request |
+| S6–S8 | GitHub Actions en su repositorio de GitHub | Pestaña Actions habilitada; el workflow de pruebas corre en cada pull request |
 | S7 | Análisis de dependencias y de código en GitHub (Dependabot, code scanning), si la organización los tiene | Pestaña Security del repositorio |
 
 ## 7. Para el equipo de TI
@@ -73,11 +74,33 @@ Instálelo con tiempo para no perder la sesión:
 | Agentes personalizados, skills e instrucciones habilitados en Copilot | Personas con Copilot Business | El agente del equipo usa esas piezas |
 | Claude Code sin restricciones administradas sobre skills, subagentes, hooks y servidores MCP locales del proyecto | Personas con Claude Code | Son las piezas del agente del equipo |
 | Acceso a PyPI (`pypi.org`, `files.pythonhosted.org`) | Todos | Instalar `pyyaml`, `mcp` y `copier` |
-| Repositorios privados de los equipos en la organización de GitHub, con GitHub Actions | Todos | Pull requests, revisión y pruebas automáticas desde la sesión 5 |
-| Revisión de código de Copilot en pull requests habilitada | Personas con Copilot Business | Revisión automática del PR en la sesión 5 |
+| Acceso a `github.com` (web y `git push` por HTTPS) desde los equipos de la clase | Todos | Desde la sesión 5 cada persona sube su `mi-reto` (datos sintéticos) a un repositorio privado de su cuenta personal |
+| Revisión de código de Copilot en pull requests (opcional) | Personas con Copilot Business | Solo funciona si su licencia de Copilot cubre su cuenta personal; el curso usa el agente Revisor, que no la necesita |
 
 Todo el trabajo usa **datos sintéticos** y un banco ficticio. Ninguna pieza del agente se conecta a sistemas del banco.
 
 ## 8. Si algo falla
 
 Envíe por el canal del curso: su sistema operativo, la herramienta (Claude Code o Copilot), una captura del error y la salida de `verificar_equipo.py`.
+
+## 9. Para la sesión 5: GitHub
+
+Desde la sesión 5 su `mi-reto` vive también en GitHub, en un repositorio **privado** de su **cuenta personal**. Solo tiene datos sintéticos y nada del banco.
+
+1. **Cuenta.** Si no tiene, créela en https://github.com/signup (gratis).
+2. **Acceso.** Desde el computador de la clase abra https://github.com e inicie sesión. Si la red no deja entrar, avise por el canal antes de la clase.
+3. **Prueba de `git push`** (2 minutos, con un repositorio de prueba que luego puede borrar):
+
+```bash
+cd ~/Downloads
+mkdir prueba-github && cd prueba-github
+git init -b main && echo "prueba" > README.md && git add . && git commit -m "Prueba"
+# En github.com: New repository → prueba-github, Private, sin README → Create repository
+git remote add origin https://github.com/<usuario>/prueba-github.git
+git push -u origin main
+```
+
+La primera vez se abre el navegador para iniciar sesión (Git Credential Manager, viene con Git para Windows). Si el `push` termina sin error y el archivo aparece en GitHub, está listo. Luego puede borrar el repositorio de prueba en *Settings → Danger Zone*.
+
+> `.mcp.json` y `.vscode/mcp.json` guardan la ruta de su Python (con su usuario de Windows). Por eso el repositorio es privado.
+

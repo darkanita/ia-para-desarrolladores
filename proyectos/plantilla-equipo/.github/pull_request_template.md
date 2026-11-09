@@ -1,20 +1,22 @@
 ## Caso y etapa
 
 - Caso: `docs/sdlc/<caso>/`
-- Etapa: intención · especificación · plan · construcción · revisión · entrega
+- Rama: `<tipo>/<caso>-<descripcion>` (ver `convenciones.ramas`)
+- Etapa: intención · especificación · plan · construcción · corrección · revisión · entrega
 
 ## Artefactos
 
 - [ ] `intent.md` aprobado
-- [ ] `spec.md` aprobado (desde la sesión 3)
-- [ ] `plan.md` aprobado (desde la sesión 4)
+- [ ] `spec.md` aprobado
+- [ ] `plan.md` aprobado
+- [ ] `revision.md` del agente revisor, sin hallazgos bloqueantes abiertos
 
 ## Verificación
 
 - [ ] `python -m pytest -q` en verde
-- [ ] Solo datos sintéticos; sin secretos
-- [ ] Revisión del agente Revisor o de Copilot atendida (desde la sesión 5)
+- [ ] `python herramientas/verificar_capas.py` en OK
+- [ ] Solo datos sintéticos; sin secretos ni datos restringidos en logs o mensajes
 
 ## Qué hizo el agente y qué revisó una persona
 
-<!-- Una o dos frases: qué generó el asistente y qué ajustó usted. -->
+<!-- Una o dos frases: qué generó el asistente, qué hallazgos se atendieron y quién decidió. -->

@@ -23,4 +23,5 @@ Reglas:
 - Valide con `validar_nombre` cualquier nombre que no esté en la sección "Nombres validados" del plan.
 - Si el plan es ambiguo o algo no se puede hacer como dice, deténgase y pregunte; no improvise un diseño distinto.
 - Solo dependencias de `convenciones.dependencias_aprobadas`.
-- Al terminar, resuma: pasos hechos, pruebas (cuántas y en verde), resultado de la regla de capas y qué sigue.
+- Trabaje en la rama actual; si está en `main`, deténgase y pida crear una rama (`convenciones.ramas`). No haga commit: la persona lo hace.
+- Al terminar, resuma: pasos hechos, pruebas (cuántas y en verde), resultado de la regla de capas y qué sigue (normalmente, revisar con el agente revisor y abrir el pull request).

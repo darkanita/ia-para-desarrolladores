@@ -129,7 +129,7 @@ def validar_nombre(tipo: str = "", nombre: str = "") -> str:
     convenciones = cargar_banco().get("convenciones", {})
     ingles = set(convenciones.get("palabras_en_ingles", []))
     problemas: list[str] = []
-    snake = re.fullmatch(r"[a-z][a-z0-9]*(_[a-z0-9]+)*", nombre)
+    snake = re.fullmatch(r"_?[a-z][a-z0-9]*(_[a-z0-9]+)*", nombre)  # "_" inicial: función o variable privada
 
     if tipo in ("modulo", "funcion", "variable", "paquete", "caso_uso"):
         if not snake:
@@ -168,7 +168,7 @@ HERRAMIENTAS: dict[str, tuple[Callable[..., str], str, dict[str, Any]]] = {
                  "Úsela antes de explicar o asumir el significado de un término. Sin término, lista los disponibles.",
                  {"termino": {"type": "string", "description": "Término a definir, por ejemplo 'usura'"}}),
     "consultar_politica": (consultar_politica,
-                           "Devuelve la política del banco sobre un tema: datos, seguridad, nombres, logs, apis o pruebas. "
+                           "Devuelve la política del banco sobre un tema: datos, seguridad, nombres, logs, apis, pruebas, revision o depuracion. "
                            "Úsela al especificar o revisar, y cite la política con su clave. Sin tema, lista los temas.",
                            {"tema": {"type": "string", "description": "Tema de la política, por ejemplo 'datos'"}}),
     "catalogo_servicios": (catalogo_servicios,
