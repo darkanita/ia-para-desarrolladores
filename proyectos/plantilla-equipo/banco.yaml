@@ -41,6 +41,7 @@ convenciones:
   paquetes_de_framework: [streamlit, fastapi, pydantic, flask, django, sqlalchemy, requests, httpx]   # prohibidos en dominio
   ramas: "<tipo>/<caso>-<descripcion-corta>, en minúsculas con guiones; tipos: funcionalidad, correccion, pruebas, documentacion"
   commits: "Una línea en español que dice qué cambió y por qué, citando RF/RN cuando aplique: 'Corrige el borde de endeudamiento (RN-05)'"
+  pull_requests: "Título: una línea en español con el formato de convenciones.commits (qué entra a main y por qué, citando RF/RN): 'Corrige el veredicto de endeudamiento (RN-05)'. Nunca el nombre de la rama. Descripción: la plantilla .github/pull_request_template.md completa."
   rama_principal: main
   palabras_en_ingles: [get, set, calculate, compute, create, update, delete, list, user, account, payment, amount, rate,
                        loan, customer, client, data, info, manager, helper, handler, service, utils, process, check, validate]

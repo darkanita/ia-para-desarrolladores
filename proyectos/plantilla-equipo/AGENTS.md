@@ -20,6 +20,7 @@ Cada caso de uso pasa por etapas y cada etapa deja un artefacto en `docs/sdlc/<c
 ## Ramas y pull requests
 - Nadie hace commit directo a `main`. Cada trabajo va en una rama con el formato de `convenciones.ramas` (`funcionalidad/<caso>-<descripcion>`, `correccion/<caso>-<descripcion>`).
 - Los mensajes de commit siguen `convenciones.commits`: una línea en español, citando RF/RN cuando aplique.
+- El título del pull request sigue `convenciones.pull_requests`: una línea en español, como un commit, que dice qué entra y por qué (nunca el nombre de la rama).
 - Todo entra a `main` por un pull request con la plantilla del repositorio, revisado antes de fusionar (`politicas.revision`). Con un hallazgo bloqueante abierto no se fusiona.
 - La aprobación de un artefacto también viaja en el pull request: el commit que cambia su `Estado` a `aprobado` lo hace la persona dueña, dentro de la rama.
 - El asistente no hace commit, push ni merge salvo que la persona se lo pida explícitamente.

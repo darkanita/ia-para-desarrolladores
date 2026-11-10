@@ -1,3 +1,5 @@
+<!-- Título: una línea en español que dice qué entra a main y por qué, citando RF/RN (convenciones.pull_requests). Ej.: "Corrige el veredicto de endeudamiento (RN-05)". Si GitHub propone el nombre de la rama, cámbielo. -->
+
 ## Caso y etapa
 
 - Caso: `docs/sdlc/<caso>/`

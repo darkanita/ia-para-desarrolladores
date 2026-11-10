@@ -97,7 +97,12 @@ git commit -m "Revisión de <qué> (borrador)"
 git push -u origin <nombre-de-su-rama>
 ```
 
-En GitHub aparece **Compare & pull request**. La descripción ya trae la plantilla del equipo: complétela, pegue como comentario la sección 7 de `revision.md` y cree el pull request. **No lo fusione todavía** si tiene hallazgos bloqueantes.
+En GitHub aparece **Compare & pull request**.
+
+- **Título** (`convenciones.pull_requests`): una línea en español, como un commit, que dice qué entra a `main` y por qué, citando RF/RN: `Agrega el cálculo de la cuota mensual (RF-02)`. Si la rama tiene varios commits, GitHub propone el nombre de la rama: cámbielo.
+- **Descripción:** ya trae la plantilla del equipo. Escriba el caso, la rama y la etapa; marque solo las casillas que sean verdad (si `revision.md` tiene bloqueantes, esa casilla queda vacía); y en la última sección, en una o dos frases, qué hizo el agente y qué revisó y decidió usted.
+
+Cree el pull request y pegue como comentario la sección 7 de `revision.md`. **No lo fusione todavía** si tiene hallazgos bloqueantes.
 
 ## En casa
 

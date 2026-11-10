@@ -23,7 +23,7 @@ Llevar el trabajo a un flujo de equipo: cada cambio en una **rama**, entra a `ma
 | Agente **depurador** (reproduce con una prueba, corrige la causa raíz, explica) | `.claude/agents/depurador.md` | `.github/agents/depurador.agent.md` |
 | Agente **revisor** (revisa la rama; solo escribe `revision.md`) | `.claude/agents/revisor.md` | `.github/agents/revisor.agent.md` |
 | Skill `/revisar` y su plantilla `revision.md` | `.claude/skills/revisar/` | `.github/skills/revisar/` |
-| Ramas, commits y pull requests | `AGENTS.md` · `convenciones.ramas` y `convenciones.commits` en `banco.yaml` | el mismo |
+| Ramas, commits y pull requests | `AGENTS.md` · `convenciones.ramas`, `convenciones.commits` y `convenciones.pull_requests` en `banco.yaml` | el mismo |
 | Políticas `revision` y `depuracion` | `consultar_politica` del servidor `banco` | el mismo |
 | Plantilla del pull request | `.github/pull_request_template.md` | el mismo |
 
