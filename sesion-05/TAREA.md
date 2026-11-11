@@ -54,6 +54,12 @@ Al correr python -m pytest -q falla <prueba o error>. Encuentra la causa raíz y
 
 **Si todo está en verde y quiere practicar con el depurador** → use un reporte de su reto en [`REPORTES_DEPURADOR.md`](REPORTES_DEPURADOR.md) (uno por cada reto sugerido de la sesión 2), con la misma rama `correccion/<caso>-<que-falla>`. Si la prueba del reporte pasa, el reporte no se reproduce: la prueba queda como regresión y eso también se entrega.
 
+**Si no encuentra ningún error y quiere ver al Depurador corregir uno** → cambie una regla, en `main` y antes de crear la rama (paso a paso en [`REPORTES_DEPURADOR.md`, sección "Si no encuentra un error"](REPORTES_DEPURADOR.md#si-no-encuentra-un-error-cambie-una-regla)):
+
+- **En el código** (un error): cambie una sola cosa en la regla (por ejemplo `>` por `>=`), haga commit como "Compañero del equipo" y páselo al Depurador con un reporte. Mejor en pareja.
+- **En `banco.yaml`** (el banco cambió la política): si el sistema no cambia, hay un valor fijo en el código y el Depurador lo corrige. Si fallan pruebas que esperaban el valor viejo, es un cambio de requisito: primero se actualiza `spec.md`, nunca el valor esperado.
+
+
 **Si todo está en verde** → rama de funcionalidad y el siguiente paso de su plan con el agente **desarrollador**:
 
 ```bash
