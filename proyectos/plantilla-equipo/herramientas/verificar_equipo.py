@@ -69,11 +69,7 @@ def main() -> int:
                           ("herramientas/verificar_capas.py", "regla de capas (sesión 4)"),
                           (".claude/agents/depurador.md", "agente depurador (sesión 5)"),
                           (".claude/agents/revisor.md", "agente revisor (sesión 5)"),
-                          (".claude/skills/revisar/SKILL.md", "skill /revisar (sesión 5)"),
-                          (".claude/agents/verificador.md", "agente verificador (sesión 6)"),
-                          (".claude/skills/pruebas/SKILL.md", "skill /pruebas (sesión 6)"),
-                          (".claude/settings.json", "hook de Claude Code (sesión 6)"),
-                          (".github/hooks/verificar-cambio.json", "hook de Copilot (sesión 6)")]:
+                          (".claude/skills/revisar/SKILL.md", "skill /revisar (sesión 5)")]:
         existe = (RAIZ / archivo).exists()
         reportar(OK if existe else FALTA, archivo, para if existe else "no existe",
                  "Actualice el repositorio: desde la carpeta del curso, bash proyectos/poner_al_dia.sh <su repo>")

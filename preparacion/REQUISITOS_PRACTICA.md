@@ -61,7 +61,7 @@ Instálelo con tiempo para no perder la sesión:
 | S3 | Que su asistente pueda usar servidores MCP locales | Claude Code: `/mcp` abre sin error · Copilot: la política de MCP de la organización debe estar habilitada (ver sección 7) |
 | S4 | Nada adicional: la estructura del proyecto se crea con `herramientas/crear_estructura.py` | En `mi-reto`, `python herramientas/verificar_equipo.py` en OK |
 | S5 | Cuenta personal de GitHub y acceso a github.com desde el computador de la clase | Sección 9 de esta guía |
-| S6 | Paquete `pytest-cov` y que el asistente pueda ejecutar hooks (comandos de Python) | `pip install pytest-cov`; en `claude`, `/hooks` muestra el hook del equipo. En VS Code los hooks están en vista previa: la organización debe permitirlos |
+| S6 | Que el asistente pueda ejecutar hooks (comandos de Python) | Se valida en la sesión 6 |
 | S6–S8 | GitHub Actions en su repositorio de GitHub | Pestaña Actions habilitada; el workflow de pruebas corre en cada pull request |
 | S7 | Análisis de dependencias y de código en GitHub (Dependabot, code scanning), si la organización los tiene | Pestaña Security del repositorio |
 

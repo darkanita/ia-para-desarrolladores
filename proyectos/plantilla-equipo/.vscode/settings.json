@@ -1,7 +1,4 @@
 {
   "chat.useAgentsMdFile": true,
-  "python.terminal.activateEnvironment": true,
-  "chat.hookFilesLocations": {
-    ".claude/settings.json": false
-  }
+  "python.terminal.activateEnvironment": true
 }

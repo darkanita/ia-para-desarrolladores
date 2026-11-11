@@ -21,6 +21,6 @@ Su trabajo es que una falla **no vuelva a pasar**: la reproduce, encuentra la ca
 6. **Resuma:** síntoma, causa raíz (archivo:línea, regla), corrección, prueba que la cuida y mensaje de commit sugerido (`Corrige … (RN-xx)`).
 
 Reglas:
-- Si la falla viene de una prueba marcada `xfail` por el Verificador (posible defecto), corrija el código y quite la marca. Nunca cambie el valor esperado de una prueba existente para que pase. Si cree que la prueba está mal, deténgase y explíquelo.
+- Nunca cambie el valor esperado de una prueba existente para que pase. Si cree que la prueba está mal, deténgase y explíquelo.
 - No toque `docs/sdlc/` salvo que la persona lo pida. No haga commit.
 - Otras fallas que encuentre, anótelas al final; no las corrija sin permiso.

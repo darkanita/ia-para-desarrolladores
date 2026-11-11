@@ -37,7 +37,7 @@ convenciones:
   dinero: "decimal.Decimal, redondeo al peso con ROUND_HALF_UP; nunca float"
   tasas: "efectivas anuales (E.A.) como fracción; mensual = (1 + ea) ** (1/12) - 1"
   pruebas: {framework: pytest, cobertura_minima_dominio: 0.80}
-  dependencias_aprobadas: [pytest, pytest-cov, streamlit, fastapi, pydantic, pyyaml]
+  dependencias_aprobadas: [pytest, streamlit, fastapi, pydantic, pyyaml]
   paquetes_de_framework: [streamlit, fastapi, pydantic, flask, django, sqlalchemy, requests, httpx]   # prohibidos en dominio
   ramas: "<tipo>/<caso>-<descripcion-corta>, en minúsculas con guiones; tipos: funcionalidad, correccion, pruebas, documentacion"
   commits: "Una línea en español que dice qué cambió y por qué, citando RF/RN cuando aplique: 'Corrige el borde de endeudamiento (RN-05)'"
@@ -48,7 +48,7 @@ convenciones:
 
 ciclo:
   carpeta_artefactos: docs/sdlc
-  artefactos: [intent.md, spec.md, plan.md, pruebas.md, revision.md]
+  artefactos: [intent.md, spec.md, plan.md, revision.md]
   aprobaciones:
     intent.md: "Dueño del producto"
     spec.md: "Dueño del producto"
@@ -75,8 +75,6 @@ glosario:
   dato_sintetico: "Dato inventado con la forma de uno real, para pruebas y desarrollo. Es el único permitido fuera de producción."
   dato_restringido: "Dato personal o financiero de un cliente (cédula, cuenta, tarjeta, saldo, ingresos). Ver datos.clasificacion."
   regresion: "Falla en algo que antes funcionaba, causada por un cambio nuevo. Se previene con una prueba que reproduce la falla."
-  cobertura: "Porcentaje de líneas del código que ejecutan las pruebas. Mide qué se ejecutó, no qué se verificó: 100 % de cobertura no garantiza que el código cumpla la especificación."
-  hook: "Comando que el asistente ejecuta solo en un momento fijo (por ejemplo, después de editar un archivo). Una regla aconseja; un hook obliga."
   causa_raiz: "La razón de fondo de una falla, no el síntoma: qué regla, supuesto o línea la produce."
   solicitud_cambio: "Registro CAMB-#### que acompaña toda entrega a producción, con su nivel de riesgo y sus aprobaciones."
 
@@ -121,9 +119,6 @@ politicas:
       - "Una prueba por regla de negocio, y pruebas de los bordes (mínimo, máximo, justo por encima)."
       - "Cobertura mínima del dominio: convenciones.pruebas.cobertura_minima_dominio."
       - "Las pruebas no llaman servicios reales: usan dobles (adaptadores en memoria)."
-      - "Los datos de prueba son sintéticos: escritos a mano o generados con la herramienta datos_sinteticos del banco."
-      - "Una prueba nueva que falla es un posible defecto: se marca con @pytest.mark.xfail(strict=True, reason='Posible defecto: ...'), se reporta y se depura; nunca se ajusta el valor esperado para que pase."
-      - "Antes de entregar, cada criterio de aceptación de la especificación tiene al menos una prueba (matriz en docs/sdlc/<caso>/pruebas.md)."
   revision:
     resumen: "Todo cambio entra a main por un pull request revisado; el revisor señala, una persona decide."
     reglas:

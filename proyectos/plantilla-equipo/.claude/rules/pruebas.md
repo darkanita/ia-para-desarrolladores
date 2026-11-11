@@ -13,6 +13,4 @@ paths:
 - Dinero y tasas con `Decimal("...")` escrito como texto, nunca con `float`.
 - Los valores esperados se calculan aparte y se escriben literales; no se recalculan con el código que se prueba.
 - Solo datos sintéticos: cuentas con el formato `SINT-0000-####` y clientes con nombres claramente inventados.
-- Para varios casos de entrada, pida datos a la herramienta `datos_sinteticos` del banco (por ejemplo `datos_sinteticos("credito_consumo", 10, semilla=1, incluir_bordes=true)`) y cite la semilla en el docstring.
-- Si una prueba nueva falla, no cambie el valor esperado para que pase: es un posible defecto. Márquela con `@pytest.mark.xfail(strict=True, reason="Posible defecto: <criterio>")` y repórtela (`politicas.pruebas`). Quien corrige el defecto quita la marca: con `strict=True`, si la prueba ya pasa y la marca sigue, la suite falla.
 - Sin llamadas a servicios reales ni a internet: use adaptadores en memoria.

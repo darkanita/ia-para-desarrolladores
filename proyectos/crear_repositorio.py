@@ -69,21 +69,10 @@ HISTORIAL = {
           "src/simulador_credito/casos_uso/simular_credito.py", "tests/test_simular_credito.py"]),
         ("rama", "main"),
     ],
-    # Demo de la sesión 6: el simulador hasta el paso 10, ya corregido y revisado, con la presentación
-    # (paso 10) probada a medias. El Verificador debe encontrar lo que falta.
-    "simulador-equipo-s6": [
-        ("2026-10-27T09:00:00", "Repositorio del equipo desde la plantilla del curso",
-         [".", ":!src", ":!tests", ":!pyproject.toml", ":!docs/sdlc/simulador-credito"]),
-        ("2026-11-05T10:00:00", "Intención, especificación y plan del simulador aprobados", ["docs/sdlc/simulador-credito"]),
-        ("2026-11-09T11:00:00", "Simulador: validación, cuota, capacidad de pago y caso de uso (pasos 1 a 8)",
-         ["pyproject.toml", "src", "tests", ":!src/simulador_credito/app/presentacion.py", ":!tests/test_presentacion.py"]),
-        ("2026-11-10T16:00:00", "Presentación del resultado para el asesor (paso 10)",
-         ["src/simulador_credito/app/presentacion.py", "tests/test_presentacion.py"]),
-    ],
 }
 
 # Proyectos que se arman sobre otro: se copia primero la base y encima el proyecto.
-BASES = {"simulador-equipo": ["plantilla-equipo"], "simulador-equipo-s6": ["plantilla-equipo", "simulador-equipo"]}
+BASES = {"simulador-equipo": "plantilla-equipo"}
 
 
 def git(destino: Path, *args: str, fecha: str | None = None) -> None:
@@ -108,8 +97,9 @@ def main() -> int:
         return 1
 
     ignorar = shutil.ignore_patterns("__pycache__", ".pytest_cache", "*.egg-info")
-    for capa in [*BASES.get(args.proyecto, []), args.proyecto]:
-        shutil.copytree(AQUI / capa, destino, ignore=ignorar, dirs_exist_ok=True)
+    if args.proyecto in BASES:
+        shutil.copytree(AQUI / BASES[args.proyecto], destino, ignore=ignorar)
+    shutil.copytree(AQUI / args.proyecto, destino, ignore=ignorar, dirs_exist_ok=True)
     configurar = destino / "herramientas" / "configurar_mcp.py"
     if configurar.exists():  # el servidor MCP usará el Python con el que se creó el repositorio
         subprocess.run([sys.executable, str(configurar)], capture_output=True, text=True)
