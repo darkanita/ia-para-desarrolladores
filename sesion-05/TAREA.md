@@ -82,6 +82,8 @@ git commit -m "Corrige <qué> (RN-xx)"        # o "Agrega <qué> (RF-xx)"
 
 ## 5. La revisión · 7 min
 
+En la demo, la docente revisó la rama de un compañero (`funcionalidad/...-casos-referencia`), que preparó antes de clase. **Usted no tiene esa rama: revisa la suya**, la del paso 4, ya con su commit. El Revisor compara la rama en la que está contra `main`. Compruebe dónde está con `git branch --show-current`.
+
 ```bash
 claude --agent revisor
 ```
