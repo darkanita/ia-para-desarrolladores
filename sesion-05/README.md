@@ -11,9 +11,9 @@ Llevar el trabajo a un flujo de equipo: cada cambio en una **rama**, entra a `ma
 |---|---|---|
 | 0:00 – 0:10 | Repaso: ¿su primer componente pasa las pruebas? Todos corren `pytest` y `verificar_capas.py` | `mi-reto` |
 | 0:10 – 0:30 | Del computador al equipo: poner al día (v3), ramas, pull requests y GitHub | `mi-reto` · GitHub |
-| 0:30 – 0:55 | Demo: el agente Depurador corrige una falla reportada, prueba primero, y abre su pull request | `demo-simulador` |
-| 0:55 – 1:20 | Demo: el agente Revisor revisa la rama de un compañero con `/revisar` | `demo-simulador` |
-| 1:20 – 1:50 | **Práctica:** su `mi-reto` en GitHub, una rama, el agente que corresponda y su primer pull request revisado | [`TAREA.md`](TAREA.md) |
+| 0:30 – 0:55 | Demo: el agente Depurador corrige una falla reportada, prueba primero, y abre su pull request | demo de la docente |
+| 0:55 – 1:20 | Demo: el agente Revisor revisa la rama de un compañero con `/revisar` | demo de la docente |
+| 1:20 – 1:50 | **Práctica individual:** siembra un error en su reto, el Depurador lo corrige en una rama, el Revisor la revisa y abre su primer pull request | [`TAREA.md`](TAREA.md) |
 | 1:50 – 2:00 | Preguntas, tarea y cierre | Presentación |
 
 ## Lo nuevo en el agente del equipo (versión 3)
