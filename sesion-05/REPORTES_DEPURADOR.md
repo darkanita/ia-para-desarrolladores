@@ -1,6 +1,8 @@
 # Sesión 5 · Reportes para practicar con el agente Depurador
 
-En la demo, una asesora reporta un error del simulador y el **Depurador** lo reproduce con una prueba antes de corregirlo. Aquí tiene reportes del mismo estilo para cada reto sugerido de la sesión 2. Úselos en el paso 4 de [`TAREA.md`](TAREA.md).
+En la demo, una asesora reporta un error del simulador y el **Depurador** lo reproduce con una prueba antes de corregirlo.
+
+**La práctica de la sesión está en [`TAREA.md`](TAREA.md):** cada uno siembra su propio error en su reto (paso 4, con una tarjeta por reto) y lo corrige con el Depurador (paso 5). Este archivo trae **más reportes** para cada reto, para practicar otra vez o en casa: algunos se reproducen en su código y otros no.
 
 ## Cómo usarlos
 
@@ -23,7 +25,7 @@ En la demo, una asesora reporta un error del simulador y el **Depurador** lo rep
    - **La prueba falla:** el reporte es real. El Depurador busca la causa raíz, la corrige con el cambio mínimo y la prueba queda en verde.
    - **La prueba pasa:** el reporte **no se reproduce**. No hay nada que corregir: la prueba se queda como prueba de regresión y usted le responde a quien reportó con esa evidencia. También es un buen resultado.
    - **La especificación no dice qué debería pasar:** el Depurador no lo decide. Queda como pregunta abierta para el dueño del producto.
-5. Siga con el paso 4 de `TAREA.md`: `git diff`, commit, revisión y pull request.
+5. Siga con los pasos 5 a 7 de `TAREA.md`: `git diff`, commit, revisión y pull request.
 
 Si ningún reporte se reproduce y quiere ver al Depurador corregir algo, siga [**Si no encuentra un error**](#si-no-encuentra-un-error-cambie-una-regla).
 
@@ -95,32 +97,7 @@ Que ningún reporte se reproduzca es buena noticia: su código cumple esos borde
 
 ### Opción 1 · Cambiar la regla en el código (un error)
 
-El código deja de cumplir la especificación: es un error de verdad, y el Depurador lo trata así. Mejor en pareja, para que quien depura no sepa qué línea cambió.
-
-1. En `main` y sin cambios pendientes (`git switch main` y `git status --short` vacío), busque la regla con `grep -rn "<palabra>" src/` (por ejemplo `limite`, `tolerancia`, `enmascar`, `endeudamiento`, `gmf`), ábrala en VS Code y cambie **una sola cosa**. Si su código está escrito al revés (`<=` para aceptar), cambie el operador contrario (`<=` por `<`). Con `git diff` debe ver una sola línea cambiada. Ideas por reto:
-
-   | Reto | Cambio en el código | Reporte que lo descubre |
-   |---|---|---|
-   | 1 · Transferencias | En el límite diario, `>` por `>=` | "Con 9.000.000 ya transferidos rechazó 1.000.000 más; 10.000.000 es justo el límite." |
-   | 1 · Transferencias | En fondos, comparar contra `monto` y no contra `monto + gmf` | "Con saldo 1.003.000 transfirió 1.000.000 y quedó en negativo." |
-   | 2 · Conciliación | En la tolerancia, `>` por `>=` | "Dos movimientos que difieren en exactamente la tolerancia aparecen como diferencia." |
-   | 3 · Alertas | En el conteo, `>=` por `>` | "5 transferencias pequeñas en 2 horas no generaron alerta; la spec dice 5 o más." |
-   | 4 · Extractos | En el filtro de fechas, `<=` por `<` en el fin de mes | "El movimiento del último día del mes no aparece." |
-   | 5 · API de productos | En el enmascarado, `[-4:]` por `[:4]` | "La respuesta muestra los primeros 4 dígitos de la cuenta y no los últimos." |
-   | 6 · Capacidad de pago | En el endeudamiento, `>` por `>=` | "Con endeudamiento de exactamente 40 % dice que no puede pagar." |
-   | 7 · Módulo `transferencias` | En `calcular_gmf`, `ROUND_HALF_UP` por `ROUND_DOWN` | "1.000.125 cobró GMF de 4.000; debía ser 4.001." |
-
-2. Confírmelo como si fuera de otra persona, y mire si sus pruebas lo atrapan:
-
-   ```bash
-   git -c user.name="Compañero del equipo" -c user.email=companero@equipo.example commit -am "Ajuste en <la regla>"
-   python -m pytest -q
-   ```
-
-   - **Todo en verde:** el error quedó escondido, como en la demo. Siga al paso 3.
-   - **Alguna prueba falla:** su suite ya tenía ese borde y atrapó el error antes que el usuario. Eso también es una lección. Deshaga el cambio con `git revert --no-edit HEAD` y pruebe con otro de la tabla.
-
-3. Haga el flujo de siempre: `git switch -c correccion/<caso>-<que-falla>`, `claude --agent depurador` y el reporte de la tabla. El Depurador reproduce con una prueba, encuentra el commit del "compañero" como causa raíz y lo corrige.
+Es la práctica principal de la sesión y está paso a paso en [`TAREA.md`](TAREA.md): el paso 4 (sembrar su error en `main`) y [las 7 tarjetas](TAREA.md#las-7-tarjetas-qué-error-sembrar-en-su-reto), una por reto, con qué buscar, qué cambiar, el reporte, la rama y el título.
 
 ### Opción 2 · Cambiar la regla en `banco.yaml` (el banco cambió la política)
 
