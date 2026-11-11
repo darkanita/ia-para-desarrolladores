@@ -97,7 +97,7 @@ Que ningún reporte se reproduzca es buena noticia: su código cumple esos borde
 
 El código deja de cumplir la especificación: es un error de verdad, y el Depurador lo trata así. Mejor en pareja, para que quien depura no sepa qué línea cambió.
 
-1. Abra la función de la regla y cambie **una sola cosa**. Ideas por reto:
+1. En `main` y sin cambios pendientes (`git switch main` y `git status --short` vacío), busque la regla con `grep -rn "<palabra>" src/` (por ejemplo `limite`, `tolerancia`, `enmascar`, `endeudamiento`, `gmf`), ábrala en VS Code y cambie **una sola cosa**. Si su código está escrito al revés (`<=` para aceptar), cambie el operador contrario (`<=` por `<`). Con `git diff` debe ver una sola línea cambiada. Ideas por reto:
 
    | Reto | Cambio en el código | Reporte que lo descubre |
    |---|---|---|

@@ -120,12 +120,51 @@ Una estudiante con el reto 1 (validador de transferencias). Su caso en `docs/sdl
 
 ```bash
 # Paso 2: ¿funciona?
-python -m pytest -q                                   # 18 passed
+python -m pytest -q                                   # por ejemplo: 18 passed
+```
 
-# Paso 4: un "compañero" cambia > por >= en el límite diario, en main
-git -c user.name="Compañero del equipo" -c user.email=companero@equipo.example commit -am "Ajuste en el límite diario"
-python -m pytest -q                                   # sigue en verde: el error quedó escondido
+**Sembrar el error (en `main`, antes de crear la rama).** Es simular que un compañero dejó un error en `main`:
 
+1. Asegúrese de estar en `main` y sin cambios pendientes:
+
+   ```bash
+   git switch main
+   git status --short                                 # no debe mostrar nada
+   ```
+
+2. Busque dónde se decide la regla:
+
+   ```bash
+   grep -rn "limite" src/
+   ```
+
+   Abra en VS Code el archivo que aparece y ubique la comparación que rechaza la transferencia, por ejemplo `if ya_debitado + monto > limite_diario:`.
+3. Cambie **solo el operador**, para que el borde quede mal: `>` por `>=`. Si su código está escrito al revés (`<=` para aceptar), cambie `<=` por `<`. Guarde.
+4. Compruebe que cambió una sola línea:
+
+   ```bash
+   git diff                                           # una línea en rojo y una en verde
+   ```
+
+5. Haga commit como si fuera otra persona:
+
+   ```bash
+   git -c user.name="Compañero del equipo" -c user.email=companero@equipo.example commit -am "Ajuste en el límite diario"
+   git log --oneline -2                               # el último es del compañero
+   ```
+
+6. Corra las pruebas:
+
+   ```bash
+   python -m pytest -q
+   ```
+
+   - **En verde:** el error quedó escondido; ninguna prueba mira justo el límite. Siga.
+   - **En rojo:** su suite ya tenía ese borde y atrapó el error. Deshágalo con `git revert --no-edit HEAD` y siembre otro (tabla de [`REPORTES_DEPURADOR.md`](REPORTES_DEPURADOR.md#si-no-encuentra-un-error-cambie-una-regla)).
+
+**La rama y el Depurador:**
+
+```bash
 git switch -c correccion/validador-transferencias-limite-diario
 claude --agent depurador
 ```
