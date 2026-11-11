@@ -52,6 +52,8 @@ claude --agent depurador
 Al correr python -m pytest -q falla <prueba o error>. Encuentra la causa raíz y corrígela, prueba primero.
 ```
 
+**Si todo está en verde y quiere practicar con el depurador** → use un reporte de su reto en [`REPORTES_DEPURADOR.md`](REPORTES_DEPURADOR.md) (uno por cada reto sugerido de la sesión 2), con la misma rama `correccion/<caso>-<que-falla>`. Si la prueba del reporte pasa, el reporte no se reproduce: la prueba queda como regresión y eso también se entrega.
+
 **Si todo está en verde** → rama de funcionalidad y el siguiente paso de su plan con el agente **desarrollador**:
 
 ```bash

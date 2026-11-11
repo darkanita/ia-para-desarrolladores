@@ -35,4 +35,4 @@ Llevar el trabajo a un flujo de equipo: cada cambio en una **rama**, entra a `ma
 > En GitHub solo sube su `mi-reto`, que tiene datos sintéticos y nada del banco. El repositorio es **privado**.
 
 ## Práctica en clase y tarea
-[`TAREA.md`](TAREA.md) tiene el paso a paso.
+[`TAREA.md`](TAREA.md) tiene el paso a paso. Para practicar con el agente Depurador: [`REPORTES_DEPURADOR.md`](REPORTES_DEPURADOR.md), con reportes para cada reto sugerido.
