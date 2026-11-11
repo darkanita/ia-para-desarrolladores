@@ -8,12 +8,13 @@ Cada caso de uso pasa por etapas y cada etapa deja un artefacto en `docs/sdlc/<c
 - Usted (el asistente) redacta y propone; **una persona aprueba** cada artefacto cambiando su `Estado` a `aprobado`.
 - No pase a la etapa siguiente si el artefacto anterior no está aprobado. Si falta, dígalo y ofrezca crearlo.
 - No escriba código de producción sin un `plan.md` aprobado.
-- Cada etapa tiene su skill: `/intencion` escribe `intent.md`, `/spec` escribe `spec.md`, `/plan-tecnico` escribe `plan.md` y `/revisar` escribe `revision.md`.
+- Cada etapa tiene su skill: `/intencion` escribe `intent.md`, `/spec` escribe `spec.md`, `/plan-tecnico` escribe `plan.md`, `/pruebas` escribe las pruebas que faltan y `pruebas.md`, y `/revisar` escribe `revision.md`.
 
 ## Agentes por rol
 - **arquitecto**: lee el repositorio y la especificación aprobada y escribe solo `plan.md`. No escribe código.
 - **desarrollador**: implementa un `plan.md` aprobado, paso a paso y con la prueba primero.
 - **depurador**: reproduce una falla con una prueba, corrige la causa raíz con el cambio mínimo y la explica.
+- **verificador**: comprueba que cada criterio de la especificación tenga su prueba; escribe solo en `tests/` y `pruebas.md`. Si una prueba nueva falla, la reporta para el depurador.
 - **revisor**: revisa los cambios de una rama y escribe solo `revision.md`, con hallazgos por severidad. No corrige ni aprueba.
 - Claude Code: `claude --agent <nombre>`. Copilot: elíjalos en el selector de agentes del chat.
 
@@ -26,7 +27,7 @@ Cada caso de uso pasa por etapas y cada etapa deja un artefacto en `docs/sdlc/<c
 - El asistente no hace commit, push ni merge salvo que la persona se lo pida explícitamente.
 
 ## Herramientas del banco (servidor MCP `banco`)
-- `glosario`: qué significa un término de negocio. `consultar_politica`: la política sobre datos, seguridad, nombres, logs, apis, pruebas, revision o depuracion. `catalogo_servicios`: qué APIs internas ya existen y de dónde sale cada dato. `validar_nombre`: si un nombre cumple las convenciones.
+- `glosario`: qué significa un término de negocio. `consultar_politica`: la política sobre datos, seguridad, nombres, logs, apis, pruebas, revision o depuracion. `catalogo_servicios`: qué APIs internas ya existen y de dónde sale cada dato. `validar_nombre`: si un nombre cumple las convenciones. `datos_sinteticos`: datos de prueba sintéticos con la forma de un servicio del catálogo o del producto `credito_consumo`.
 - Consúltelas antes de definir un término, proponer una regla o crear un servicio nuevo, y cite lo que encontró.
 - Si no están disponibles, lea `glosario`, `politicas` y `catalogo_servicios` en `banco.yaml`.
 
@@ -43,7 +44,12 @@ Cada caso de uso pasa por etapas y cada etapa deja un artefacto en `docs/sdlc/<c
 
 ## Pruebas
 - `pytest`, una prueba por regla de negocio, con valores esperados calculados aparte.
+- Datos de prueba sintéticos: a mano o con `datos_sinteticos`.
 - Antes de dar algo por terminado: `python -m pytest -q`.
+
+## Hooks (se corren solos)
+- Después de cada edición de un `.py` en `src/` o `tests/`, el hook del equipo (`herramientas/hooks/verificar_cambio.py`) corre la regla de capas y las pruebas. Si algo falla, usted recibe el resumen: corríjalo antes de seguir, sin cambiar el valor esperado de una prueba.
+- Claude Code lo configura en `.claude/settings.json`; Copilot, en `.github/hooks/verificar-cambio.json`.
 
 ## Datos y seguridad
 - Solo datos sintéticos. Nada de cédulas, cuentas, tarjetas ni nombres reales.
