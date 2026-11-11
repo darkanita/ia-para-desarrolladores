@@ -114,6 +114,61 @@ En GitHub aparece **Compare & pull request**.
 
 Cree el pull request y pegue como comentario la sección 7 de `revision.md`. **No lo fusione todavía** si tiene hallazgos bloqueantes.
 
+## Ejemplo completo con un reto
+
+Una estudiante con el reto 1 (validador de transferencias). Su caso en `docs/sdlc/` se llama `validador-transferencias` (use el nombre de **su** carpeta). Sus pruebas están en verde y ningún reporte se reproduce, así que siembra un error para practicar.
+
+```bash
+# Paso 2: ¿funciona?
+python -m pytest -q                                   # 18 passed
+
+# Paso 4: un "compañero" cambia > por >= en el límite diario, en main
+git -c user.name="Compañero del equipo" -c user.email=companero@equipo.example commit -am "Ajuste en el límite diario"
+python -m pytest -q                                   # sigue en verde: el error quedó escondido
+
+git switch -c correccion/validador-transferencias-limite-diario
+claude --agent depurador
+```
+```text
+Un cliente reporta: ya había transferido 9.000.000 hoy e intentó 1.000.000 más. El sistema la rechazó por límite diario, pero según la especificación 10.000.000 es justo el límite permitido (productos.transferencias.limite_diario). Encuentra la causa raíz y corrígela, prueba primero.
+```
+```bash
+/exit
+git diff                                              # la prueba nueva y el >= vuelto a >
+git add -A
+git commit -m "Corrige el límite diario: 10.000.000 es permitido (RN-03)"
+
+# Paso 5: el Revisor, en la MISMA rama
+claude --agent revisor
+```
+```text
+/revisar validador-transferencias
+```
+```bash
+/exit
+git add docs/sdlc
+git commit -m "Revisión de la corrección del límite diario (borrador)"
+
+# Paso 6: el pull request
+git push -u origin correccion/validador-transferencias-limite-diario
+```
+
+En GitHub: **Compare & pull request** → título `Corrige el límite diario: 10.000.000 es permitido (RN-03)` (GitHub propone el de un commit; si propone el nombre de la rama, cámbielo) → la plantilla → **Create pull request** → la sección 7 de `revision.md` como comentario.
+
+Con cualquier otro reto es igual: cambian el nombre del caso, la rama, el reporte y el RN. Para los 7 retos:
+
+| Reto | Rama de ejemplo | Título del commit y del PR |
+|---|---|---|
+| 1 · Transferencias | `correccion/<caso>-limite-diario` | `Corrige el límite diario: el máximo es permitido (RN-xx)` |
+| 2 · Conciliación | `correccion/<caso>-tolerancia` | `Corrige la tolerancia: una diferencia igual a la tolerancia no se reporta (RN-xx)` |
+| 3 · Alertas | `correccion/<caso>-umbral-alerta` | `Corrige el umbral: 5 transferencias en 2 horas generan alerta (RN-xx)` |
+| 4 · Extractos | `correccion/<caso>-fin-de-mes` | `Corrige el corte: incluye los movimientos del último día del mes (RN-xx)` |
+| 5 · API de productos | `correccion/<caso>-enmascarado` | `Corrige el enmascarado: muestra los últimos 4 dígitos (datos.reglas)` |
+| 6 · Capacidad de pago | `correccion/<caso>-endeudamiento-maximo` | `Corrige el endeudamiento: 40 % exacto es permitido (RN-xx)` |
+| 7 · Módulo `transferencias` | `correccion/<caso>-redondeo-gmf` | `Corrige el redondeo del GMF: ROUND_HALF_UP (convenciones.dinero)` |
+
+Si en el paso 2 algo ya falló, o si prefiere avanzar con el plan, el flujo es el mismo con su rama (`correccion/...` con el depurador, o `funcionalidad/<caso>-paso-<n>` con el desarrollador).
+
 ## En casa
 
 1. Atienda los hallazgos bloqueantes e importantes (o escriba en el pull request por qué no). En Claude Code: `claude --agent desarrollador` y `Atiende los hallazgos H-01 y H-02 de docs/sdlc/<caso>/revision.md`; en Copilot, el botón **Atender los hallazgos** del Revisor.
