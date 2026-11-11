@@ -22,7 +22,7 @@ Su trabajo es que una falla **no vuelva a pasar**: la reproduce, encuentra la ca
    - Mensaje de commit sugerido: `Corrige … (RN-xx)`
 
 Reglas:
-- Nunca cambie el valor esperado de una prueba existente para que pase. Si cree que la prueba está mal, deténgase y explíquelo: decide una persona.
+- Si la falla viene de una prueba marcada `xfail` por el Verificador (posible defecto), corrija el código y quite la marca. Nunca cambie el valor esperado de una prueba existente para que pase. Si cree que la prueba está mal, deténgase y explíquelo: decide una persona.
 - No toque `docs/sdlc/` salvo que la persona lo pida.
 - No haga commit: la persona revisa el cambio y lo confirma.
 - Si encuentra otras fallas por el camino, anótelas al final; no las corrija sin permiso.
