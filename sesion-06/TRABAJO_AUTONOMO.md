@@ -2,7 +2,7 @@
 
 La sesión 6 se mueve un día. Usen ese tiempo para llegar a clase con el mismo caso de la docente y con el trabajo de "ojo humano" ya hecho. En clase lo repetimos con el agente **Verificador** y comparamos: ¿encontró lo mismo que ustedes?, ¿más?, ¿menos?
 
-**Tiempo:** 60 a 75 minutos. **Individual.** **No** abran todavía el agente Verificador ni corran `/pruebas`: eso lo hacemos juntos.
+**Tiempo:** 65 a 80 minutos. **Individual.** **No** abran todavía el agente Verificador ni corran `/pruebas`: eso lo hacemos juntos.
 
 Todo en **Git Bash**, desde la carpeta del curso y con el entorno activo (`source .venv/Scripts/activate`).
 
@@ -19,7 +19,7 @@ Todo en **Git Bash**, desde la carpeta del curso y con el entorno activo (`sourc
 
 ## 2. El mismo caso de la docente · 10 min
 
-El script crea una carpeta nueva, `demo-clase`, al lado de `mi-reto`, con el simulador de la docente ya listo. Es un repositorio **solo local**: no hay que crear nada en GitHub, ni hacer `git init`, `clone` o `push`. Su `mi-reto` no se toca.
+El script crea una carpeta nueva, `demo-clase`, al lado de `mi-reto`, con el simulador de la docente ya listo (con `git` y su historia). Su `mi-reto` no se toca. Desde aquí trabajamos con **dos repositorios**: `demo-clase` para seguir a la docente en clase y `mi-reto` para repetirlo con su reto.
 
 ```bash
 python proyectos/nivelar_clase.py ../demo-clase --sesion 6
@@ -32,6 +32,18 @@ git log --oneline -4
 En `git log` deben ver cuatro commits. El último es **"Pantalla del asesor con lo que pidieron las oficinas"**, de un *Compañero del equipo*. Todas las pruebas pasan. La pregunta de la sesión es: **¿lo que pide la especificación sigue probado?**
 
 > Si `nivelar_clase.py` dice que `../demo-clase` ya existe, bórrelo (`rm -rf ../demo-clase`) y vuelva a correrlo.
+
+### Súbalo a GitHub · 5 min
+
+1. En GitHub: **New repository**, nombre `demo-clase`, **Private**, y **sin** README, `.gitignore` ni licencia (debe quedar vacío).
+2. En la terminal, dentro de `demo-clase` (cambie `<su-usuario>`):
+
+   ```bash
+   git remote add origin https://github.com/<su-usuario>/demo-clase.git
+   git push -u origin main
+   ```
+
+3. Recargue la página del repositorio: deben verse los cuatro commits y la carpeta `src/`.
 
 ## 3. Leer la especificación · 15 min
 
@@ -100,15 +112,16 @@ Agregue al final de `matriz-a-mano.md` una sección **"Lo que la pantalla hace d
 git switch -c pruebas/simulador-credito-consumo-verificacion
 git add docs
 git commit -m "Matriz a mano de la especificación del simulador (sesión 6)"
+git push -u origin pruebas/simulador-credito-consumo-verificacion
 ```
 
-Es local, no hay que hacer push: `demo-clase` es solo para la clase.
+No abra todavía el pull request: en clase le agregamos las pruebas del Verificador y lo abrimos juntos.
 
 ---
 
 ## Para traer a la sesión
 
-- [ ] `demo-clase` con 47 pruebas en verde.
+- [ ] `demo-clase` con 47 pruebas en verde y subido a GitHub (`main` y la rama `pruebas/...`).
 - [ ] `matriz-a-mano.md` con la matriz y las diferencias que encontró en la pantalla.
 - [ ] El porcentaje de cobertura del dominio.
 - [ ] Su pull request de la sesión 5 en `mi-reto`, fusionado o con los hallazgos que le quedaron.

@@ -80,9 +80,12 @@ Compare con lo que encontró la docente. Si a usted le salió distinto (otro nú
 ```bash
 git add tests docs
 git commit -m "Pruebas de lo que ve el asesor y matriz (RF-02, RF-06, sección 9)"
+git push -u origin pruebas/simulador-credito-consumo-verificacion
 ```
 
-`demo-clase` es solo para la clase: no hace falta subirlo a GitHub.
+En GitHub, abra el pull request de esa rama hacia `main` con la plantilla del repositorio. Título: `Pruebas de lo que ve el asesor y matriz (RF-02, RF-06, sección 9)`. No lo fusione todavía: los tres posibles defectos van al Depurador.
+
+Si `demo-clase` todavía no está en GitHub, súbalo primero como dice el paso 2 de [`TRABAJO_AUTONOMO.md`](TRABAJO_AUTONOMO.md).
 
 ## 5. Ver el hook en acción · con la docente, 5 min
 
