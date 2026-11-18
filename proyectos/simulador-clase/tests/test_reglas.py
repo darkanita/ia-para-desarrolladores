@@ -1,6 +1,8 @@
 """Pruebas de las reglas del banco (RN-01 a RN-05). Los límites llegan como parámetros, no de archivos."""
 from decimal import Decimal
 
+import pytest
+
 from simulador_credito.dominio.reglas import (
     validar_endeudamiento,
     validar_monto,
@@ -93,6 +95,27 @@ def test_endeudamiento_40_por_ciento_acepta():
     assert validar_endeudamiento(Decimal("0.40"), ENDEUDAMIENTO_MAXIMO) is None
 
 
+@pytest.mark.parametrize(
+    ("endeudamiento", "rechaza"),
+    [
+        (Decimal("0.399999"), False),
+        (Decimal("0.40"), False),
+        (Decimal("0.400001"), True),
+        (Decimal("0.4004"), True),
+        (Decimal("0.4005"), True),
+    ],
+    ids=["justo_debajo", "igual_maximo", "justo_encima", "exceso_oculto", "exceso_visible"],
+)
+def test_endeudamiento_bordes(endeudamiento: Decimal, rechaza: bool) -> None:
+    """Regla: productos.credito_consumo.endeudamiento_maximo (RN-05), sin redondear para validar."""
+    motivo = validar_endeudamiento(endeudamiento, ENDEUDAMIENTO_MAXIMO)
+    if rechaza:
+        assert motivo is not None
+        assert motivo.regla == "RN-05"
+    else:
+        assert motivo is None
+
+
 def test_endeudamiento_22_2_por_ciento_le_alcanza():
     """Regla: productos.credito_consumo.endeudamiento_maximo (RN-05). 22,2 % sí le alcanza."""
     assert validar_endeudamiento(Decimal("0.222"), ENDEUDAMIENTO_MAXIMO) is None
@@ -103,10 +126,3 @@ def test_endeudamiento_52_6_por_ciento_no_le_alcanza():
     motivo = validar_endeudamiento(Decimal("0.526"), ENDEUDAMIENTO_MAXIMO)
     assert motivo is not None
     assert motivo.regla == "RN-05"
-
-
-def test_endeudamiento_justo_por_encima_del_maximo_no_alcanza():
-    """Regla: RN-05 · 40,04 % supera el 40 % aunque en pantalla se vea 40 % (corrección de la sesión 5)."""
-    from decimal import Decimal
-    from simulador_credito.dominio.reglas import validar_endeudamiento
-    assert validar_endeudamiento(Decimal("0.4004"), Decimal("0.40")) is not None

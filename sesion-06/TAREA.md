@@ -20,7 +20,7 @@ Desde la carpeta del curso:
 ```bash
 python proyectos/nivelar_clase.py ../demo-clase --sesion 6
 cd ../demo-clase
-python -m pytest -q                         # 41 passed
+python -m pytest -q                         # 47 passed
 python herramientas/verificar_capas.py      # OK
 git log --oneline -4
 ```

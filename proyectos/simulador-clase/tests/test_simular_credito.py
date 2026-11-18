@@ -130,3 +130,26 @@ def test_ingresos_cero_no_calcula_endeudamiento():
     assert resultado.valido is False
     assert resultado.endeudamiento is None
     assert resultado.motivo.mensaje == "Los ingresos deben ser mayores que cero."
+
+
+def test_endeudamiento_sin_redondeo() -> None:
+    """Regla: productos.credito_consumo.endeudamiento_maximo (RN-05). El caso reportado supera el máximo."""
+    datos = DatosSimulacion(
+        monto=Decimal("10000000"),
+        plazo_meses=36,
+        tasa_ea=Decimal("0.26"),
+        ingresos=Decimal("2219900"),
+        otras_cuotas=Decimal("500000"),
+    )
+    resultado, registro = _simular(datos)
+    assert resultado.valido is False
+    assert resultado.motivo is not None
+    assert resultado.motivo.regla == "RN-05"
+    assert resultado.endeudamiento is not None
+    assert resultado.endeudamiento.quantize(Decimal("0.0001")) == Decimal("0.4004")
+    assert resultado.cuota is None
+    assert resultado.costo_total is None
+    assert resultado.aviso == aviso_simulacion
+    assert len(registro.eventos) == 1
+    assert registro.eventos[0]["nivel"] == "WARNING"
+    assert registro.eventos[0]["regla"] == "RN-05"

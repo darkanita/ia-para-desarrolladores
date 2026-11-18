@@ -37,7 +37,7 @@ CAMBIOS_S6 = [
      "                if resultado.endeudamiento is not None:\n"
      "                    # Para que el asesor pueda ofrecer otro plazo o monto sin volver a simular.\n"
      "                    referencia = calcular_cuota_mensual(datos.monto, datos.plazo_meses, datos.tasa_ea)\n"
-     '                    st.markdown(f"**Cuota mensual (referencia):** {formatear_pesos(referencia)} COP")\n'),
+     '                    st.markdown(f"**Referencia de cuota:** {formatear_pesos(referencia)} COP")\n'),
     ('                st.markdown(f"**Plazo:** {resultado.plazo_meses} meses")\n', ""),
     ("from simulador_credito.casos_uso.simular_credito import simular_credito\n",
      "from simulador_credito.casos_uso.simular_credito import simular_credito\n"
