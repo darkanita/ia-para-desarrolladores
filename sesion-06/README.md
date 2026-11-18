@@ -9,11 +9,11 @@ Comprobar que lo que pide la especificación está probado, no solo que "las pru
 
 | Tiempo | Bloque | Material |
 |---|---|---|
-| 0:00 – 0:10 | Repaso: su pull request fusionado. Poner al día (v4) | `mi-reto` |
+| 0:00 – 0:10 | Repaso. **Todos con el mismo caso:** su copia del simulador de la docente con `nivelar_clase.py` | `demo-clase` |
 | 0:10 – 0:25 | Probar la especificación: matriz criterio → prueba, cobertura, datos sintéticos | Presentación · `mi-reto` |
-| 0:25 – 0:50 | Demo: el agente Verificador y `/pruebas` encuentran tres huecos en lo que ve el asesor del simulador | `demo-equipo` |
-| 0:50 – 1:15 | Hooks: qué son, dónde viven y demo del hook que no deja romper la regla de capas | `demo-equipo` |
-| 1:15 – 1:45 | **Práctica:** `/pruebas` sobre su reto en una rama, con el hook encendido, y su pull request | [`TAREA.md`](TAREA.md) |
+| 0:25 – 0:50 | El agente Verificador y `/pruebas` encuentran tres huecos en lo que ve el asesor del simulador: **la docente y ustedes, a la vez** | `demo-clase` |
+| 0:50 – 1:15 | Hooks: qué son, dónde viven y el hook que no deja romper la regla de capas, también a la vez | `demo-clase` |
+| 1:15 – 1:45 | **Práctica:** terminar en `demo-clase` y empezar lo mismo en su reto (`mi-reto`) | [`TAREA.md`](TAREA.md) |
 | 1:45 – 2:00 | Preguntas, tarea y cierre | Presentación |
 
 ## Lo nuevo en el agente del equipo (versión 4)
