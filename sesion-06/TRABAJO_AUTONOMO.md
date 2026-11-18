@@ -19,6 +19,8 @@ Todo en **Git Bash**, desde la carpeta del curso y con el entorno activo (`sourc
 
 ## 2. El mismo caso de la docente · 10 min
 
+El script crea una carpeta nueva, `demo-clase`, al lado de `mi-reto`, con el simulador de la docente ya listo. Es un repositorio **solo local**: no hay que crear nada en GitHub, ni hacer `git init`, `clone` o `push`. Su `mi-reto` no se toca.
+
 ```bash
 python proyectos/nivelar_clase.py ../demo-clase --sesion 6
 cd ../demo-clase
