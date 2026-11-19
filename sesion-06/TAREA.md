@@ -15,7 +15,9 @@ pip install pytest-cov
 
 ## 1. Su copia del caso de la docente · 3 min
 
-Desde la carpeta del curso:
+> **¿Hizo el [`TRABAJO_AUTONOMO.md`](TRABAJO_AUTONOMO.md)?** Ya tiene `demo-clase` en GitHub: no lo vuelva a crear. Solo entre (`cd ../demo-clase`), corra `python -m pytest -q` (47 passed) y siga con la tabla de comprobaciones de abajo.
+
+Si no lo hizo, desde la carpeta del curso:
 
 ```bash
 python proyectos/nivelar_clase.py ../demo-clase --sesion 6
@@ -50,7 +52,8 @@ Fíjese en el porcentaje del dominio. Pregunta para la clase: con esa cobertura 
 ## 3. El Verificador · con la docente, 15 min
 
 ```bash
-git switch -c pruebas/simulador-credito-consumo-verificacion
+git switch pruebas/simulador-credito-consumo-verificacion     # ya existe si hizo el trabajo autónomo
+# si dice que no existe: git switch -c pruebas/simulador-credito-consumo-verificacion
 claude --agent verificador
 ```
 
@@ -73,7 +76,7 @@ python -m pytest -q                  # N passed, M xfailed
 git show HEAD --stat                 # todavía es el commit del compañero: ¿qué cambió?
 ```
 
-Compare con lo que encontró la docente. Si a usted le salió distinto (otro número de pruebas, otro criterio), dígalo en clase: es la misma spec, revisada por otra sesión del agente.
+Compare con lo que encontró la docente **y con su `matriz-a-mano.md`**: ¿el agente encontró lo mismo que usted? Si a usted le salió distinto (otro número de pruebas, otro criterio), dígalo en clase: es la misma spec, revisada por otra sesión del agente.
 
 ## 4. Guardar su trabajo · 3 min
 
