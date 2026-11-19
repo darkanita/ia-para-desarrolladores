@@ -44,7 +44,7 @@ HISTORIAL = {
         ("2026-11-03T10:00:00", "Módulo de GMF del equipo de pagos, todavía sin pruebas", ["."]),
     ],
     "plantilla-equipo": [
-        ("2026-11-11T09:00:00", "Repositorio del equipo desde la plantilla del curso (agente v3)", ["."]),
+        ("2026-11-11T09:00:00", "Repositorio del equipo desde la plantilla del curso", ["."]),
     ],
     # Demo de la sesión 5: el repositorio del equipo con el simulador construido hasta el paso 6
     # y una rama de un compañero con el caso de uso, lista para revisar.
