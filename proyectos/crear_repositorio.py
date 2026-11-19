@@ -90,7 +90,7 @@ def git(destino: Path, *args: str, fecha: str | None = None) -> None:
     env = {**os.environ, **AUTOR}
     if fecha:
         env["GIT_AUTHOR_DATE"] = env["GIT_COMMITTER_DATE"] = fecha
-    subprocess.run(["git", *args], cwd=destino, env=env, check=True, capture_output=True, text=True)
+    subprocess.run(["git", *args], cwd=destino, env=env, check=True, capture_output=True, text=True, encoding="utf-8", errors="replace")
 
 
 def main() -> int:
@@ -112,7 +112,7 @@ def main() -> int:
         shutil.copytree(AQUI / capa, destino, ignore=ignorar, dirs_exist_ok=True)
     configurar = destino / "herramientas" / "configurar_mcp.py"
     if configurar.exists():  # el servidor MCP usará el Python con el que se creó el repositorio
-        subprocess.run([sys.executable, str(configurar)], capture_output=True, text=True)
+        subprocess.run([sys.executable, str(configurar)], capture_output=True, text=True, encoding="utf-8", errors="replace")
     git(destino, "init", "-q", "-b", "main")
     for paso in HISTORIAL[args.proyecto]:
         if paso[0] == "rama":  # cambia de rama (la crea si no existe)

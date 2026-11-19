@@ -31,7 +31,7 @@ Comprobar que lo que pide la especificación está probado, no solo que "las pru
 > **La sesión se movió un día.** Antes de clase haga el [`TRABAJO_AUTONOMO.md`](TRABAJO_AUTONOMO.md) (65 a 80 minutos): deja listo el mismo caso de la docente, subido a GitHub como `demo-clase`, y la matriz a mano que compararemos con el Verificador.
 
 1. Traiga el material nuevo del curso: descargue el `.zip` nuevo y descomprímalo **sobre** la carpeta del curso (o `git pull`).
-2. Instale `pytest-cov` en el entorno del curso: `pip install pytest-cov`.
+2. Instale `pytest-cov` en el entorno del curso: `pip install -U "pytest-cov>=5" "coverage>=7.5"`.
 3. Traiga su pull request de la sesión 5 fusionado (o abierto, si le quedaron hallazgos).
 
 ## Práctica en clase y tarea

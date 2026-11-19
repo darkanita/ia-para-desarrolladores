@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import shutil
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -46,7 +47,7 @@ CAMBIOS_S6 = [
 
 
 def git(repo: Path, *args: str, quien: list[str] | None = None) -> str:
-    r = subprocess.run(["git", *(quien or []), *args], cwd=repo, capture_output=True, text=True, encoding="utf-8")
+    r = subprocess.run(["git", *(quien or []), *args], cwd=repo, capture_output=True, text=True, encoding="utf-8", errors="replace")
     if r.returncode != 0:
         sys.exit(f"git {' '.join(args)} falló:\n{r.stderr}")
     return r.stdout.strip()
@@ -84,7 +85,8 @@ def main() -> int:
 
     # 1. El agente del equipo, en la versión del curso (con su historia de versiones)
     r = subprocess.run([sys.executable, str(AQUI / "crear_repositorio.py"), str(destino), "--proyecto", "plantilla-equipo"],
-                       capture_output=True, text=True, encoding="utf-8")
+                       capture_output=True, text=True, encoding="utf-8", errors="replace",
+                       env={**os.environ, "PYTHONIOENCODING": "utf-8", "PYTHONUTF8": "1"})
     if r.returncode != 0:
         print(r.stdout + r.stderr)
         return 1

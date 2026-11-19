@@ -10,7 +10,7 @@ Todo en **Git Bash**, con el entorno del curso activo (`source .venv/Scripts/act
 2. En la carpeta del curso:
 
 ```bash
-pip install pytest-cov
+pip install -U "pytest-cov>=5" "coverage>=7.5"
 ```
 
 ## 1. Su copia del caso de la docente · 3 min

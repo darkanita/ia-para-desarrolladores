@@ -14,8 +14,10 @@ Todo en **Git Bash**, desde la carpeta del curso y con el entorno activo (`sourc
 2. Instale la cobertura:
 
    ```bash
-   pip install pytest-cov
+   pip install -U "pytest-cov>=5" "coverage>=7.5"
    ```
+
+   Si después `pytest` falla con `KeyError: 'BREAK_LOOP'` o menciona `cov_core`, quedó una versión vieja: `pip uninstall -y cov-core pytest-cov coverage` y vuelva a correr el comando de arriba.
 
 ## 2. El mismo caso de la docente · 10 min
 
