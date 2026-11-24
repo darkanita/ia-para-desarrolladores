@@ -9,12 +9,13 @@ Comprobar que lo que pide la especificación está probado, no solo que "las pru
 
 | Tiempo | Bloque | Material |
 |---|---|---|
-| 0:00 – 0:10 | Repaso. **Todos con el mismo caso:** su copia del simulador de la docente con `nivelar_clase.py` | `demo-clase` |
-| 0:10 – 0:25 | Probar la especificación: matriz criterio → prueba, cobertura, datos sintéticos | Presentación · `mi-reto` |
-| 0:25 – 0:50 | El agente Verificador y `/pruebas` encuentran tres huecos en lo que ve el asesor del simulador: **la docente y ustedes, a la vez** | `demo-clase` |
-| 0:50 – 1:15 | Hooks: qué son, dónde viven y el hook que no deja romper la regla de capas, también a la vez | `demo-clase` |
-| 1:15 – 1:45 | **Práctica:** terminar en `demo-clase` y empezar lo mismo en su reto (`mi-reto`) | [`TAREA.md`](TAREA.md) |
-| 1:45 – 2:00 | Preguntas, tarea y cierre | Presentación |
+| 0:00 – 0:15 | Repaso: el caso de hoy (el simulador de crédito de la docente), sus commits y ramas, y qué hay en `demo-clase` | `demo-clase` |
+| 0:15 – 0:25 | Probar la especificación: qué prueba una prueba, dónde se ve en el repositorio, la matriz, datos sintéticos | Presentación · `demo-clase` |
+| 0:25 – 0:35 | El Verificador y el Depurador: quién encuentra y quién corrige; `xfail` estricto | Presentación |
+| 0:35 – 1:05 | Hooks: qué son, casos de uso, cómo se configuran y el **hola mundo de hooks**, todos a la vez | [`hola-hooks/`](hola-hooks/README.md) |
+| 1:05 – 1:30 | Demos, todos a la vez: el Verificador encuentra tres huecos en la pantalla del asesor, y el hook del equipo no deja romper la regla de capas | `demo-clase` |
+| 1:30 – 1:50 | **Práctica:** terminar en `demo-clase` y empezar lo mismo en su reto (`mi-reto`) | [`TAREA.md`](TAREA.md) |
+| 1:50 – 2:00 | Preguntas, tarea y cierre | Presentación |
 
 ## Lo nuevo en el agente del equipo (versión 4)
 
