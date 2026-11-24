@@ -10,7 +10,27 @@ Un ejemplo mínimo para **ver cuándo corre cada hook y qué puede hacer**, sin 
 | `PostToolUse` | Después de usarla | Solo lo anota (el hook del equipo aquí corre capas y pruebas) |
 | `Stop` | Cuando Claude termina de responder | Solo lo anota |
 
-Los cinco están registrados en `.claude/settings.json`.
+## Cómo se configura un hook: dos piezas
+
+1. **El script** (`hooks/hola.py`): lee el JSON del evento por stdin, decide y sale con un código (0 sigue; 2 bloquea y le pasa a Claude el texto de stderr). Aquí vive la regla, por ejemplo «`secreto.txt` no se lee».
+2. **El registro**: un JSON que dice *en qué evento* correr *qué comando*. No sabe nada de las reglas.
+
+| Asistente | Dónde se registra | Cómo se ve |
+|---|---|---|
+| Claude Code | `.claude/settings.json` | `/hooks` dentro de `claude` |
+| Copilot (VS Code, vista previa) | `.github/hooks/hola.json` | Output → GitHub Copilot Chat Hooks |
+
+```json
+// .claude/settings.json (Claude Code): evento → matcher → comando
+"PreToolUse": [
+  { "matcher": "*", "hooks": [{ "type": "command", "command": "python \"$CLAUDE_PROJECT_DIR/hooks/hola.py\"" }] }
+]
+
+// .github/hooks/hola.json (Copilot): evento → comando
+"PreToolUse": [{ "type": "command", "command": "python hooks/hola.py" }]
+```
+
+El script es el mismo para los dos. `.vscode/settings.json` le dice a VS Code que no lea también `.claude/settings.json`, para que cada hook no corra dos veces.
 
 ## 1. Abrir dos terminales · 1 min
 
@@ -56,9 +76,17 @@ echo '{"hook_event_name":"PreToolUse","tool_name":"Read","tool_input":{"file_pat
 # código 2: bloquea
 ```
 
-## 4. Cambiarlo usted · opcional
+## 4. Lo mismo en Copilot · 5 min
+
+1. Abra la carpeta `sesion-06/hola-hooks` en VS Code (**File → Open Folder**), no la carpeta del curso: los hooks se leen desde la carpeta abierta.
+2. En el chat, modo **Agent**, escriba `Lee el archivo saludo.txt` y luego `Lee el archivo secreto.txt`.
+3. Mire `hola-hooks.log` (con `tail -f`) y **View → Output → GitHub Copilot Chat Hooks**.
+
+Los hooks de VS Code están en **vista previa**: si no corren, puede que su organización no los tenga activados. Muéstrelo en Claude Code.
+
+## 5. Cambiarlo usted · opcional
 
 - En `hooks/hola.py`, cambie el saludo de `SessionStart`, cierre y vuelva a abrir `claude`, y pregunte otra vez por el saludo.
 - Haga que `PreToolUse` también bloquee el comando `rm` (pista: `herramienta == "Bash"` y `"rm " in archivo`).
 
-**Para recordar:** los hooks se leen al abrir `claude`. Si cambia `.claude/settings.json`, cierre y vuelva a abrir.
+**Para recordar:** los hooks se leen al abrir `claude` (o la carpeta en VS Code). Si cambia el registro, cierre y vuelva a abrir.

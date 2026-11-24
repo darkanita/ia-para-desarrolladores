@@ -1,0 +1,9 @@
+{
+  "hooks": {
+    "SessionStart":     [{ "type": "command", "command": "python hooks/hola.py" }],
+    "UserPromptSubmit": [{ "type": "command", "command": "python hooks/hola.py" }],
+    "PreToolUse":       [{ "type": "command", "command": "python hooks/hola.py" }],
+    "PostToolUse":      [{ "type": "command", "command": "python hooks/hola.py" }],
+    "Stop":             [{ "type": "command", "command": "python hooks/hola.py" }]
+  }
+}

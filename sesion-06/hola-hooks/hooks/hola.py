@@ -25,10 +25,18 @@ def anotar(texto: str) -> None:
 
 def main() -> int:
     evento = json.loads(sys.stdin.read() or "{}")
-    nombre = evento.get("hook_event_name", "?")
-    herramienta = evento.get("tool_name", "")
-    entrada = evento.get("tool_input") or {}
-    archivo = entrada.get("file_path") or entrada.get("command") or ""
+    # Claude Code y Copilot mandan casi el mismo JSON; los nombres de algunos campos cambian.
+    nombre = evento.get("hook_event_name") or evento.get("hookEventName", "?")
+    herramienta = evento.get("tool_name") or evento.get("toolName") or ""
+    entrada = evento.get("tool_input") or evento.get("toolArgs") or {}
+    if isinstance(entrada, str):
+        try:
+            entrada = json.loads(entrada)
+        except json.JSONDecodeError:
+            entrada = {"command": entrada}
+    archivo = (entrada.get("file_path") or entrada.get("filePath") or entrada.get("path")
+               or entrada.get("command") or "")
+    es_lectura = herramienta in ("Read", "read_file", "readFile") or "read" in herramienta.lower()
 
     if nombre == "SessionStart":
         anotar("SessionStart      se abrió la sesión")
@@ -46,7 +54,7 @@ def main() -> int:
 
     if nombre == "PreToolUse":
         anotar(f"PreToolUse        Claude va a usar {herramienta}: {archivo}")
-        if herramienta == "Read" and archivo.endswith("secreto.txt"):
+        if es_lectura and archivo.endswith("secreto.txt"):
             print("Hook PreToolUse: BLOQUEADO. secreto.txt no se lee. Dígale a la persona que ese archivo está protegido.",
                   file=sys.stderr)
             return 2  # la herramienta no se ejecuta
