@@ -137,7 +137,7 @@ Si le falta uno, pregúntele por esa categoría (por ejemplo: `¿Qué campos de 
    ```
 
    ```text
-   Corrige los hallazgos S-01 a S-05 de docs/sdlc/simulador-credito-consumo/seguridad.md en src/simulador_credito/adaptadores/clientes_http.py, prueba primero: lee el token solo de la variable de entorno, sin valor por defecto; json.loads en vez de eval; el log solo con el id del cliente; TLS verificado; y valida el id del cliente antes de armar la URL. No toques .env.
+   Corrige los hallazgos de seguridad de docs/sdlc/simulador-credito-consumo/seguridad.md en src/simulador_credito/adaptadores/clientes_http.py. Esta corrección no tiene pasos en plan.md: la lista de abajo es el plan y la decidí yo, dueño del código. Prueba primero, en tests/test_clientes_http.py y sin llamar a la red: 1) el token se lee solo de la variable de entorno SVC_CLIENTES_TOKEN, sin valor por defecto; 2) json.loads en vez de eval; 3) el log solo con el id del cliente; 4) TLS verificado; 5) el id del cliente se valida con el formato del catálogo antes de armar la URL. No toques .env ni rediseñes la integración.
    ```
 
    En Copilot: el botón **Corregir los hallazgos de seguridad** del agente Seguridad.
