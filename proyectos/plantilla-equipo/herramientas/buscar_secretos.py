@@ -80,6 +80,11 @@ def buscar(reglas: dict, historia: bool) -> list[str]:
 
 
 def main() -> int:
+    for flujo in (sys.stdin, sys.stdout, sys.stderr):  # consola de Windows (cp1252): tildes y símbolos sin error
+        try:
+            flujo.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError):
+            pass
     hallazgos = buscar(cargar_reglas(), "--historia" in sys.argv)
     if not hallazgos:
         print("Búsqueda de secretos: OK (no se encontró ninguno)")

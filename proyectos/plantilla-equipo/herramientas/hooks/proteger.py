@@ -224,6 +224,11 @@ def revisar(herramienta: str, comandos: list[str], rutas: list[str], contenidos:
 
 
 def main(argv: list[str]) -> int:
+    for flujo in (sys.stdin, sys.stdout, sys.stderr):  # consola de Windows (cp1252): tildes y símbolos sin error
+        try:
+            flujo.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError):
+            pass
     solo: list[str] = []
     if "--solo" in argv:
         i = argv.index("--solo")
