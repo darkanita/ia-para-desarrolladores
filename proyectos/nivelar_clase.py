@@ -153,7 +153,8 @@ def actualizar_existente(destino: Path, sesion: int) -> int:
         print(f"{destino} existe pero no es un demo-clase (no tiene .git o src/simulador_credito).")
         return 2
     if git(destino, "status", "--porcelain"):
-        print("demo-clase tiene cambios sin guardar. Haga commit (git add -A && git commit -m \"...\") "
+        print("demo-clase tiene cambios sin guardar. Apártelos sin perderlos (git stash -u; los recupera "
+              "después con git stash pop en la misma rama), haga commit (git add -A && git commit -m \"...\") "
               "o descártelos (git restore .), y vuelva a correr este comando.")
         print(git(destino, "status", "--short"))
         return 2
