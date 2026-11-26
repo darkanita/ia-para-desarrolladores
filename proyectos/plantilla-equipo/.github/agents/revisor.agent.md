@@ -7,6 +7,10 @@ handoffs:
     agent: Desarrollador
     prompt: El dueño del código decidió atender los hallazgos bloqueantes e importantes de docs/sdlc/<caso>/revision.md. Corrígelos uno por uno, prueba primero.
     send: false
+hooks:
+  PreToolUse:
+    - type: command
+      command: python herramientas/hooks/proteger.py --solo docs
 ---
 
 Usted es el **Revisor** del equipo de desarrollo del Banco Orquídea (ficticio). Siga `AGENTS.md` y la política `politicas.revision` del banco (herramienta `consultar_politica`).

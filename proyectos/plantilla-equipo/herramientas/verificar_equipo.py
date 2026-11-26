@@ -73,7 +73,12 @@ def main() -> int:
                           (".claude/agents/verificador.md", "agente verificador (sesión 6)"),
                           (".claude/skills/pruebas/SKILL.md", "skill /pruebas (sesión 6)"),
                           (".claude/settings.json", "hook de Claude Code (sesión 6)"),
-                          (".github/hooks/verificar-cambio.json", "hook de Copilot (sesión 6)")]:
+                          (".github/hooks/verificar-cambio.json", "hook de Copilot (sesión 6)"),
+                          (".claude/agents/seguridad.md", "agente seguridad (sesión 7)"),
+                          (".claude/skills/seguridad/SKILL.md", "skill /seguridad (sesión 7)"),
+                          ("herramientas/hooks/proteger.py", "hook de seguridad (sesión 7)"),
+                          (".github/hooks/proteger.json", "hook de seguridad de Copilot (sesión 7)"),
+                          ("herramientas/buscar_secretos.py", "búsqueda de secretos (sesión 7)")]:
         existe = (RAIZ / archivo).exists()
         reportar(OK if existe else FALTA, archivo, para if existe else "no existe",
                  "Actualice el repositorio: desde la carpeta del curso, bash proyectos/poner_al_dia.sh <su repo>")
@@ -96,6 +101,20 @@ def main() -> int:
                                text=True, encoding="utf-8", errors="replace")
         reportar(OK if capas.returncode == 0 else FALTA, "Regla de capas en src/", "OK" if capas.returncode == 0 else "con violaciones",
                  "Ejecute: python herramientas/verificar_capas.py y corrija lo que reporte")
+
+    try:
+        ajustes = json.loads((RAIZ / ".claude" / "settings.json").read_text(encoding="utf-8"))
+        antes = json.dumps(ajustes.get("hooks", {}).get("PreToolUse", []))
+        protegido = "proteger.py" in antes and bool(ajustes.get("permissions", {}).get("deny"))
+    except (OSError, ValueError):
+        protegido = False
+    reportar(OK if protegido else FALTA, "Bloqueos de seguridad (sesión 7)", "hook proteger.py y permisos denegados" if protegido else "no configurados",
+             "Actualice el repositorio: bash proyectos/poner_al_dia.sh <su repo>")
+    if (RAIZ / "herramientas" / "buscar_secretos.py").exists():
+        secretos = subprocess.run([sys.executable, str(RAIZ / "herramientas" / "buscar_secretos.py")], capture_output=True,
+                                  text=True, encoding="utf-8", errors="replace")
+        reportar(OK if secretos.returncode == 0 else AVISO, "Secretos en el repositorio", "ninguno" if secretos.returncode == 0 else "hay hallazgos",
+                 "Ejecute: python herramientas/buscar_secretos.py y saque los secretos (y rótelos)")
 
     print("\n3. Herramientas del banco (servidor MCP)")
     try:

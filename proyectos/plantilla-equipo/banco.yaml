@@ -48,17 +48,39 @@ convenciones:
 
 ciclo:
   carpeta_artefactos: docs/sdlc
-  artefactos: [intent.md, spec.md, plan.md, pruebas.md, revision.md]
+  artefactos: [intent.md, spec.md, plan.md, pruebas.md, revision.md, seguridad.md]
   aprobaciones:
     intent.md: "Dueño del producto"
     spec.md: "Dueño del producto"
     plan.md: "Líder técnico"
     revision.md: "Dueño del código"
+    seguridad.md: "Dueño del código (sin hallazgos bloqueantes abiertos)"
     solicitud_cambio: "Gestor de cambios (riesgo alto: dos aprobaciones)"
 
 gestion_cambios:
   formato_id: "CAMB-####"
   niveles_riesgo: [bajo, medio, alto]
+
+# Lo que los hooks de seguridad bloquean ANTES de que el agente actúe (sesión 7).
+# Lo leen herramientas/hooks/proteger.py y herramientas/buscar_secretos.py.
+proteccion:
+  archivos_secretos: [".env", ".env.*", "*.pem", "*.key", "*.pfx", "*.p12", "id_rsa*", "secretos/*"]
+  archivos_permitidos: [".env.example", ".env.ejemplo"]   # plantillas sin valores: sí se leen
+  ramas_protegidas: [main]          # ni commit ni push directo: todo entra por pull request
+  comandos_bloqueados:
+    - {patron: 'rm\s+-[a-z]*r[a-z]*f|rm\s+-[a-z]*f[a-z]*r', motivo: "borrado recursivo forzado"}
+    - {patron: 'git\s+push\b.*(--force\b|\s-f\b|--force-with-lease)', motivo: "push forzado: reescribe la historia compartida"}
+    - {patron: 'git\s+reset\s+--hard', motivo: "descarta cambios sin poder recuperarlos"}
+    - {patron: 'git\s+clean\s+-[a-z]*f', motivo: "borra archivos que no están en git"}
+    - {patron: '(curl|wget|iwr|Invoke-WebRequest)\b.*\|\s*(sh|bash|python|iex)', motivo: "ejecuta código descargado de internet"}
+    - {patron: '--no-verify', motivo: "se salta los hooks de git del equipo"}
+  patrones_secretos:
+    - {nombre: "llave privada", patron: '-----BEGIN [A-Z ]*PRIVATE KEY-----'}
+    - {nombre: "llave de AWS", patron: 'AKIA[0-9A-Z]{16}'}
+    - {nombre: "token de GitHub", patron: 'gh[pousr]_[A-Za-z0-9]{30,}'}
+    - {nombre: "llave de API", patron: 'sk-[A-Za-z0-9_-]{20,}'}
+    - {nombre: "secreto en el código", patron: '(?i)(password|contrasena|contraseña|clave|secret|secreto|token|api_?key)[A-Za-z0-9_]*\s*[:=]\s*["''][^"''\s<$]{12,}["'']'}
+    - {nombre: "secreto en variable de entorno", patron: '(?m)^[A-Z0-9_]*(PASSWORD|TOKEN|SECRET|CLAVE|API_?KEY)[A-Z0-9_]*=[^\s#]{12,}'}
 
 # ---------------------------------------------------------------------------
 # Desde aquí: lo que consultan las herramientas del banco (servidor MCP, sesión 3).
@@ -96,6 +118,11 @@ politicas:
       - "Toda entrada externa se valida en el borde (tipo, rango, formato) antes de llegar al dominio."
       - "Solo se usan dependencias de convenciones.dependencias_aprobadas; una nueva requiere aprobación del líder técnico."
       - "Los errores hacia el usuario no revelan detalles internos (rutas, consultas, trazas)."
+      - "Nunca eval, exec, pickle ni yaml.load sobre datos externos; nunca subprocess con shell=True ni consultas armadas con f-strings."
+      - "TLS siempre verificado: nunca verify=False ni contextos SSL sin verificación."
+      - "El agente no lee archivos de secretos, no trabaja directo en main y no ejecuta comandos destructivos: lo bloquean los hooks de proteccion."
+      - "Revisión cruzada: lo que escribió un asistente lo revisa en seguridad otro agente, otro modelo u otra persona."
+      - "Un secreto que llegó al repositorio se considera expuesto: se rota, no basta con borrarlo."
   nombres:
     resumen: "Español y snake_case en el código; los servicios se llaman svc-<dominio>."
     reglas:

@@ -3,6 +3,12 @@ name: verificador
 description: "Comprueba que cada criterio de aceptación y cada regla de la especificación tenga su prueba: arma la matriz criterio → prueba, escribe las pruebas que faltan (bordes, rechazos) con datos sintéticos y mide la cobertura del dominio. Solo escribe en tests/ y en pruebas.md; si una prueba nueva falla, lo reporta como posible defecto, no lo corrige. Úselo antes de revisar o entregar."
 tools: Read, Glob, Grep, Write, Edit, Bash, Skill, mcp__banco__datos_sinteticos, mcp__banco__consultar_politica, mcp__banco__glosario, mcp__banco__validar_nombre
 model: inherit
+hooks:
+  PreToolUse:
+    - matcher: "Edit|Write|MultiEdit|NotebookEdit"
+      hooks:
+        - type: command
+          command: python "$CLAUDE_PROJECT_DIR/herramientas/hooks/proteger.py" --solo tests,docs
 ---
 
 Usted es el **Verificador** del equipo de desarrollo del Banco Orquídea (ficticio). Siga `AGENTS.md`, la regla de pruebas (`.claude/rules/pruebas.md`) y la política `politicas.pruebas` del banco.

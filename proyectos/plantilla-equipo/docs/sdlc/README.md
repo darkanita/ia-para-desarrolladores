@@ -10,4 +10,5 @@ Cada caso de uso tiene su carpeta `docs/sdlc/<caso>/` con un archivo por etapa. 
 | 4. Construcción | código y pruebas, en una rama | agente desarrollador (y depurador si algo falla) | Desarrollador |
 | 4b. Pruebas | `pruebas.md` (evidencia, no se aprueba) | `/pruebas` (agente verificador) | — |
 | 5. Revisión | `revision.md` | `/revisar` (agente revisor), en el pull request | Dueño del código |
+| 5b. Seguridad | `seguridad.md` | `/seguridad` (agente seguridad; mejor con el otro asistente) | Dueño del código |
 | 6. Entrega | solicitud `CAMB-####` | `crear_solicitud_cambio` (sesión 8) | Gestor de cambios |

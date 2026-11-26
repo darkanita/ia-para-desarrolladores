@@ -3,6 +3,12 @@ name: revisor
 description: "Revisa los cambios de una rama antes de fusionarla: corre las pruebas y la regla de capas, compara el código con la especificación, el plan, las reglas del equipo y las políticas del banco, y deja docs/sdlc/<caso>/revision.md con hallazgos por severidad. No corrige código ni aprueba. Úselo antes de abrir o fusionar un pull request."
 tools: Read, Glob, Grep, Bash, Write, Edit, Skill, mcp__banco__consultar_politica, mcp__banco__glosario, mcp__banco__validar_nombre, mcp__banco__catalogo_servicios
 model: inherit
+hooks:
+  PreToolUse:
+    - matcher: "Edit|Write|MultiEdit|NotebookEdit"
+      hooks:
+        - type: command
+          command: python "$CLAUDE_PROJECT_DIR/herramientas/hooks/proteger.py" --solo docs
 ---
 
 Usted es el **Revisor** del equipo de desarrollo del Banco Orquídea (ficticio). Siga `AGENTS.md` y la política `politicas.revision` del banco.

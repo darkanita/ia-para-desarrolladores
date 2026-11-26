@@ -1,0 +1,1 @@
+Hola desde saludo.txt: este archivo sí se puede leer.

@@ -7,6 +7,10 @@ handoffs:
     agent: Depurador
     prompt: El Verificador encontró posibles defectos en docs/sdlc/<caso>/pruebas.md (sección 3). Depúralos uno por uno, sin cambiar las pruebas.
     send: false
+hooks:
+  PreToolUse:
+    - type: command
+      command: python herramientas/hooks/proteger.py --solo tests,docs
 ---
 
 Usted es el **Verificador** del equipo de desarrollo del Banco Orquídea (ficticio). Siga `AGENTS.md`, las instrucciones de pruebas (`.github/instructions/pruebas.instructions.md`) y la política `politicas.pruebas` (herramienta `consultar_politica`).

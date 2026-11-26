@@ -8,7 +8,7 @@ Cada caso de uso pasa por etapas y cada etapa deja un artefacto en `docs/sdlc/<c
 - Usted (el asistente) redacta y propone; **una persona aprueba** cada artefacto cambiando su `Estado` a `aprobado`.
 - No pase a la etapa siguiente si el artefacto anterior no está aprobado. Si falta, dígalo y ofrezca crearlo.
 - No escriba código de producción sin un `plan.md` aprobado.
-- Cada etapa tiene su skill: `/intencion` escribe `intent.md`, `/spec` escribe `spec.md`, `/plan-tecnico` escribe `plan.md`, `/pruebas` escribe las pruebas que faltan y `pruebas.md`, y `/revisar` escribe `revision.md`.
+- Cada etapa tiene su skill: `/intencion` escribe `intent.md`, `/spec` escribe `spec.md`, `/plan-tecnico` escribe `plan.md`, `/pruebas` escribe las pruebas que faltan y `pruebas.md`, `/revisar` escribe `revision.md` y `/seguridad` escribe `seguridad.md`.
 
 ## Agentes por rol
 - **arquitecto**: lee el repositorio y la especificación aprobada y escribe solo `plan.md`. No escribe código.
@@ -16,6 +16,8 @@ Cada caso de uso pasa por etapas y cada etapa deja un artefacto en `docs/sdlc/<c
 - **depurador**: reproduce una falla con una prueba, corrige la causa raíz con el cambio mínimo y la explica.
 - **verificador**: comprueba que cada criterio de la especificación tenga su prueba; escribe solo en `tests/` y `pruebas.md`. Si una prueba nueva falla, la reporta para el depurador.
 - **revisor**: revisa los cambios de una rama y escribe solo `revision.md`, con hallazgos por severidad. No corrige ni aprueba.
+- **seguridad**: revisa secretos, entradas, inyección, datos restringidos, dependencias y permisos (OWASP Top 10) y escribe solo `seguridad.md`. No corrige ni lee secretos.
+- Los agentes que solo escriben documentos (arquitecto, revisor, seguridad) o pruebas (verificador) tienen un hook que les impide escribir en otra parte.
 - Claude Code: `claude --agent <nombre>`. Copilot: elíjalos en el selector de agentes del chat.
 
 ## Ramas y pull requests
@@ -48,12 +50,15 @@ Cada caso de uso pasa por etapas y cada etapa deja un artefacto en `docs/sdlc/<c
 - Antes de dar algo por terminado: `python -m pytest -q`.
 
 ## Hooks (se corren solos)
-- Después de cada edición de un `.py` en `src/` o `tests/`, el hook del equipo (`herramientas/hooks/verificar_cambio.py`) corre la regla de capas y las pruebas. Si algo falla, usted recibe el resumen: corríjalo antes de seguir, sin cambiar el valor esperado de una prueba.
-- Claude Code lo configura en `.claude/settings.json`; Copilot, en `.github/hooks/verificar-cambio.json`.
+- **Antes** de cada herramienta, el hook de seguridad (`herramientas/hooks/proteger.py`, reglas en `proteccion` de `banco.yaml`) bloquea: leer o escribir secretos, commit o push en `main`, comandos destructivos, dependencias no aprobadas y secretos escritos en el código. Si lo bloquea, lea el motivo y siga la indicación; no intente rodearlo con otro comando.
+- **Después** de cada edición de un `.py` en `src/` o `tests/`, el hook del equipo (`herramientas/hooks/verificar_cambio.py`) corre la regla de capas y las pruebas. Si algo falla, usted recibe el resumen: corríjalo antes de seguir, sin cambiar el valor esperado de una prueba.
+- Claude Code los configura en `.claude/settings.json` (con permisos denegados para secretos y comandos destructivos); Copilot, en `.github/hooks/`.
 
 ## Datos y seguridad
 - Solo datos sintéticos. Nada de cédulas, cuentas, tarjetas ni nombres reales.
-- No lea ni escriba secretos (`.env`, llaves). No los incluya en prompts, logs ni código.
+- No lea ni escriba secretos (`.env`, llaves). No los incluya en prompts, logs ni código: léalos de variables de entorno y documente la variable, sin valor, en `.env.example`.
+- Nunca `eval`, `exec`, `pickle` ni `yaml.load` sobre datos externos; nunca `shell=True` ni consultas armadas con f-strings; TLS siempre verificado (`politicas.seguridad`).
+- Antes de un pull request: `python herramientas/buscar_secretos.py`. Revisión cruzada: lo que escribió un asistente lo revisa en seguridad el otro (o otra persona).
 
 ## Reglas por tipo de archivo
 Hay reglas que solo aplican a ciertos archivos (capas, pruebas, APIs, ETL, artefactos del ciclo). Viven en `.claude/rules/` y se copian a `.github/instructions/` para Copilot.
@@ -64,4 +69,4 @@ Hay reglas que solo aplican a ciertos archivos (capas, pruebas, APIs, ETL, artef
 - Para una tarea nueva, la persona abre una conversación nueva: no arrastre contexto de la anterior.
 
 ## Comandos útiles
-- `python -m pytest -q` · `python herramientas/verificar_equipo.py` · `python herramientas/sincronizar_skills.py` · `python herramientas/mcp_banco/servidor.py --probar` · `python herramientas/verificar_capas.py`
+- `python -m pytest -q` · `python herramientas/verificar_equipo.py` · `python herramientas/sincronizar_skills.py` · `python herramientas/mcp_banco/servidor.py --probar` · `python herramientas/verificar_capas.py` · `python herramientas/buscar_secretos.py`

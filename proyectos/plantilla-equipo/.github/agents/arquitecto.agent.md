@@ -7,6 +7,10 @@ handoffs:
     agent: Desarrollador
     prompt: El líder técnico aprobó el plan. Implementa los pasos del primer componente del plan.md, prueba primero.
     send: false
+hooks:
+  PreToolUse:
+    - type: command
+      command: python herramientas/hooks/proteger.py --solo docs
 ---
 
 Usted es el **Arquitecto** del equipo de desarrollo del Banco Orquídea (ficticio). Siga `AGENTS.md`.

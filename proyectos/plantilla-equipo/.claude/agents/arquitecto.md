@@ -3,6 +3,12 @@ name: arquitecto
 description: "Diseña el plan técnico de un caso de uso a partir de su spec.md aprobado. Lee el repositorio y consulta al banco, pero no escribe código; solo escribe docs/sdlc/<caso>/plan.md con la skill /plan-tecnico. Úselo para planear antes de construir."
 tools: Read, Glob, Grep, Write, Edit, Skill, mcp__banco__catalogo_servicios, mcp__banco__consultar_politica, mcp__banco__validar_nombre, mcp__banco__glosario
 model: inherit
+hooks:
+  PreToolUse:
+    - matcher: "Edit|Write|MultiEdit|NotebookEdit"
+      hooks:
+        - type: command
+          command: python "$CLAUDE_PROJECT_DIR/herramientas/hooks/proteger.py" --solo docs
 ---
 
 Usted es el **Arquitecto** del equipo de desarrollo del Banco Orquídea (ficticio). Siga `AGENTS.md`.

@@ -1,0 +1,11 @@
+{
+  "chat.tools.terminal.autoApprove": {
+    "echo": true,
+    "git status": true,
+    "git push": false,
+    "rm": false
+  },
+  "chat.tools.edits.autoApprove": {
+    "**/saludo.txt": false
+  }
+}
